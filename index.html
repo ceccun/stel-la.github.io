@@ -28,19 +28,19 @@ function getOS() {
   return os;
 }
 if (getOS() == "Windows"){
-var uri = "/chromium";
+var uri = "sonic";
 paramsearch();
 }
 if (getOS() == "Mac OS"){
-var uri = "/sonic";
+var uri = "sonic";
 paramsearch();
 }
 if (getOS() == "Android"){
 if (screen.width <= 1242) {
-var uri = "/bionic";
+var uri = "bionic";
 }
 if (screen.width >= 1243) {
-var uri = "/sonic";
+var uri = "sonic";
 }
 paramsearch();
 }
@@ -50,10 +50,10 @@ paramsearch();
 }
 if (getOS() == "iOS"){
 if (screen.width <= 1242) {
-var uri = "/bionic";
+var uri = "bionic";
 }
 if (screen.width >= 1243) {
-var uri = "/sonic";
+var uri = "sonic";
 }
 paramsearch();
 }
