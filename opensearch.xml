@@ -1,0 +1,5 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>stella.find</ShortName>
+<Description>Get to info faster.</Description>
+<Url type="text/html" method="get" template="https://stel-la.github.io/?q={searchTerms}"/>
+</OpenSearchDescription>

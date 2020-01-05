@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
+</head>
+<body>
+<script type="text/javascript">
+function getOS() {
+  var userAgent = window.navigator.userAgent,
+      platform = window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'Mac OS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (!os && /Linux/.test(platform)) {
+    os = 'Linux';
+  }
+
+  return os;
+}
+if (getOS() == "Windows"){
+var uri = "/chromium";
+paramsearch();
+}
+if (getOS() == "Mac OS"){
+var uri = "/sonic";
+paramsearch();
+}
+if (getOS() == "Android"){
+if (screen.width <= 1242) {
+var uri = "/bionic";
+}
+if (screen.width >= 1243) {
+var uri = "/sonic";
+}
+paramsearch();
+}
+if (getOS() == "Linux"){
+var uri = "/sonic";
+paramsearch();
+}
+if (getOS() == "iOS"){
+if (screen.width <= 1242) {
+var uri = "/bionic";
+}
+if (screen.width >= 1243) {
+var uri = "/sonic";
+}
+paramsearch();
+}
+function paramsearch(){
+var q = new URL(window.location).searchParams.get('q');
+if (q == null) {
+window.location.replace(uri);
+} else{
+window.location.replace(uri + "/search.html?q=" + q);
+}
+}
+</script>
+</body>
+</html>
