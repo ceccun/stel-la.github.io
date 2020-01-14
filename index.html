@@ -1,22 +1,70 @@
 <!doctype html>
 <html>
 <head>
-    <title id="title">stella.speed - Test your network capabilities.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../light.css" rel="stylesheet" type="text/css">
- <link type="application/opensearchdescription+xml" rel="search" href="../opensearch.xml"/>
-    </head>
-    <body onLoad="loadcall()">
-	<script type="text/javascript">
-	function loadcall(){
-	
-	}
-	</script>
-   <div id="header" class="head"><a href="../index.html" style="color: black;"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;">stella</h1></a></div>
-   <div id="lan" style="" class="lan">
-   <h1>Speed</h1>
-<p>Test your internet services to check reaction time, receiving time and downloading time.</p>
-<iframe src="https://stella.speedtestcustom.com/" frameborder=0 width="100%" height="650px"></iframe>
-   </div>
-    </body>
+  <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
+</head>
+<body>
+<script type="text/javascript">
+function getOS() {
+  var userAgent = window.navigator.userAgent,
+      platform = window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'Mac OS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (!os && /Linux/.test(platform)) {
+    os = 'Linux';
+  }
+
+  return os;
+}
+if (getOS() == "Windows"){
+var uri = "sonic";
+paramsearch();
+}
+if (getOS() == "Mac OS"){
+var uri = "sonic";
+paramsearch();
+}
+if (getOS() == "Android"){
+if (screen.width <= 1242) {
+var uri = "bionic";
+}
+if (screen.width >= 1243) {
+var uri = "sonic";
+}
+paramsearch();
+}
+if (getOS() == "Linux"){
+var uri = "/sonic";
+paramsearch();
+}
+if (getOS() == "iOS"){
+if (screen.width <= 1242) {
+var uri = "bionic";
+}
+if (screen.width >= 1243) {
+var uri = "sonic";
+}
+paramsearch();
+}
+function paramsearch(){
+var q = new URL(window.location).searchParams.get('q');
+if (q == null) {
+window.location.replace(uri);
+} else{
+window.location.replace(uri + "/search.html?q=" + q);
+}
+}
+</script>
+</body>
 </html>
