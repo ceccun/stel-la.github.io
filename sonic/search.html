@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html id="page">
 <head>
     <title id="title">stella.find - Get to info faster.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,8 +91,12 @@ document.onkeyup = doSomethingWithSelectedText;
 	console.log("Event Listener Added for stella.voice");
 	function clearSelection()
 {
- if (window.getSelection) {window.getSelection().removeAllRanges();}
- else if (document.selection) {document.selection.empty();}
+ if (window.getSelection) {
+
+ }
+ else if (document.selection) {
+ document.selection.empty();
+ }
 }
 	</script>
 	<script type="text/javascript">
@@ -100,11 +104,12 @@ document.onkeyup = doSomethingWithSelectedText;
 	var query = new URL(window.location).searchParams.get('q');
 	document.getElementById("title").innerHTML = query + " - stella.find";
 	document.getElementById("searchbar").setAttribute("value", query);
+		document.getElementById("searchbar").removeAttribute("readonly");
 	}
 	</script>
    <div id="header" style="margin-bottom: 0; padding-bottom: 0; position: sticky; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.07); backdrop-filter: blur(10px);" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;"><a style="text-decoration: none; color: black;" href="index.html">stella.find</a></h1></div>
    <div style="top: 78px; position: absolute; width: 100%; background-color: #ededed; z-index: 2; height: 53px;">&nbsp</div>
-   <input type="search" value="Connecting..." id="searchbar" style="margin-left: 30px; width: 40%; margin-top: 10px; padding: 10px; border-style: solid; border: none; border-radius: 10px; position: relative; z-index: 2;">
+   <input type="search" value="Connecting..." id="searchbar" style="margin-left: 30px; width: 40%; margin-top: 10px; padding: 10px; border-style: solid; border: none; border-radius: 10px; position: relative; z-index: 2;" readonly>
    <script id="searchbar" type="text/javascript">
 	var input = document.getElementById("searchbar");
 input.addEventListener("keyup", function(event) {

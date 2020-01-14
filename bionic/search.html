@@ -107,6 +107,7 @@ document.onkeyup = doSomethingWithSelectedText;
 	document.getElementById("title").innerHTML = query + " - stella.find";
 	document.getElementById("searchbar").setAttribute("value", query);
 	scrolldown();
+	starteventinput();
 	}
 	function scrolldown(){
 	if (window.scrollY >= 0 && window.scrollY <= 35) {
@@ -161,8 +162,11 @@ var input = document.getElementById("searchbar").value;
 }
 });</script>
    <script type="text/javascript">
-   element.addEventListener("mouseover", "raisemouseflag()");
-   element.addEventListener("mouseout", "unraisemouseflag()");
+   function starteventinput(){
+   document.getElementById("searchbar").addEventListener("mouseover", raisemouseflag());
+   document.getElementById("searchbar").addEventListener("mouseout", unraisemouseflag());
+   console.log("Event listeners in place for stella.find")
+   }
 function raisemouseflag(){
 var mouseinput = "1";
 console.log("Holding stella.find input bar.")
@@ -175,8 +179,8 @@ console.log("Left stella.find input bar.")
   </input></center></div>
   <!-- END POP UP SEARCH -->
   <div id="toolbar" style="position: fixed; left: 30px; top: 10px; z-index: 99999">
-  <img onclick="searchme()" src="../images/search.png" style="height: 25px; display: inline-block;"></img>
-  <img onclick="voice()" src="http://stella.rf.gd/voice/images/logo_black.png" style="height: 25px; display: inline-block;">
+  <img onclick="searchme()" src="../images/search.png" style="height: 30px; display: inline-block;"></img>
+  <img onclick="voice()" src="http://stella.rf.gd/voice/images/logo_black.png" style="height: 30px; display: inline-block;">
   <script type="text/javascript">
 function voice(){
 document.getElementById("voice").setAttribute("style", "z-index=999999999; position: fixed; display: inline; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: " + (window.outerHeight - 40) + "px; top: 40px;");
