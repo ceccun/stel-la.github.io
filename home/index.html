@@ -14,6 +14,9 @@
 function openBrows(url, title){
 document.getElementById("browsapp").setAttribute("style", "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: white; display: inline-block; opacity: 0");
 document.getElementById("browsapp").setAttribute("class", "browsappopen");
+setTimeout(finishopen(url, title), 200)
+}
+function finishopen(url, title){
 document.getElementById("browsapp.frame").setAttribute("height", window.innerHeight - document.getElementById("browsapp.topbar").offsetHeight + "px");
 document.getElementById("browsapp.frame").src = "https://stel-la.github.io/home/brows/index.html?url=" + url + "&t=" + title;
 }
@@ -33,6 +36,7 @@ input.addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
 var input = document.getElementById("searchbar").value;
+document.getElementById("searchbar").blur;
      openBrows("https://stel-la.github.io/?q=" + input, input);
 }
 });</script>
@@ -45,17 +49,12 @@ var input = document.getElementById("searchbar").value;
 			<img style="width: 40px;" src="../images/speedtest.png">
 			<p style="margin: 0; font-weight: 700;">Speed</p>
 			<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
-			<script>
-			function speedtest(){
-			openBrows("https://stel-la.github.io/speed-test", "stella.speed");
-			}
-			</script>
 		</div>
 </div>
 <!-- Brows Browser -->
 <div id="browsapp" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: white; display: none;">
 <div style="height: 50px; margin: 0; padding: 0; z-index: 1; padding-left: 20px; padding-top: 20px;" id="browsapp.topbar"><img onclick="closeBrows()" src="../images/arrow-down.png" width="30px"></img></div>
 <iframe id="browsapp.frame" src="" frameborder="0" height="0px;" style="width: 100vw; overflow-x: none;" scrolling="no"></iframe>
-<div>
+</div>
 </body>
 </html>
