@@ -63,6 +63,7 @@ background-color: #FFFFFF;
 margin-left: 30px;
 }
 </style>
+<script src="../blocks/cdn.js"></script>
 <script type="text/javascript">
 function getSelectedText() {
     var text = "";
@@ -102,9 +103,12 @@ document.onkeyup = doSomethingWithSelectedText;
 	<script type="text/javascript">
 	function loadcall(){
 	var query = new URL(window.location).searchParams.get('q');
+	var querydevice = new URL(window.location).searchParams.get('q');
 	document.getElementById("title").innerHTML = query + " - stella.find";
 	document.getElementById("searchbar").setAttribute("value", query);
 		document.getElementById("searchbar").removeAttribute("readonly");
+		setTimeout("checkBlock('" + querydevice + "')", 0);
+		console.log("Sending Request to Blocks Service...");
 	}
 	</script>
    <div id="header" style="margin-bottom: 0; padding-bottom: 0; position: sticky; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.07); backdrop-filter: blur(10px);" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;"><a style="text-decoration: none; color: black;" href="index.html">stella.find</a></h1></div>
