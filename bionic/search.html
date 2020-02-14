@@ -70,6 +70,7 @@ background-color: #FFFFFF;
 margin-left: 30px;
 }
 </style>
+<script src="../blocks/cdn.js"></script>
 <script type="text/javascript">
 function getSelectedText() {
     var text = "";
@@ -92,7 +93,7 @@ function doSomethingWithSelectedText() {
 document.onmouseup = doSomethingWithSelectedText;
 document.onkeyup = doSomethingWithSelectedText;
 </script>
-    <body onLoad="loadcall()">
+    <body style="overflow-x: hidden;" onLoad="loadcall()">
 	<script>
 	document.addEventListener("mouseup", doSomethingWithSelectedText);
 	console.log("Event Listener Added for stella.voice");
@@ -104,10 +105,13 @@ document.onkeyup = doSomethingWithSelectedText;
 	<script type="text/javascript">
 	function loadcall(){
 	var query = new URL(window.location).searchParams.get('q');
+	var querydevice = new URL(window.location).searchParams.get('q');
 	document.getElementById("title").innerHTML = query + " - stella.find";
 	document.getElementById("searchbar").setAttribute("value", query);
 	scrolldown();
 	starteventinput();
+	setTimeout("checkBlock('" + querydevice + "')", 0);
+		console.log("Sending Request to Blocks Service...");
 	}
 	function scrolldown(){
 	if (window.scrollY >= 0 && window.scrollY <= 35) {
@@ -132,12 +136,15 @@ document.onkeyup = doSomethingWithSelectedText;
    }
    </script>
    Find</a></h1></div>
-   <div style="top: 78px; position: absolute; width: 100%; background-color: #ededed; z-index: 2; height: 20px;">&nbsp</div>
+   <!-- Blocks Socket -->
+   <div id="blockszone" style="display: none; font-family: 'stella.typeface', sans-serif;s z-index: 10; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; background-color: #ededed;  margin-bottom: 0px;"><p id="blockscontent" style="width: 100%; margin: 0; padding: 0; padding-top: 10px;"></p></div>
+   <div style="position: relative; background-color: #ededed; z-index: 2; height: 20px; margin-bottom: -14px;">&nbsp</div>
+
 <script async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
    </div>
    <!-- POP UP SEARCH -->
-  <div id="overlaybar" class="" onmouseup="goaway()" style="display: none; visibility: invisible; position: fixed; z-index: 100000; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+  <div id="overlaybar" class="" onmouseup="goaway()" style="display: none; visibility: invisible; position: fixed; z-index: 99998; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
   <script type="text/javascript">
   function goaway(){
   if (mouseinput = "0"){
@@ -178,21 +185,22 @@ console.log("Left stella.find input bar.")
 </script>
   </input></center></div>
   <!-- END POP UP SEARCH -->
-  <div id="toolbar" style="position: fixed; left: 30px; top: 10px; z-index: 99999">
+  <div id="toolbar" style="position: fixed; left: 30px; top: 10px; z-index: 99999;">
   <img onclick="searchme()" src="../images/search.png" style="height: 30px; display: inline-block;"></img>
-  <img onclick="voice()" src="http://stella.rf.gd/voice/images/logo_black.png" style="height: 30px; display: inline-block;">
+  <img onclick="voice()" src="https://stel-la.github.io/voice/images/logo_gray.png" style="height: 30px; display: inline-block;">
   <script type="text/javascript">
 function voice(){
-document.getElementById("voice").setAttribute("style", "z-index=999999999; position: fixed; display: inline; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: " + (window.outerHeight - 40) + "px; top: 40px;");
-document.getElementById("voiceframe").setAttribute("style", "height: " + (window.outerHeight - 40) + "%; width: 100vw;");
-document.getElementById("voiceframe").setAttribute("src", "http://stella.rf.gd/voice/");
+document.getElementById("voice").setAttribute("style", "z-index: 999999999; position: fixed; display: inline; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: " + (window.outerHeight - 40) + "px;");
+document.getElementById("voiceframe").setAttribute("style", "height: " + (window.outerHeight - 40) + "px; width: 100vw; z-index: 99;");
+document.getElementById("voiceframe").setAttribute("src", "https://stel-la.github.io/voice");
 }  
   </script>
   </img>
+   <img src="../images/multiscreen.png" style="height: 30px; display: inline-block;">
   </div>
   <!-- voice -->
-  <div style="display: none; z-index=999999999; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);" id="voice">
-  <iframe style="height: 100vh; width: 100vw;" id="voiceframe">
+  <div style="display: none; z-index=999999999; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: red;" id="voice">
+  <iframe allowtransparency="yes" scrolling="no" frameborder="no" style="height: 100vh; width: 100vw;" id="voiceframe">
   </iframe>
   </div>
     </body>
