@@ -22,7 +22,7 @@ input.addEventListener("keyup", function(event) {
     event.preventDefault();
 	document.getElementById("title").innerHTML = "stella.find - typing...";
     if (event.keyCode === 13) {
-var input = encodeURI(document.getElementById("searchbar").value);
+var input = encodeURIComponent(document.getElementById("searchbar").value);
      window.location = "search.html?q=" + input;
 }
 });</script></input>
@@ -42,7 +42,7 @@ Find</button>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
 </div>
 </a>
-<p>v2.0.158 - "Bionic"</p>
+<p>v2.0.627 - "Bionic"</p>
    </div>
     </body>
 </html>

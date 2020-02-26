@@ -22,7 +22,7 @@ input.addEventListener("keyup", function(event) {
     event.preventDefault();
 	document.getElementById("title").innerHTML = "stella.find - typing...";
     if (event.keyCode === 13) {
-var input = encodeURI(document.getElementById("searchbar").value);
+var input = encodeURIComponent(document.getElementById("searchbar").value);
      window.location = "search.html?q=" + input;
 }
 });</script></input>
