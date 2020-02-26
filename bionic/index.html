@@ -22,11 +22,18 @@ input.addEventListener("keyup", function(event) {
     event.preventDefault();
 	document.getElementById("title").innerHTML = "stella.find - typing...";
     if (event.keyCode === 13) {
-var input = document.getElementById("searchbar").value;
+var input = encodeURI(document.getElementById("searchbar").value);
      window.location = "search.html?q=" + input;
 }
 });</script></input>
-<button style="margin-top: 5px;">Find</button>
+<button onclick="search()" style="margin-top: 5px;">
+<script>
+function search(){
+var input = encodeURI(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+	 }
+</script>
+Find</button>
 <h2>Services</h2>
 <a href="../speed-test/index.html" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
@@ -35,13 +42,7 @@ var input = document.getElementById("searchbar").value;
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
 </div>
 </a>
-<a href="../calculator.html" style="display: inline-block; color: black; width: 100px;">
-<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
-<img style="width: 40px;" src="../images/calculator.png">
-<p style="margin: 0; font-weight: 700;">Calculator</p>
-<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Perform calculations on the web.</p>
-</div>
-</a>
+<p>v2.0.158 - "Bionic"</p>
    </div>
     </body>
 </html>

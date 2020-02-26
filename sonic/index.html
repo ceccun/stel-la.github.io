@@ -9,7 +9,7 @@
     <body onLoad="loadcall()">
 	<script type="text/javascript">
 	function loadcall(){
-	
+	document.getElementById("tip").innerHTML = "Pro Tip: Find can now organise and complete mathmatical queries. Try " + (Math.floor(Math.random() * 100)) + "*" + (Math.floor(Math.random() * 1000));
 	}
 	</script>
    <div id="header" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;">stella</h1></div>
@@ -22,11 +22,17 @@ input.addEventListener("keyup", function(event) {
     event.preventDefault();
 	document.getElementById("title").innerHTML = "stella.find - typing...";
     if (event.keyCode === 13) {
-var input = document.getElementById("searchbar").value;
+var input = encodeURI(document.getElementById("searchbar").value);
      window.location = "search.html?q=" + input;
 }
 });</script></input>
-<button style="margin-top: 5px;">Find</button>
+<button onclick="search()" style="margin-top: 5px;"><script>
+function search(){
+var input = encodeURI(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+	 }
+</script>Find</button></a>
+<p id="tip">Pro Tip: Find can now organise and complete mathmatical queries.</p>
 <h2>Services</h2>
 <a href="../speed-test/index.html" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
@@ -35,6 +41,7 @@ var input = document.getElementById("searchbar").value;
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
 </div>
 </a>
+<p>v2.1 - "Sonic"</p>
    </div>
     </body>
 </html>
