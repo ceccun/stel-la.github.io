@@ -1,32 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>stella maps - explore</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
-<style>
-	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-	a.mapboxgl-ctrl-logo { display: none; }
-	.mapboxgl-ctrl-bottom-right { display: none; }
-</style>
+  <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
 </head>
 <body>
-<div id="map"></div>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ';
-var map = new mapboxgl.Map({
-container: 'map', // container id
-style: 'mapbox://styles/mapbox/streets-v11',
-center: [-74.5, 40], // starting position
-zoom: 9 // starting zoom
-});
- 
-// Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl());
+<script type="text/javascript">
+function getOS() {
+  var userAgent = window.navigator.userAgent,
+      platform = window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'Mac OS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (!os && /Linux/.test(platform)) {
+    os = 'Linux';
+  }
+
+  return os;
+}
+if (getOS() == "Windows"){
+var uri = "sonic.html";
+paramsearch();
+}
+if (getOS() == "Mac OS"){
+var uri = "sonic.html";
+paramsearch();
+}
+if (getOS() == "Android"){
+if (screen.width <= 1242) {
+var uri = "bionic.html";
+}
+if (screen.width >= 1243) {
+var uri = "sonic.html";
+}
+paramsearch();
+}
+if (getOS() == "Linux"){
+var uri = "sonic.html";
+paramsearch();
+}
+if (getOS() == "iOS"){
+if (screen.width <= 1242) {
+var uri = "bionic.html";
+}
+if (screen.width >= 1243) {
+var uri = "sonic.html";
+}
+paramsearch();
+}
+function paramsearch(){
+var q = new URL(window.location).searchParams.get('q');
+if (q == null) {
+window.location.replace(uri);
+}
+}
 </script>
- 
 </body>
 </html>
