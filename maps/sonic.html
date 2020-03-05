@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>stella maps - explore</title>
+<title>eMap - explore</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
@@ -68,7 +68,7 @@
 	font-family: 'stella.typeface', sans-serif;
 	margin-top: 0px;
 	margin-left: 20px;
-	color: rgba(0,0,0,0.6);
+	color: rgba(0,0,0,0.9);
 	}
 </style>
 </head>
@@ -88,8 +88,8 @@ type="text/css"
 var map = new mapboxgl.Map({
 container: 'map', // container id
 style: 'mapbox://styles/mapbox/streets-v11',
-center: [-74.5, 40], // starting position
-zoom: 9 // starting zoom
+center: [0.1278, 51.5074], // starting position
+zoom: 10 // starting zoom
 });
  map.addControl(
 new MapboxGeocoder({
@@ -100,8 +100,13 @@ mapboxgl: mapboxgl
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 </script>
-<h1 class="title">stella maps</h1>
+<h1 class="title">eMap</h1>
 <a href="about.html" target="_BLANK">
-<div style="position: fixed; bottom: 10px; background-color: rgba(255,255,255,0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: 2px; border-radius: 10px; right: 10px; padding-bottom: -15px;"><img width="25px" style="text-align: center;" src="../images/info.png"></div></a>
+<div style="position: fixed; bottom: 10px; background-color: rgba(255,255,255,0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: 2px; border-radius: 10px; right: 10px;"><img width="25px" style="text-align: center; margin: 0; padding: 0;" src="../images/info.png"></div></a>
+<div id="databox" style="position: fixed; bottom: 80px; background-color: rgba(255,255,255,0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: 10px; border-radius: 10px; right: 10px; width: 300px;"><h3 style="margin: 0; font-family: 'stella.typeface', sans-serif">Data Enforcement</h3><p style="margin: 0; font-family: 'stella.typeface', sans-serif;">stella and MapBox collect data on your visit to help improve The eMap service. Data collected do not contain information that can uniquely identify you and will only be used for debugging and recreation purposes.</p><button onclick="permit()" style="border-radius: 10px; padding: 10px; background-color: rgba(255, 0, 68,0.5); border: none; margin-top: 5px;"><script>
+function permit(){
+document.getElementById("databox").setAttribute("style", "position: fixed; bottom: 80px; background-color: rgba(255,255,255,0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: 10px; border-radius: 10px; right: 10px; width: 300px; display: none;");
+}
+</script>Permit</button></div>
 </body>
 </html>
