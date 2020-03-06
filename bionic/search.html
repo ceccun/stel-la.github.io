@@ -113,6 +113,10 @@ document.onkeyup = doSomethingWithSelectedText;
 	starteventinput();
 	setTimeout("checkBlock('" + querydevice + "')", 0);
 		console.log("Sending Request to Blocks Service...");
+		if checkBlock(query) != null {
+		document.getElementById("blockszone").setAttribute("style", "display: block; font-family: 'stella.typeface', sans-serif;s z-index: 2; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; background-color: #ededed;  margin-bottom: 0px; padding-left: 30px; padding-right: 30px;");
+		document.getElementById("blockscontent").innerHTML = checkBlock(query);
+		}
 	}
 	function scrolldown(){
 	if (window.scrollY >= 0 && window.scrollY <= 35) {
