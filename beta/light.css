@@ -50,6 +50,7 @@
 	 top: 0;
 	 position: sticky;
 	 background-color: white;
+	 z-index: 2;
  }
  .strip-title{
 	 margin-left: 30px;
@@ -205,5 +206,60 @@
     -o-transform:  translate(0px,30px)  ;
   }
 }
+/* Search Platform !! ALOT */
+body{
+overflow-y: none;
+}
+.gcse-searchresults-only{
+background-color: #ededed;
+margin: 0;
+padding: 0;
+}
+.gsc-control-cse.gsc-control-cse-en{
+font-family: 'stella.typeface';
+margin: 0;
+padding: 0;
+position: relative;
+z-index: 1;
 
+}
+.gcsc-find-more-on-google-root{
+display: none;
+visibility: invisible;
+opacity: 0;
+}
+.gcsc-find-more-on-google{
+display: none;
+visibility: invisible;
+opacity: 0;
+}
+.gs-bidi-start-align.gs-snippet{
+font-family: 'stella.typeface';
+}
+.gsc-resultsbox-visible{
+margin-right: 60%;
+margin-left: 30px;
+display: none;
+}
+.gsc-tabsArea{
+background-color: #FFF;
+padding-left: 30px;
+}
+.gsc-tabHeader.gsc-tabhInactive.gsc-inline-block{
+background-color: #FFF;
+}
+.gsc-tabHeader.gsc-inline-block.gsc-tabhActive{
+background-color: #FFF;
+color: black;
+border-bottom-color: black;
+}
+.gsc-wrapper{
+background-color: #FFFFFF;
+}
+.gsc-above-wrapper-area{
+background-color: #FFFFFF;
+}
+.gsc-result-info{
+margin-left: 30px;
+}
 
