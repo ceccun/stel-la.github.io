@@ -8,7 +8,6 @@ Http.onreadystatechange = (e) => {
 	  try{
 	  math.evaluate(queryw);
 	  var result = math.evaluate(queryw).toString();
-	return result;
 	placement(result);
   }
   catch(err){
