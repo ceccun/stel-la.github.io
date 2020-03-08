@@ -3,89 +3,52 @@
 <head>
     <title id="title">stella.find - Get to info faster.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="light.css" rel="stylesheet" type="text/css">
+<link href="../light.css" rel="stylesheet" type="text/css">
  <link type="application/opensearchdescription+xml" rel="search" href="../opensearch.xml"/>
     </head>
     <body onLoad="loadcall()">
 	<script type="text/javascript">
 	function loadcall(){
-topcontrol();
-	}
-	function topcontrol(){
-if (window.scrollY > 20){
-document.getElementById("strip").setAttribute("style", "box-shadow: 0px 5px 10px #888888;");
-}
-if (window.scrollY < 20){
-document.getElementById("strip").setAttribute("style", "");
-}
-if (window.scrollY > 80){
-document.getElementById("searchbox").setAttribute("class", "strip-search strip-search-enter");
-document.getElementById("searchbox").setAttribute("style", "");
-}
-if (window.scrollY < 80){
-document.getElementById("searchbox").setAttribute("class", "strip-search strip-search-exit");
-document.getElementById("searchbox").setAttribute("style", "");
-}
-setTimeout("topcontrol()", 1);
+	document.getElementById("tip").innerHTML = "Pro Tip: Find can now organise and complete mathmatical queries. Try " + (Math.floor(Math.random() * 100)) + "*" + (Math.floor(Math.random() * 1000));
 	}
 	</script>
-	<div id="strip" style="" class="strip">
-	<h1 class="strip-title">stella</h1>
-	<input id="searchbox" style="display: none;" class="strip-search" placeholder="Search">
-	<script>
-	var search = document.getElementById("searchbox");
-	search.addEventListener("keydown", event => {
-  if (event.isComposing || event.keyCode === 13) {
-    window.location = "search.html?q=" + encodeURIComponent(search.value);
-  }
-});
-	search.addEventListener("keyup", event => {
-document.getElementById("searchbox-main").value = search.value;
-});
-	</script>
-	</input>
-	</div>
-	<div class="content">
-	<div style="padding-right: 30px; max-width: 100vw;">
-	<input id="searchbox-main" class="inline-search" placeholder="Search">
-	<script>
-	var searchm = document.getElementById("searchbox-main");
-	searchm.addEventListener("keydown", event => {
-  if (event.isComposing || event.keyCode === 13) {
-    window.location = "search.html?q=" + encodeURIComponent(searchm.value);
-  }
-});
-	searchm.addEventListener("keyup", event => {
-document.getElementById("searchbox").value = searchm.value;
-});
-	</script>
-	</div>
-	</input>
+   <div id="header" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;">stella</h1></div>
+   <div id="lan" style="" class="lan">
+   <h1>Find.</h1>
+<input type="search" id="searchbar" class="searchbar">
+<script id="searchbar" type="text/javascript">
+	var input = document.getElementById("searchbar");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+	document.getElementById("title").innerHTML = "stella.find - typing...";
+    if (event.keyCode === 13) {
+var input = encodeURIComponent(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+}
+});</script></input>
+<button onclick="search()" style="margin-top: 5px;"><script>
+function search(){
+var input = encodeURI(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+	 }
+</script>Find</button></a>
+<p id="tip">Pro Tip: Find can now organise and complete mathmatical queries.</p>
 <h2>Services</h2>
-<a class="service-hitmark" href="new.html">
-<div class="service-backbox" style="border-color: #ff8c00">
-<img class="service-img" src="../images/new.png">
-<p class="service-title">What's New?</p>
-<p class="service-description">See updates and changes.</p>
+<a href="new.html" style="display: inline-block; color: black; width: 100px;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<img style="width: 40px;" src="../images/new.png">
+<p style="margin: 0; font-weight: 700;">What's New?</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">See updates and changes.</p>
 </div>
 </a>
-&nbsp
-<a class="service-hitmark" href="../speed-test/index.html">
-<div class="service-backbox">
-<img class="service-img" src="../images/speedtest.png">
-<p class="service-title">Speed</p>
-<p class="service-description">Test your internet speed.</p>
+<a href="../speed-test/index.html" style="display: inline-block; color: black; width: 100px;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<img style="width: 40px;" src="../images/speedtest.png">
+<p style="margin: 0; font-weight: 700;">Speed</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
 </div>
 </a>
-&nbsp
-<a class="service-hitmark" href="../maps/index.html">
-<div class="service-backbox">
-<img class="service-img" src="../images/maps.png">
-<p class="service-title">Map</p>
-<p class="service-description">Explore cities, roads and highways.</p>
-</div>
-</a>
-<p>v3.0 - "Sonic" - <a style="text-decoration: none; color: #00ff59" href="https://icons8.com">Icons by Icons8</a></p>
+<p>v2.1 - "Sonic" - <a style="text-decoration: none; color: #00ff59" href="https://icons8.com">Icons by Icons8</a></p>
    </div>
     </body>
 </html>
