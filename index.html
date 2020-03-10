@@ -4,7 +4,19 @@
 <title>Welcome to the nginx.</title>
   <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
 </head>
-<body>
+<body onload="myFunction()">
+<script>
+function myFunction() {
+  var txt;
+  var person = prompt("Login to the stella account system.", "@stella.hs.vc");
+  if (person == null || person == "") {
+    txt = "User cancelled the prompt.";
+  } else {
+    txt = "Hello " + person + "! How are you today?";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
 <h1>403 Access Forbidden</h1>
 <p>HTACCESS corrupted, not present or being updated.</p>
 <hr>
