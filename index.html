@@ -1,25 +1,70 @@
 <!doctype html>
 <html>
 <head>
-<title>Welcome to the nginx.</title>
   <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
 </head>
-<body onload="myFunction()">
-<script>
-function myFunction() {
-  var txt;
-  var person = prompt("Login to the stella account system.", "@stella.hs.vc");
-  if (person == null || person == "") {
-    txt = "User cancelled the prompt.";
-  } else {
-    txt = "Hello " + person + "! How are you today?";
+<body>
+<script type="text/javascript">
+function getOS() {
+  var userAgent = window.navigator.userAgent,
+      platform = window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'Mac OS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (!os && /Linux/.test(platform)) {
+    os = 'Linux';
   }
-  document.getElementById("demo").innerHTML = txt;
+
+  return os;
+}
+if (getOS() == "Windows"){
+var uri = "sonic";
+paramsearch();
+}
+if (getOS() == "Mac OS"){
+var uri = "sonic";
+paramsearch();
+}
+if (getOS() == "Android"){
+if (screen.width <= 1242) {
+var uri = "bionic";
+}
+if (screen.width >= 1243) {
+var uri = "sonic";
+}
+paramsearch();
+}
+if (getOS() == "Linux"){
+var uri = "/sonic";
+paramsearch();
+}
+if (getOS() == "iOS"){
+if (screen.width <= 1242) {
+var uri = "bionic";
+}
+if (screen.width >= 1243) {
+var uri = "sonic";
+}
+paramsearch();
+}
+function paramsearch(){
+var q = new URL(window.location).searchParams.get('q');
+if (q == null) {
+window.location.replace(uri);
+} else{
+window.location.replace(uri + "/search.html?q=" + q);
+}
 }
 </script>
-<h1>403 Access Forbidden</h1>
-<p>HTACCESS corrupted, not present or being updated.</p>
-<hr>
-<p style="text-align: center;">nginx - stella - nodejs - FreeBSD</p>
 </body>
 </html>
