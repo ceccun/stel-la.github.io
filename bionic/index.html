@@ -6,7 +6,7 @@
 <link href="../light.css" rel="stylesheet" type="text/css">
  <link type="application/opensearchdescription+xml" rel="search" href="../opensearch.xml"/>
     </head>
-    <body onLoad="loadcall()">
+    <body style="overflow-x: hidden;" onLoad="loadcall()">
 	<script type="text/javascript">
 	function loadcall(){
 	
@@ -34,9 +34,14 @@ var input = encodeURI(document.getElementById("searchbar").value);
 	 }
 </script>
 Find</button>
+<h2>SOS Alert</h2>
+<div style="background-color: #ededed; width: 100%; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<p style="margin: 0; font-weight: 700;">COVID-19</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">COVID-19 is a coronavirus that affects the lungs and airways. It is a world-wide pandemic.</p>
+</div>
 <h2>Services</h2>
 </div>
-<div style="overflow: auto; padding-left: 30px; width: 100vw;">
+<div style="overflow-x: scroll; padding-left: 10%; padding-right: 10%; width: 100%; font-family: 'stella.typeface', sans-serif; margin: 0;">
 <a href="new.html" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
 <img style="width: 40px;" src="../images/new.png">
