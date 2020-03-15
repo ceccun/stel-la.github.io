@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <title id="title">stella.find - Get to info faster.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="visuals/light.css" rel="stylesheet" type="text/css">
+ <link type="application/opensearchdescription+xml" rel="search" href="../opensearch.xml"/>
+    </head>
+
+    <body onLoad="loadcall()">
+	<script type="text/javascript">
+	function loadcall(){
+topcontrol();
+var query = new URL(window.location).searchParams.get('q');
+	var querydevice = new URL(window.location).searchParams.get('q');
+	document.getElementById("title").innerHTML = query + " - stella.find";
+	document.getElementById("searchbox-main").setAttribute("value", query);
+		document.getElementById("searchbox-main").removeAttribute("readonly");
+			document.getElementById("searchbox").setAttribute("value", query);
+		document.getElementById("searchbox").removeAttribute("readonly");
+		checkBlock(query);
+		console.log("Sending Request to Blocks Service...");
+	}
+	function topcontrol(){
+if (window.scrollY > 20){
+document.getElementById("strip").setAttribute("style", "box-shadow: 0px 5px 10px #888888;");
+}
+if (window.scrollY < 20){
+document.getElementById("strip").setAttribute("style", "");
+}
+if (window.scrollY > 80){
+document.getElementById("searchbox").setAttribute("class", "strip-search strip-search-enter");
+document.getElementById("searchbox").setAttribute("style", "");
+}
+if (window.scrollY < 80){
+document.getElementById("searchbox").setAttribute("class", "strip-search strip-search-exit");
+document.getElementById("searchbox").setAttribute("style", "");
+}
+setTimeout("topcontrol()", 1);
+	}
+	</script>
+	<div id="strip" style="" class="strip">
+	<a href="index.html"><h1 class="strip-title">stella</h1></a>
+	<input id="searchbox" value="Searching..." style="display: none;" class="strip-search" placeholder="Search">
+	<script>
+	var search = document.getElementById("searchbox");
+	search.addEventListener("keydown", event => {
+  if (event.isComposing || event.keyCode === 13) {
+    window.location = "search.html?q=" + encodeURIComponent(search.value);
+  }
+});
+	search.addEventListener("keyup", event => {
+document.getElementById("searchbox-main").value = search.value;
+});
+	</script>
+	</input>
+	</div>
+	<div class="content">
+	<div style="padding-right: 30px; max-width: 100vw;">
+	<input id="searchbox-main" value="Searching..." class="inline-search" placeholder="Search">
+	<script>
+	var searchm = document.getElementById("searchbox-main");
+	searchm.addEventListener("keydown", event => {
+  if (event.isComposing || event.keyCode === 13) {
+    window.location = "search.html?q=" + encodeURIComponent(searchm.value);
+  }
+});
+	searchm.addEventListener("keyup", event => {
+document.getElementById("searchbox").value = searchm.value;
+});
+	</script>
+	</div>
+	</input>
+	</div>
+<script async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
+<div class="gcse-searchresults-only"></div>
+<div class="content">
+<p>v3.0 - "Sonic" - <a style="text-decoration: none; color: #00ff59" href="https://icons8.com">Icons by Icons8</a></p>
+   </div>
+    </body>
+</html>

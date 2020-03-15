@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+    <title id="title">stella.find - Get to info faster.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="visuals/light.css" rel="stylesheet" type="text/css">
+ <link type="application/opensearchdescription+xml" rel="search" href="../opensearch.xml"/>
+ <script src='gestures/dist/zingtouch.min.js'></script>
+    </head>
+    <body id="body" onLoad="loadcall()">
+	<script type="text/javascript">
+	function loadcall(){
+topcontrol();
+empty_setup();
+	}
+	function topcontrol(){
+if (window.scrollY > 20){
+document.getElementById("strip").setAttribute("style", "box-shadow: 0px 5px 10px #888888;");
+}
+if (window.scrollY < 20){
+document.getElementById("strip").setAttribute("style", "");
+}
+}
+function empty_setup(){
+var empty_space = document.getElementById("extra-space")
+empty_space.setAttribute("style", "height: " + (window.innerHeight - 175.867) + "px;" )
+}
+	</script>
+	<div id="strip" class="strip">
+	<h1 class="strip-title">stella</h1>
+	</div>
+	<div id="content" class="content">
+	<div style="padding-right: 30px; max-width: 100vw;">
+	<input id="searchbox-main" class="inline-search" placeholder="Search">
+	<script>
+	var searchm = document.getElementById("searchbox-main");
+	searchm.addEventListener("keydown", event => {
+  if (event.isComposing || event.keyCode === 13) {
+    window.location = "search.html?q=" + encodeURIComponent(searchm.value);
+  }
+});
+	</script>
+	</div>
+	</input>
+	<div id="services" class="services-sidebox">
+<h2 onclick="close_services()">
+	<script>
+function close_services(){
+	var services = document.getElementById("services")
+	services.setAttribute("class", "service_closed");
+}
+	</script>
+	‹ Services</h2>
+<a class="service-hitmark" href="new.html">
+<div class="service-backbox" style="border-color: #ff8c00">
+<img class="service-img" src="../images/new.png">
+<p class="service-title">What's New?</p>
+<p class="service-description">See updates and changes.</p>
+</div>
+</a>
+&nbsp
+<a class="service-hitmark" href="../speed-test/index.html">
+<div class="service-backbox">
+<img class="service-img" src="../images/speedtest.png">
+<p class="service-title">Speed</p>
+<p class="service-description">Test your internet speed.</p>
+</div>
+</a>
+&nbsp
+<a class="service-hitmark" href="../maps/index.html">
+<div class="service-backbox">
+<img class="service-img" src="../images/maps.png">
+<p class="service-title">Map</p>
+<p class="service-description">Explore cities, roads and highways.</p>
+</div>
+</a>
+&nbsp
+<a class="service-hitmark" href="https://docs.google.com/forms/d/e/1FAIpQLSfNfNalQzgF6F3feWoVikWoaaP5nhtLdDCKlIaGxs_03-ctjg/viewform?usp=sf_link">
+<div class="service-backbox">
+<img class="service-img" src="../images/feedback.png">
+<p class="service-title">Feedback</p>
+<p class="service-description">Send reports and logs to stella.</p>
+</div>
+</a>
+</div>
+<p>v3.0 - "Sonic" - <a style="text-decoration: none; color: #00ff59" href="https://icons8.com">Icons by Icons8</a></p>
+<div id="extra-space">&nbsp
+</div>
+   </div>
+   	<script>
+var containerElement = document.getElementById('content');
+var activeRegion = ZingTouch.Region(containerElement);
+var childElement = document.getElementById('extra-space');
+activeRegion.bind(childElement, new ZingTouch.Pan({ numInputs: 2, directionFromOrigin: 180 }), function(event){
+	//Perform Operations
+	console.log("hello");
+});
+	</script>
+	<div onclick="open_services()" style="bottom: 30%; right: 20%;" class="floating-container">
+		<script type="text/javascript">
+function open_services(){
+	var services = document.getElementById("services")
+	services.setAttribute("class", "service_opened");
+}
+		</script>
+	<div class="floating-button" ><img src="../images/services.png" width="30px"></img></div>
+	<p style="display: inline-block; line-height: 42px; margin: 0; transform: translateY(-10px);">›</p>
+	</div>
+    </body>
+</html>
