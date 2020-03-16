@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 	function loadcall(){
 	if (document.URL.includes("https") == true){
-	var extra = document.getElementsByClassName("extra-geo");
+	var extra = document.getElementById("extra-geo");
 	extra.setAttribute("style", "display: none;");
 	document.getElementById("info").innerHTML = "Your connection was served over a secure connection, you cannot use this service at the moment! 🙅‍♀️";
 	}
@@ -39,7 +39,7 @@ var input = encodeURI(document.getElementById("searchbar").value);
 </script>
 Find</button>
 <div style="background-color: #ededed; width: 100%; display: inline-block; padding: 10px; margin-top: 8px; border-radius: 10px;">
-<p id="info" style="display: inline-block; margin: 0;">Country: </p>
+<p id="info" style="display: inline-block; margin: 0;"></p><div style="" id="extra-geo">
 <p class="extra-geo" style="display: inline-block; font-weight: 700; margin: 0px;">geobytescountry</p>
 <br>
 <p class="extra-geo" style="display: inline-block; margin: 0px;">Local Currency: </p>
@@ -47,6 +47,7 @@ Find</button>
 <br>
 <p class="extra-geo" style="display: inline-block; margin: 0px;">Local Population: </p>
 <p class="extra-geo" style="display: inline-block; font-weight: 700; margin: 0px;">geobytespopulation</p>
+</div>
 </div>
 <h2>SOS Alert</h2>
 <div style="background-color: #ededed; width: 100%; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
