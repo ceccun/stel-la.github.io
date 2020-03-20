@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title id="title">stella.find - Get to info faster.</title>
+    <title id="title">stella search - Get to info faster.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../light.css" rel="stylesheet" type="text/css">
 <link href="bionic.css" rel="stylesheet" type="text/css">
@@ -108,28 +108,21 @@ document.onkeyup = doSomethingWithSelectedText;
 	var querydevice = new URL(window.location).searchParams.get('q');
 	document.getElementById("title").innerHTML = query + " - stella.find";
 	document.getElementById("searchbar").setAttribute("value", query);
+	document.getElementById("tool-text").innerHTML = query;
 	scrolldown();
-	starteventinput();
 	checkBlock(query);
 	}
 	function placement(results){
-		  document.getElementById("blockszone").setAttribute("style", "display: inline; font-family: 'stella.typeface', sans-serif;s z-index: 10; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; background-color: #ededed;  margin-bottom: 0px;");
+		  document.getElementById("blockszone").setAttribute("style", "display: auto; font-family: 'stella.typeface', sans-serif; z-index: 10; margin: 0; padding-top: 0; padding-bottom: 0; background-color: #ededed;  margin-bottom: 0px; width: 100vw;");
 		  document.getElementById("blockscontent").innerHTML = results;
 	}
 	function scrolldown(){
-	if (window.scrollY >= 0 && window.scrollY <= 35) {
-	document.getElementById("htext").setAttribute("style", "padding-top: " + (40 - window.scrollY) + "px; padding-left: 30px; margin: 0px; display: inline-block; opacity: " + (0.9 - (window.scrollY/35)) + ";");
-	document.getElementById("header").setAttribute("style", "margin-bottom: " + window.scrollY + "px; padding-bottom: 0; position: sticky; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.07); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);");
-	document.getElementById("toolbar").setAttribute("style", "position: fixed; left: 30px; top: 10px; z-index: 99999; opacity: " +  (window.scrollY/35) + ";");
-	} else if (window.scrollY >= 35){
-	document.getElementById("htext").setAttribute("style", "padding-top: 5px; padding-left: 30px; margin: 0px; display: inline-block; opacity: 0;");
-	document.getElementById("header").setAttribute("style", "margin-bottom: 35px; padding-bottom: 0; position: sticky; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.07); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);");
-	document.getElementById("toolbar").setAttribute("style", "position: fixed; left: 30px; top: 10px; z-index: 99999; opacity: 1");
-	}
-	setTimeout("scrolldown()", 0);
+	var tools = document.getElementById("toolbar");
+	tools.setAttribute("style", "width: 100vw; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: fixed; left: 0px; top: 0px; z-index: 99999; margin: 0; background-color: rgba(0, 0, 0, 0.07); opacity: " + ((1/155)*window.scrollY) + ";");
+	setTimeout("scrolldown()", 50);
 	}
 	</script>
-   <div id="header" style="margin-bottom: 0; padding-bottom: 0; position: sticky; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.07); backdrop-filter: blur(10px); -webkit- backdrop-filter: blur(10px);" class="head"><h1 id="htext" style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;"><a style="text-decoration: none; color: black;" onClick="searchme()">
+   <div id="header" style="margin-bottom: 0; padding-bottom: 0; z-index: 100; background-color: #ededed;" class="head"><img onclick="searchme()" src="../images/search.png" style="height: 25px; display: inline-block; margin-left: 30px; margin-right: 5px;"><img><h1 id="htext" style="padding-top: 40px; margin: 0px; display: inline-block;"><a style="text-decoration: none; color: black;" onClick="searchme()">
    <script type="text/javascript">
    function searchme(){
    document.getElementById("overlaybar").setAttribute("style", "display: inline; visibility: visible; position: fixed; z-index: 100000; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);");
@@ -140,9 +133,9 @@ document.onkeyup = doSomethingWithSelectedText;
    </script>
    Find</a></h1></div>
    <!-- Blocks Socket -->
-   <div id="blockszone" style="display: none; font-family: 'stella.typeface', sans-serif;s z-index: 10; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; background-color: #ededed;  margin-bottom: 0px;"><p id="blockscontent" style="width: 100%; margin: 0; padding: 0; padding-top: 10px;"></p></div>
-   <div style="position: relative; background-color: #ededed; z-index: 2; height: 20px; margin-bottom: -14px;">&nbsp</div>
-
+   <div id="blockszone" style="display: none; font-family: 'stella.typeface', sans-serif;  z-index: 10; margin: 0; padding: 0; padding-bottom: 0; background-color: #ededed;  margin-bottom: 0px; width: 100vw;"><div style="margin-left: 30px; margin-right: 30px;"><p id="blockscontent" style="margin: 0; padding: 0; padding-top: 10px; background-color: #ededed; width: 100%;"></p></div></div>
+   <div style="position: relative; background-color: #ededed; z-index: 2; height: 20px; margin-bottom: -16px;">&nbsp
+   </div>
 <script async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
    </div>
@@ -175,8 +168,11 @@ var input = encodeURIComponent(document.getElementById("searchbar").value);
 });</script>
   </input></center></div></div>
   <!-- END POP UP SEARCH -->
-  <div id="toolbar" style="position: fixed; left: 30px; top: 10px; z-index: 99999;">
-  <img onclick="searchme()" src="../images/search.png" style="height: 30px; display: inline-block;"></img>
+  <div id="toolbar" style="width: 100vw; backdrop-filter: blur(10px); -webkit-backdrop-filter: 10px; position: fixed; left: 0px; top: 0px; z-index: 99999; margin: 0; background-color: rgba(0, 0, 0, 0.07); opacity: 0;">
+  <div style="margin: 10px; margin-left: 30px; vertical-align: middle;">
+  <img onclick="searchme()" src="../images/search.png" style="height: 25px; display: inline-block;  vertical-align: middle;"></img>
+  <p id="tool-text" onclick="searchme()" style="display: inline-block; font-family: 'stella.typeface'; padding: 0; margin: 0; line-height: 25px; height: 25px;  vertical-align: middle; margin-left: 5px;">Search the Web</p>
+  </div>
   </div>
     </body>
 </html>
