@@ -147,7 +147,8 @@ document.onkeyup = doSomethingWithSelectedText;
 <div class="gcse-searchresults-only"></div>
    </div>
    <!-- POP UP SEARCH -->
-  <div id="overlaybar" class="" onmouseup="goaway()" style="display: none; visibility: invisible; position: fixed; z-index: 99998; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+  <div id="overlaybar" class="" style="display: none; visibility: invisible; position: fixed; z-index: 99998; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-left: 10%; padding-right: 10%;">
+  <h1 onclick="goaway()" style="margin-left: 10%; position: relative; top: 50px; font-weight: 400;">×</h1>
   <script type="text/javascript">
   function goaway(){
   if (mouseinput = "0"){
@@ -157,10 +158,11 @@ document.onkeyup = doSomethingWithSelectedText;
   }
   }
   function finaliseaway(){
-  document.getElementById("overlaybar").setAttribute("style", "display: none; visibility: invisible; position: fixed; z-index: 100000; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 1;");
+  document.getElementById("overlaybar").setAttribute("style", "display: none; visibility: invisible; position: fixed; z-index: 100000; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100vh; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 1;  padding-left: 10%; padding-right: 10%;");
   }
   </script>
-  <center><input type="search" value="Connecting..." id="searchbar" style="width: 90%; margin-top: 40px; padding: 10px; border-style: solid; border: none; border-radius: 10px; position: relative; z-index: 2; box-shadow: 0px 6px 10px -1px #888888;">
+  <div style="margin-right: 10%; margin-left: 10%;">
+  <center><input type="search" value="Connecting..." id="searchbar" style="width: 100%; margin-top: 40px; padding: 10px; border-style: solid; border: none; border-radius: 10px; position: relative; z-index: 2; box-shadow: 0px 6px 10px -1px #888888;">
    <script id="searchbar" type="text/javascript">
 	var input = document.getElementById("searchbar");
 input.addEventListener("keyup", function(event) {
@@ -171,40 +173,10 @@ var input = encodeURIComponent(document.getElementById("searchbar").value);
      window.location = "search.html?q=" + input;
 }
 });</script>
-   <script type="text/javascript">
-   function starteventinput(){
-   document.getElementById("searchbar").addEventListener("mouseover", raisemouseflag());
-   document.getElementById("searchbar").addEventListener("mouseout", unraisemouseflag());
-   console.log("Event listeners in place for stella.find")
-   }
-function raisemouseflag(){
-var mouseinput = "1";
-console.log("Holding stella.find input bar.")
-}
-function unraisemouseflag(){
-var mouseinput = "0";
-console.log("Left stella.find input bar.")
-}
-</script>
-  </input></center></div>
+  </input></center></div></div>
   <!-- END POP UP SEARCH -->
   <div id="toolbar" style="position: fixed; left: 30px; top: 10px; z-index: 99999;">
   <img onclick="searchme()" src="../images/search.png" style="height: 30px; display: inline-block;"></img>
-  <img onclick="voice()" src="https://stel-la.github.io/voice/images/logo_gray.png" style="height: 30px; display: inline-block;">
-  <script type="text/javascript">
-function voice(){
-document.getElementById("voice").setAttribute("style", "z-index: 999999999; position: fixed; display: inline; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: " + (window.outerHeight - 40) + "px;");
-document.getElementById("voiceframe").setAttribute("style", "height: " + (window.outerHeight - 40) + "px; width: 100vw; z-index: 99;");
-document.getElementById("voiceframe").setAttribute("src", "https://stel-la.github.io/voice");
-}  
-  </script>
-  </img>
-   <img src="../images/multiscreen.png" style="height: 30px; display: inline-block;">
-  </div>
-  <!-- voice -->
-  <div style="display: none; z-index=999999999; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: red;" id="voice">
-  <iframe allowtransparency="yes" scrolling="no" frameborder="no" style="height: 100vh; width: 100vw;" id="voiceframe">
-  </iframe>
   </div>
     </body>
 </html>
