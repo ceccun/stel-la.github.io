@@ -10,7 +10,7 @@
     <body onLoad="loadcall()">
 	<script type="text/javascript">
 	function loadcall(){
-	document.getElementById("tip").innerHTML = "Pro Tip: Find can now organise and complete mathmatical queries. Try " + (Math.floor(Math.random() * 100)) + "*" + (Math.floor(Math.random() * 1000));
+	document.getElementById("tip").innerHTML = "You can use the search-bar to work out math. Try  " + (Math.floor(Math.random() * 100)) + "*" + (Math.floor(Math.random() * 1000)) + "!";
 	}
 	</script>
    <div id="header" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;">stella</h1></div>
@@ -33,7 +33,7 @@ var input = encodeURI(document.getElementById("searchbar").value);
      window.location = "search.html?q=" + input;
 	 }
 </script>Find</button></a>
-<p id="tip">Pro Tip: Find can now organise and complete mathmatical queries.</p>
+<p id="tip">Waiting for the page to finish loading...</p>
 <h2>Services</h2>
 <a href="new.html" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
@@ -47,6 +47,13 @@ var input = encodeURI(document.getElementById("searchbar").value);
 <img style="width: 40px;" src="../images/speedtest.png">
 <p style="margin: 0; font-weight: 700;">Speed</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
+</div>
+</a>
+<a href="../maps/index.html" style="display: inline-block; color: black; width: 100px;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<img style="width: 40px;" src="../images/maps.png">
+<p style="margin: 0; font-weight: 700;">eMap</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">A hybrid map with search functionality.</p>
 </div>
 </a>
 <a href="../beta/index.html" style="display: inline-block; color: black; width: 100px;">
