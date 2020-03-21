@@ -61,14 +61,14 @@ input.addEventListener("keyup", function(event) {
 	document.getElementById("title").innerHTML = "stella.find - typing...";
     if (event.keyCode === 13) {
 var input = encodeURIComponent(document.getElementById("searchbar").value);
-     window.location = "search.html?q=" + input;
+     window.location.assign("search.html?q=" + input);
 }
 });</script></input>
 <button onclick="search()" style="margin-top: 5px;">
 <script>
 function search(){
 var input = encodeURI(document.getElementById("searchbar").value);
-     window.location = "search.html?q=" + input;
+     window.location.assign("search.html?q=" + input);
 	 }
 </script>
 Find</button>
@@ -82,21 +82,21 @@ Find</button>
 </div>
 <div style="overflow-x: scroll; overflow-y: hidden; width: 100vw; font-family: 'stella.typeface', sans-serif; margin: 0; background-color: white;">
 <div style="margin-left: 10%; margin-right: 10%; height: 143px; width: 100vw;  white-space: nowrap; vertical-align: top; background-color: white;">
-<a href="new.html" style="display: inline-block; color: black; width: 100px;">
+<a href="javascript:window.location.assign('new.html');" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
 <img style="width: 40px;" src="../images/new.png">
 <p style="margin: 0; font-weight: 700;">What's New?</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">See updates and changes.</p>
 </div>
 </a>
-<a href="../speed-test/index.html" style="display: inline-block; color: black; width: 100px;">
+<a href="javascript:window.location.assign('../speed-test/index.html');" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
 <img style="width: 40px;" src="../images/speedtest.png">
 <p style="margin: 0; font-weight: 700;">Speed</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
 </div>
 </a>
-<a href="../maps/index.html" style="display: inline-block; color: black; width: 100px;">
+<a href="javascript:window.location.assign('../maps/index.html');" style="display: inline-block; color: black; width: 100px;">
 <div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
 <img style="width: 40px;" src="../images/maps.png">
 <p style="margin: 0; font-weight: 700;">Map</p>
@@ -112,8 +112,7 @@ Find</button>
 </div>
 </div>
 <div id="lan" style="" class="lan">
-<p>v2.1.74🅹 - "Fusion"</p>
+<p>v2.1.80🅹 - "Fusion"</p>
 </div>
-<script src="https://geoif.geobytes.com/geoif" language="javascript"></script>
     </body>
 </html>
