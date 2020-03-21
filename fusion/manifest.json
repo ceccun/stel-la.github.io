@@ -2,7 +2,7 @@
   "name": "stella",  
   "short_name": "stella",  
   "display": "fullscreen",  
-  "scope": "/",
+  "scope": "../",
   "start_url": "index.html",
   "icons": [
     {
