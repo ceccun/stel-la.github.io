@@ -1,0 +1,15 @@
+{  
+  "name": "stella",  
+  "short_name": "stella",  
+  "display": "standalone",  
+  "scope": "/",
+  "start_url": "index.html",
+  "icons": [
+    {
+      "src": "images/icons-192.png",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "white",
+
+}  
