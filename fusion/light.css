@@ -47,9 +47,7 @@
 			width: 100%;
 			padding: 10px;
 			background-color: #ededed;
-			-webkit-border-style: solid;
-			-webkit-border-color: #ededed;
-			-webkit-border-radius: 10px;
+			-webkit-appearance: none;
 			border-style: solid;
 			border-color: #ededed;
 			border-radius: 10px;
