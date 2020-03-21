@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <title id="title">stella.find - Get to info faster.</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="apple-touch-icon" href="images/touch-icon-iphone.png">
+	<meta name="apple-mobile-web-app-title" content="stella">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#ededed">
+	<script data-ad-client="ca-pub-1010710647557803" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link href="../light.css" rel="stylesheet" type="text/css">
+ <link type="application/opensearchdescription+xml" rel="search" href="../opensearch.xml"/>
+    </head>
+    <body style="overflow-x: hidden;" onLoad="loadcall()">
+	<script type="text/javascript">
+	function loadcall(){
+	if (document.URL.includes("https") == true){
+	var extra = document.getElementById("extra-geo");
+	extra.setAttribute("style", "display: none;");
+	document.getElementById("info").innerHTML = "Your connection was served over a secure connection, you cannot use this service at the moment! 🙅‍♀️";
+	}
+	}
+	</script>
+   <div id="header" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;">stella</h1></div>
+   <div id="lan" style="" class="lan">
+   <h1>Find.</h1>
+<input type="search" id="searchbar" class="searchbar">
+<script id="searchbar" type="text/javascript">
+	var input = document.getElementById("searchbar");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+	document.getElementById("title").innerHTML = "stella.find - typing...";
+    if (event.keyCode === 13) {
+var input = encodeURIComponent(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+}
+});</script></input>
+<button onclick="search()" style="margin-top: 5px;">
+<script>
+function search(){
+var input = encodeURI(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+	 }
+</script>
+Find</button>
+<h2>SOS Alert</h2>
+<div style="background-color: #ededed; width: 100%; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<p style="margin: 0; font-weight: 700;">COVID-19</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">COVID-19 is a coronavirus that affects the lungs and airways. It is a world-wide pandemic.</p>
+</div>
+<h2>Services</h2>
+</div>
+</div>
+<div style="overflow-x: scroll; width: 100vw; font-family: 'stella.typeface', sans-serif; margin: 0;">
+<div style="margin-left: 10%; margin-right: 10%; height: 143px; width: 100vw;  white-space: nowrap; vertical-align: top;">
+<a href="new.html" style="display: inline-block; color: black; width: 100px;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
+<img style="width: 40px;" src="../images/new.png">
+<p style="margin: 0; font-weight: 700;">What's New?</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">See updates and changes.</p>
+</div>
+</a>
+<a href="../speed-test/index.html" style="display: inline-block; color: black; width: 100px;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
+<img style="width: 40px;" src="../images/speedtest.png">
+<p style="margin: 0; font-weight: 700;">Speed</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
+</div>
+</a>
+<a href="../maps/index.html" style="display: inline-block; color: black; width: 100px;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
+<img style="width: 40px;" src="../images/maps.png">
+<p style="margin: 0; font-weight: 700;">Map</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Explore and discover Earth.</p>
+</div>
+</a>
+<a href="#" style="display: inline-block; color: black; width: 100px; vertical-align: top;">
+<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal; height: 133px;">
+<p style="margin: 0; font-weight: 700;">Math</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Type a math equation into the search bar for answers to it.</p>
+</div>
+</a>
+</div>
+</div>
+<div id="lan" style="" class="lan">
+<p>v2.1.12 - "Fusion"</p>
+</div>
+<script src="https://geoif.geobytes.com/geoif" language="javascript"></script>
+    </body>
+</html>
