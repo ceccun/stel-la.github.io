@@ -2,7 +2,7 @@
   "name": "stella",  
   "short_name": "stella",  
   "display": "fullscreen",  
-  "scope": "../",
+  "scope": "https://stella.hs.vc/",
   "start_url": "index.html",
   "icons": [
     {
