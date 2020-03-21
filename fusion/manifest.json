@@ -6,10 +6,9 @@
   "start_url": "index.html",
   "icons": [
     {
-      "src": "images/icons-192.png",
+      "src": "images/touch-icon-iphone.png",
       "type": "image/png"
     }
   ],
   "theme_color": "white",
-
 }  
