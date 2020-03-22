@@ -1,5 +1,5 @@
 <!doctype html>
-<html style="">
+<html>
 <head>
     <title id="title">stella - Get to info faster.</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,10 @@
    </h1></div>
    <div id="lan" style="background-color: white;" class="lan">
    <h1>stella</h1>
-<input type="search" id="searchbar" class="searchbar">
+<input type="search" id="searchbar" 
+style="-webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important; 
+    -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important; 
+    outline: none !important;" class="searchbar">
 <script id="searchbar" type="text/javascript">
 	var input = document.getElementById("searchbar");
 input.addEventListener("keyup", function(event) {
@@ -63,8 +66,14 @@ input.addEventListener("keyup", function(event) {
 var input = encodeURIComponent(document.getElementById("searchbar").value);
      window.location.assign("search.html?q=" + input);
 }
+if (document.getElementById("searchbar").value != ""){
+document.getElementById("searchbutton").setAttribute("style", "background: rgb(191,44,254);  background: linear-gradient(0deg, rgba(191,44,254,1) 0%, rgba(40,107,255,1) 100%); color: white; font-family: 'stella.typeface', sans-serif; border-left-radius: 0px; border-bottom-left-radius: 0px;");
+} else{
+document.getElementById("searchbutton").setAttribute("style", "background-color: #ededed; color: black; font-family: 'stella.typeface', sans-serif");
+}
 });</script></input>
-<button onclick="search()" style="margin-top: 5px;">
+<div style="text-align: right; position: absolute; top: 159px; width: 51px; right: 10%;">
+<button id="searchbutton" onclick="search()" style="background-color: #ededed; color: black; font-family: 'stella.typeface', sans-serif">
 <script>
 function search(){
 var input = encodeURI(document.getElementById("searchbar").value);
@@ -72,39 +81,49 @@ var input = encodeURI(document.getElementById("searchbar").value);
 	 }
 </script>
 Find</button>
+</div>
 <h2>SOS Alert</h2>
-<div style="background-color: #ededed; width: 100%; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<div style="background-color: #ffff; width: 100%; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; -webkit-box-shadow: 0px 4px 8px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 8px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 8px -4px rgba(0,0,0,0.75);">
 <p style="margin: 0; font-weight: 700;">COVID-19</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">COVID-19 is a coronavirus that affects the lungs and airways. It is a world-wide pandemic.</p>
 </div>
 <h2>Services</h2>
 </div>
-</div>
 <div style="overflow-x: scroll; overflow-y: hidden; width: 100vw; font-family: 'stella.typeface', sans-serif; margin: 0; background-color: white;">
-<div style="margin-left: 10%; margin-right: 10%; height: 143px; width: 100vw;  white-space: nowrap; vertical-align: top; background-color: white;">
+<div style="margin-left: 10%; margin-right: 10%; height: 155px; width: 100vw;  white-space: nowrap; vertical-align: top; background-color: white;">
 <a href="javascript:window.location.assign('new.html');" style="display: inline-block; color: black; width: 100px;">
-<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
+<div style="-webkit-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75); background-color: #FFFFFF; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
 <img style="width: 40px;" src="../images/new.png">
 <p style="margin: 0; font-weight: 700;">What's New?</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">See updates and changes.</p>
 </div>
 </a>
 <a href="javascript:window.location.assign('../speed-test/index.html');" style="display: inline-block; color: black; width: 100px;">
-<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
+<div style="-webkit-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75); background-color: #FFFFFF; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
 <img style="width: 40px;" src="../images/speedtest.png">
 <p style="margin: 0; font-weight: 700;">Speed</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
 </div>
 </a>
 <a href="javascript:window.location.assign('../maps/index.html');" style="display: inline-block; color: black; width: 100px;">
-<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
+<div style="-webkit-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75); background-color: #FFFFFF; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal;">
 <img style="width: 40px;" src="../images/maps.png">
 <p style="margin: 0; font-weight: 700;">Map</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Explore and discover Earth.</p>
 </div>
 </a>
 <a href="#" style="display: inline-block; color: black; width: 100px; vertical-align: top;">
-<div style="background-color: #ededed; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal; height: 133px;">
+<div style="-webkit-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 7px -4px rgba(0,0,0,0.75); background-color: #FFFFFF; width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px; white-space: normal; height: 133px;">
 <p style="margin: 0; font-weight: 700;">Math</p>
 <p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Type a math equation into the search bar for answers to it.</p>
 </div>
@@ -112,7 +131,7 @@ Find</button>
 </div>
 </div>
 <div id="lan" style="" class="lan">
-<p>v2.1.80🅹 - "Fusion"</p>
+<p>v2.1.100🅹 - "Fusion"</p>
 </div>
     </body>
 </html>
