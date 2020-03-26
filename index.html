@@ -61,7 +61,7 @@ var uri = "bionic";
 if (screen.width >= 1243) {
 var uri = "sonic";
 }
-if (getOS() == "Android") && (Cookies.get('opensearch') != 'yes'){
+if (getOS() == "Android" && Cookies.get('opensearch') != 'yes') {
 setTimeout(Cookies.set('opensearch', 'yes'), 3000);
 paramsearch();
 } else{
