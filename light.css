@@ -7,6 +7,100 @@
 	 font-weight: bold;
 	 src: url('fonts/stellabold.otf');
  }
+ 	    .head {
+        background-color: #ededed;
+        color: black !important;
+    }
+		.searchbar{
+		background-color: #ededed;
+		border-width: 0px;
+		color: black;
+	}
+	button{
+		border-color: #ededed;
+		background-color: #ededed;
+		color: black;
+	}
+	.service-a{
+		background-color: #ededed;
+		color: black;
+		border-radius: 10px;
+	}
+		.reversable-image{
+		filter: none;
+	}
+	.a{
+		color: black;
+	}
+	.gsc-tabsArea{
+	background-color: #ededed;
+	}
+	.header-se{
+		background-color: rgba(0, 0, 0, 0.07); 
+		color: black;
+	}
+		.gcse-searchresults-only{
+background-color: #ededed;
+		}
+		.blockszone{
+			background-color: #ededed;
+			color: black;
+		}
+		.gsc-wrapper{
+			background-color: white;
+			color: black;
+		}
+				.gs-title{
+			color: #000099 !important;
+		}
+				.gs-title b{
+			color: #000099 !important;
+		}
+				.gsc-webResult.gsc-result:hover{
+							background-color: white !important;
+		color: black;
+		border: none !important;
+		}
+				.gsc-webResult.gsc-result.gsc-promotion{
+										background-color: white !important;
+		color: black;
+		border: none !important;
+		}
+				.gsc-webResult.gsc-result.gsc-promotion:hov{
+										background-color: white !important;
+		color: black;
+		border: none !important;
+		}
+		.gsc-results-wrapper-nooverlay.gsc-results-wrapper-visible{
+			background-color: white;
+		}
+				.header-2{
+			background-color: #ededed;
+		}
+		.search-2{
+			background-color: #fff;
+			color: black;
+		}
+				.gsc-control-cse.gsc-control-cse-en{
+			background-color: white;
+		}
+				.gsc-positioningWrapper{
+			background-color: #ededed;
+		}		
+		.div-head{
+			background-color: #ededed
+		}
+		.toolbar{
+			background-color: rgba(0,0,0,0.07)
+		}
+			.gsc-tabHeader.gsc-tabhInactive.gsc-inline-block{
+		background-color: #ededed;
+	}
+	.gsc-tabHeader.gsc-inline-block.gsc-tabhActive{
+		background-color: #ededed;
+		color: black;
+		border-bottom-color: black;
+	}
  /* Dark mode */
 @media (prefers-color-scheme: dark) {
     body {
