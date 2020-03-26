@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-<ShortName>stella.find</ShortName>
-<Description>Get to info faster.</Description>
-<Url type="text/html" method="get" template="https://stel-la.github.io/?q={searchTerms}"/>
+	<ShortName>stella</ShortName>
+	<LongName>stella</LongName>
+	<Description>stella search - Get to info faster.</Description>
+	<Url type="application/rss+xml" template="https://stella.hs.vc/?q={searchTerms}"/>
+	<moz:SearchForm>[https://stella.hs.vc/]</moz:SearchForm>
 </OpenSearchDescription>
