@@ -218,6 +218,14 @@ background-color: #ededed;
 		.toolbar{
 			background-color: rgba(0,0,0,0.07)
 		}
+			.gsc-tabHeader.gsc-tabhInactive.gsc-inline-block{
+		background-color: #ededed;
+	}
+	.gsc-tabHeader.gsc-inline-block.gsc-tabhActive{
+		background-color: #ededed;
+		color: black;
+		border-bottom-color: black;
+	}
 }
  h1{
             font-family: 'stella.typeface', sans-serif;
