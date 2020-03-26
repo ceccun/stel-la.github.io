@@ -219,8 +219,8 @@ background-color: #ededed;
 				.toolbar{
 			background-color: #292929
 		}
-		.test.test--init{
-			filter: invert();
+		.test test--init{
+			filter: invert() !important;
 		}
 }
  /* Light Mode */
