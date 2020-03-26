@@ -1,10 +1,15 @@
 <!doctype html>
 <html>
 <head>
-  <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
+<link rel="search"
+      type="application/opensearchdescription+xml"
+      title="stella"
+      href="opensearch.xml">
   <script data-ad-client="ca-pub-1010710647557803" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 </head>
 <body>
+<script src="cookies.js"></script>
 <script type="text/javascript">
 function getOS() {
   var userAgent = window.navigator.userAgent,
@@ -56,6 +61,10 @@ var uri = "bionic";
 if (screen.width >= 1243) {
 var uri = "sonic";
 }
+if (getOS() == "Android") && (Cookies.get('opensearch') != 'yes'){
+setTimeout(Cookies.set('opensearch', 'yes'), 3000);
+paramsearch();
+} else{
 paramsearch();
 }
 function paramsearch(){
@@ -67,5 +76,6 @@ window.location.replace(uri + "/search.html?q=" + q);
 }
 }
 </script>
+A permanent encryption key is being generated... This device appears to be slowing down the handshake process.
 </body>
 </html>
