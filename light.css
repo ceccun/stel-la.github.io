@@ -219,6 +219,9 @@ background-color: #ededed;
 				.toolbar{
 			background-color: #292929
 		}
+		.test{
+			filter: invert();
+		}
 }
  /* Light Mode */
 @media (prefers-color-scheme: light) {
