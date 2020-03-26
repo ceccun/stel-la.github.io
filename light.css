@@ -219,7 +219,7 @@ background-color: #ededed;
 				.toolbar{
 			background-color: #292929
 		}
-		.test{
+		.test.test--init{
 			filter: invert();
 		}
 }
