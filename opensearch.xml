@@ -4,5 +4,4 @@
 	<LongName>stella</LongName>
 	<Description>stella search - Get to info faster.</Description>
 	<Url type="application/rss+xml" template="https://stella.hs.vc/?q={searchTerms}"/>
-	<moz:SearchForm>[https://stella.hs.vc/]</moz:SearchForm>
 </OpenSearchDescription>
