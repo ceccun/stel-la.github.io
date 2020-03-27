@@ -1,7 +1,7 @@
 <!doctype html>
 <html id="page">
 <head>
-    <title id="title">stella.find - Get to info faster.</title>
+    <title id="title">stella search platform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="search"
       type="application/opensearchdescription+xml"
@@ -86,21 +86,6 @@ document.onkeyup = doSomethingWithSelectedText;
  }
 }
 	</script>
-	<script type="text/javascript">
-	function loadcall(){
-	var query = new URL(window.location).searchParams.get('q');
-	var querydevice = new URL(window.location).searchParams.get('q');
-	document.getElementById("title").innerHTML = query + " - stella.find";
-	document.getElementById("searchbar").setAttribute("value", query);
-		document.getElementById("searchbar").removeAttribute("readonly");
-		checkBlock(query);
-		console.log("Sending Request to Blocks Service...");
-	}
-	function placement(results){
-		  document.getElementById("blockszone").setAttribute("style", "display: block; font-family: 'stella.typeface', sans-serif; padding-left: 30px; z-index: 3; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; margin-bottom: -7px; width: 100%;  margin-right: -30px;");
-		  document.getElementById("blockscontent").innerHTML = results;
-	}
-	</script>
    <div class="header-se" style="margin-bottom: 0; padding-bottom: 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); width: 100%;" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;"><a class="a" style="text-decoration: none;" href="index.html">stella search</a></h1></div>
 
    
@@ -122,6 +107,22 @@ var input = encodeURIComponent(document.getElementById("searchbar").value);
 <script async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
    </div>
+   <script type="text/javascript">	
+	var query = new URL(window.location).searchParams.get('q');
+	var querydevice = new URL(window.location).searchParams.get('q');
+	document.getElementById("title").innerHTML = query + " - stella search";
+			checkBlock(query);
+		console.log("Sending Request to Blocks Service...");	
+		document.getElementById("searchbar").setAttribute("value", query);
+		document.getElementById("searchbar").removeAttribute("readonly");
+	function loadcall(){
+
+	}
+	function placement(results){
+		  document.getElementById("blockszone").setAttribute("style", "display: block; font-family: 'stella.typeface', sans-serif; padding-left: 30px; z-index: 3; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; margin-bottom: -7px; width: 100%;  margin-right: -30px;");
+		  document.getElementById("blockscontent").innerHTML = results;
+	}
+	</script>
     </body>
 </html>
 <link href="../light.css" rel="stylesheet" type="text/css">
