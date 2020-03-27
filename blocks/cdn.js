@@ -59,7 +59,7 @@ function checkBlock(queryw){
 		
 		
 		else {
-		checkWiki();
+		checkWiki(newquestion);
 }}}
 	}
 	
