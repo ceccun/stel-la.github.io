@@ -48,7 +48,6 @@ padding-left: 30px;
 margin-left: 30px;
 }
 </style>
-<script src="../blocks/blocks.js"></script>
 <script type="text/javascript">
 function getSelectedText() {
     var text = "";
@@ -72,6 +71,7 @@ document.onmouseup = doSomethingWithSelectedText;
 document.onkeyup = doSomethingWithSelectedText;
 </script>
     <body onLoad="loadcall()">
+	<script src="../blocks/blocks.js"></script>
 	<script>
 	document.addEventListener("mouseup", doSomethingWithSelectedText);
 	console.log("Event Listener Added for stella.voice");
