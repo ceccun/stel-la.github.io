@@ -110,12 +110,11 @@ var input = encodeURIComponent(document.getElementById("searchbar").value);
 	var query = new URL(window.location).searchParams.get('q');
 	var querydevice = new URL(window.location).searchParams.get('q');
 	document.getElementById("title").innerHTML = query + " - stella search";
-			checkBlock(query);
 		console.log("Sending Request to Blocks Service...");	
 		document.getElementById("searchbar").setAttribute("value", query);
 		document.getElementById("searchbar").removeAttribute("readonly");
 	function loadcall(){
-
+checkBlock(query);
 	}
 	function placement(results){
 		  document.getElementById("blockszone").setAttribute("style", "display: block; font-family: 'stella.typeface', sans-serif; padding-left: 30px; z-index: 3; position: relative; margin: 0; padding-top: 0; padding-bottom: 0; margin-bottom: -7px; width: 100%;  margin-right: -30px;");
