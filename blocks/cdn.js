@@ -39,13 +39,28 @@ function checkBlock(queryw){
 		}
 	}
 	if (newquestion.includes("when is") == true) {
-		var newquestion = newquestion.split("who is");
+		var newquestion = newquestion.split("when is");
 		var newquestion = newquestion[newquestion.length - 1];
 		if (newquestion == " christmas" || newquestion == "christmas"){
 					var result = "Christmas Day is on the 25th of December.";
 			placement(result);
 			return;
 		}
+		if (newquestion == " eid" || newquestion == "eid"){
+					var result = "Eid al-Fitr 2020 begins at night on Saturday 23rd May.";
+			placement(result);
+			return;
+		}
+				if (newquestion == " eid al-fitr" || newquestion == "eid al-fitr" || newquestion == " eid fitr" || newquestion == " eid al fitr"){
+					var result = "Eid al-Fitr 2020 begins at night on Saturday 23rd May.";
+			placement(result);
+			return;
+		}
+				if (newquestion == " eid al-adha" || newquestion == "eid al-adha" || newquestion == " eid adha" || newquestion == " eid al adha"){
+					var result = "Eid al-Adha 2020 begins at night on Thursday 30th July. Compared to Eid al-Fitr, it lasts approximately 3 days.";
+			placement(result);
+			return;
+		}		
 	}
 		if (newquestion == " time" || newquestion == "time"){
 			sendTime();
@@ -64,24 +79,25 @@ function checkBlock(queryw){
 	}
 	
 	function checkWiki(question) {
+		  try{
+	  math.eval(question);
+	  var result = math.eval(question).toString();
+	placement(result);
+	return;
+  }
+    catch(err){
 const Http = new XMLHttpRequest();
 const url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&exlimit=2&titles=" + question + "&explaintext=1&formatversion=2&origin=*&format=json";
 Http.open("GET", url);
 Http.send();
 console.log("BlocksAI - running.");
 Http.onreadystatechange = (e) => {
-	  try{
-	  math.evaluate(queryw);
-	  var result = math.evaluate(queryw).toString();
-	placement(result);
-  }
-  catch(err){
 	  var result = (Http.responseText.split('"extract":"'));
 	  	  var result1 = result[1].split('"}');
 		  var result = result1[0]
 	  placement(result);
-  }
 };
+	}
 }
 function sendTime(){
 	var timing = new Date();
