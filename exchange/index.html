@@ -26,19 +26,26 @@ if (screen.width <= 1125){
 	  var warned = new URL(window.location).searchParams.get('warned');
 	  if (warned != "1"){
 	  goTo("index.html");
+	  } else{
+	  var title = document.getElementById("title");
+	  var sd = document.getElementById("sd");
+	  var content = document.getElementById("content");
+	  title.innerHTML = "₪";
+	  sd.setAttribute("style", "display: none;")
+	  content.setAttribute("style", "padding-left: 10%; padding-right: 10%; font-family: 'Quicksand', sans-serif")
 	  }
 }
 }
 </script>
 <div style="width: 100%; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(74,74,74,1) 100%); padding-top: 30px; font-family: 'Quicksand', sans-serif;">
 <div style="margin-left: 10%; margin-right: 10%; display: flex; justify-content: space-between;">
-<h1 style="margin: 0; color: white; font-family: 'Quicksand', sans-serif; display: inline-block;">₪ exchange</h1>
-<a href="streamdepracated.html"><p style="color: white; display: inline-block;">STREAM Developers</p></a>
+<h1 id="title" style="margin: 0; color: white; font-family: 'Quicksand', sans-serif; display: inline-block;">₪ exchange</h1>
+<a href="streamdepracated.html"><p id="sd" style="color: white; display: inline-block;">STREAM Developers</p></a>
 </div>
 </div>
-<div style=" padding-left: 20%; padding-right: 20%; font-family: 'Quicksand', sans-serif;">
+<div id="content" style=" padding-left: 20%; padding-right: 20%; font-family: 'Quicksand', sans-serif;">
 <a href="#">
-<img onclick="goTo('blocks.html');" style="width: 100%; border-radius: 20px; margin-top: 10px;" src="images/front-page1.png"></img>
+<img onclick="goTo('blocks.html');" style="width: 100%; border-radius: 10px; margin-top: 10px;" src="images/front-page1.png"></img>
 </a>
 </div>
 </body>
