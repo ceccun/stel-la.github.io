@@ -22,5 +22,5 @@ function contentCali(){
 		title.setAttribute("style", "margin-top: 40px; font-size: 40px;");
 	}
 	content.setAttribute("style", "height: " + (window.innerHeight - header.offsetHeight) + "px");
-			setTimeout("contentCali()", 20);
+			setTimeout("contentCali()", 2);
 }
