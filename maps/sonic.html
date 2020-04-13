@@ -84,12 +84,23 @@ type="text/css"
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 <div id="map"></div>
 <script>
+	const locationget = new XMLHttpRequest();
+locationget.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+var response = JSON.parse(this.response);
+map(response.longitude, response.latitude)
+}
+};
+locationget.open("GET", "https://ipapi.co/json", true);
+locationget.send();
+	
+	function map(lon, lat){
 	mapboxgl.accessToken = 'pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 style: 'mapbox://styles/mapbox/streets-v11',
-center: [0.1278, 51.5074], // starting position
-zoom: 10 // starting zoom
+center: [lon, lat], // starting position
+zoom: 14 // starting zoom
 });
  map.addControl(
 new MapboxGeocoder({
@@ -156,6 +167,7 @@ map.addLayer(
 labelLayerId
 );
 });
+	}
 </script>Permit</button></div>
 </body>
 </html>
