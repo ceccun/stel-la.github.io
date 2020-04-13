@@ -92,10 +92,8 @@ Http.open("GET", url);
 Http.send();
 console.log("BlocksAI - running.");
 Http.onreadystatechange = (e) => {
-	  var result = (Http.responseText.split('"extract":"'));
-	  	  var result1 = result[1].split('"}');
-		  var result = result1[0]
-	  placement(result);
+var response = JSON.parse(this.responseText);
+	  placement(response.extract);
 };
 	}
 }
