@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"><center><image src="../images/loading.gif"></image><p id="status" style="font-family: sans-serif; font-size: 13px;">Checking status...</p></center></div>
+<script>
+setTimeout("changeStatus('Communication with router...')", 200);
+setTimeout("changeStatus('Checking connection to servers...')", 400);
+var random = (Math.floor(Math.random() * Math.floor(3)));
+if (random == 0){
+var url = "https://fibre.stella.hs.vc"
+}
+if (random == 1){
+var url = "https://uk.one.stella.hs.vc"
+}
+if (random == 2){
+var url = "https://talkservice.stella.hs.vc"
+}
+Pinger_ping(url +"/index.php/apps/files_sharing/publicpreview/FjYNLrR7rjgoXYx?x=838&y=579&a=true&file=check.png&scalingup=0");
+
+function Pinger_ping(ip, callback) {
+
+  if(!this.inUse) {
+
+    this.inUse = true;
+    this.callback = callback
+    this.ip = ip;
+
+    var _that = this;
+
+    this.img = new Image();
+
+    this.img.onload = function() { changeStatus('Handshaking...'); window.location = url; };
+    this.img.onerror = function() { changeStatus('Connection Refused...'); window.location = "noserver.html";};
+
+    this.start = new Date().getTime();
+    this.img.src = ip;
+    this.timer = setTimeout(function() { changeStatus('Check Failed!'); window.location = "noserver.html"}, 30000);
+
+  }
+}
+
+function changeStatus(text){
+var status = document.getElementById("status");
+status.innerText = text;
+}
+</script>
+</body>
+</html>
