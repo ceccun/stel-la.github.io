@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<link
+rel="stylesheet"
+href="../desk.css"
+/>
+<title>stella</title>
+</head>
+<body onload="refreshBlock()">
+<div class="margin-container">
+<div class="top-head"><a class="a" style="color: #292929;" href="new.html"><p style="margin: 0;">What's New?</p></a><div>
+<a class="a" href="../speed-test/index.html"><image src="../images/speedtest.png" style="height: 23.5px;"></image></a>
+<a class="a" href="../maps/index.html"><image src="../images/maps.png" style="height: 23.5px;"></image></a>
+</div></div>
+<div style="position: relative; top: 10vh; left: 50%; transform: translate(-50%, 0%);">
+<center>
+<h1 style="font-size: 50px;">stella.</h1>
+<div class="input-container">
+<image src="../images/search.png" class="r-img" style="width: 20px; height: 20px; vertical-align: middle; display: inline-block; padding-left: 10px; padding-right: 10px;">
+<input id="search-bar" style="display: inline-block;"></input>
+</div>
+<button class="search-button">Search</button><button class="search-button">Pica!</button>
+<image id="loading" class="r-img" style="display: none; margin-top: 20px;" src="../images/loading.gif"></image>
+<div id="special-card" style="display: none;" class="special-card"><p id="place"></p></div>
+<iframe sandbox="allow-same-origin allow-scripts" " src="../wave/feed.html" id="wave" frameborder="0" style="width: 582px; display: block;"></iframe>
+</center>
+</div>
+</div>
+<script src="../blocks/blocks.js"></script>
+<script>
+var search_bar = document.getElementById("search-bar");
+search_bar.addEventListener('keyup', keyPress);
+
+function keyPress(e) {
+refreshBlock();
+}
+
+function refreshBlock() {
+var loading = document.getElementById("loading");
+loading.setAttribute("style", "display: block; margin-top: 20px;");
+var search_bar = document.getElementById("search-bar");
+var search_value = search_bar.value;
+checkBlock(search_value);
+var special_card = document.getElementById("special-card");
+special_card.setAttribute("style", "display: none;");
+}
+
+
+function placement(result){
+var place = document.getElementById("place");
+place.innerText = result;
+if (result == ""){
+var special_card = document.getElementById("special-card");
+special_card.setAttribute("style", "display: none;");
+var loading = document.getElementById("loading");
+loading.setAttribute("style", "display: none;  margin-top: 20px;");
+} else{
+var special_card = document.getElementById("special-card");
+special_card.setAttribute("style", "display: block;");
+var loading = document.getElementById("loading");
+loading.setAttribute("style", "display: none;  margin-top: 20px;");
+}
+}
+
+function setIframeHeight(iframe) {
+	if (iframe) {
+		var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+		if (iframeWin) {
+			iframe.height = iframeWin.document.documentElement.scrollHeight;
+		}
+	}
+};
+window.onload = function () {
+setTimeout(function (){ setIframeHeight(document.getElementById('wave')); }, 3000);
+};
+</script>
+</body>
+</html>
