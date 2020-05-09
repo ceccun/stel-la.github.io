@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>The eMap by stella</title>
 <meta name="description" content="Explore and view new places using The eMap."/>
   <link type="application/opensearchdescription+xml" rel="search" href="opensearch.xml"/>
 </head>
 <body>
 <script type="text/javascript">
+
 function getOS() {
   var userAgent = window.navigator.userAgent,
       platform = window.navigator.platform,
@@ -31,11 +33,9 @@ function getOS() {
 }
 if (getOS() == "Windows"){
 var uri = "sonic.html";
-paramsearch();
 }
 if (getOS() == "Mac OS"){
 var uri = "sonic.html";
-paramsearch();
 }
 if (getOS() == "Android"){
 if (screen.width <= 1242) {
@@ -44,11 +44,9 @@ var uri = "bionic.html";
 if (screen.width >= 1243) {
 var uri = "sonic.html";
 }
-paramsearch();
 }
 if (getOS() == "Linux"){
 var uri = "sonic.html";
-paramsearch();
 }
 if (getOS() == "iOS"){
 if (screen.width <= 1242) {
@@ -57,13 +55,14 @@ var uri = "bionic.html";
 if (screen.width >= 1243) {
 var uri = "sonic.html";
 }
+}
+if ((typeof InstallTrigger !== 'undefined') == true){
+var uri = "lost.html?sessionid=" + Math.floor(Math.random()*999999999999);
+}
 paramsearch();
-}
+
 function paramsearch(){
-var q = new URL(window.location).searchParams.get('q');
-if (q == null) {
 window.location.replace(uri);
-}
 }
 </script>
 </body>
