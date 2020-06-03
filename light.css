@@ -9,6 +9,7 @@
  }
  	    .head {
         background-color: #ededed;
+		    background: linear-gradient(90deg, rgba(255,50,75,1) 0%, rgba(255,132,0,1) 20%, rgba(255,248,0,1) 40%, rgba(65,255,0,1) 60%, rgba(0,212,255,1) 80%);
         color: black !important;
     }
 		.searchbar{
