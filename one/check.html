@@ -25,11 +25,11 @@ function Pinger_ping(ip, callback) {
     this.img = new Image();
 
     this.img.onload = function() { changeStatus('Handshaking...'); window.location = url; };
-    this.img.onerror = function() { changeStatus('Connection Refused...'); window.location = "noserver.html";};
+    this.img.onerror = function() { changeStatus('Connection Refused...'); window.location = "index.html";};
 
     this.start = new Date().getTime();
     this.img.src = ip;
-    this.timer = setTimeout(function() { changeStatus('Check Failed!'); window.location = "noserver.html"}, 10000);
+    this.timer = setTimeout(function() { changeStatus('Check Failed!'); window.location = "index.html"}, 10000);
 
   }
 }
