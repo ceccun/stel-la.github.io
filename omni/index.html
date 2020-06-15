@@ -61,12 +61,6 @@ if (screen.width >= 1243) {
 var uri = "index-d.html";
 }
 }
-if (getOS() == "Android" && Cookies.get('opensearch') != 'yes') {
-Cookies.set('opensearch', 'yes');
-setTimeout(paramsearch(), 3000);
-} else{
-paramsearch();
-}
 function paramsearch(){
 window.location.replace(uri);
 }
