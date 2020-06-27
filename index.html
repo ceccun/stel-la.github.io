@@ -67,10 +67,15 @@ setTimeout(paramsearch(), 3000);
 } else{
 paramsearch();
 }
-function paramsearch(){
+function paramsearch(){ 
 var q = new URL(window.location).searchParams.get('q');
+ if (q == null) {
+ window.location.replace(uri); 
+} else{ 
+window.location.replace(uri + "/search.html?q=" + q);
+}
 }
 </script>
-We've disabled new sessions, as we deal with an emergency. If you're already connected on another device, use that device to access Stella.
+Browser not supported or connection cut.
 </body>
 </html>
