@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<title>stella - gaming</title>
+</head>
+<style>
+@font-face{
+font-family: 'stella-typeface';
+src: url(../fonts/stellanorm.otf);
+}
+@font-face{
+font-family: 'stella-typeface';
+src: url(../fonts/stellabold.otf);
+font-weight: bold;
+}
+body{
+margin: 0;
+background-color: black;
+}
+.head {
+background-color: rgba(0,0,0,0.1);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+position: sticky;
+top: 0px;
+border-bottom: solid rgba(255,255,255,0.5);
+}
+</style>
+<body onload="loadcall()">
+<script>
+function loadcall(){
+var id = new URL(window.location).searchParams.get('id');
+console.log("id present @ " + id);
+console.log("stella analytica");
+console.log("set game.");
+var width = new URL(window.location).searchParams.get('width');
+var height = new URL(window.location).searchParams.get('height');
+var player = "<embed style='width: " + width + "px; height: " + height + "px;' id='game' src='";
+document.getElementById("containerplayer").innerHTML = player + ("cdn/" + id + ".swf") + "'></embed>";
+var title = new URL(window.location).searchParams.get('title');
+document.getElementById("title").innerHTML = title;
+}
+</script>
+<div id="header" class="head"><h1 style="font-family: 'stella-typeface', sans-serif; margin: 0; padding-top: 40px; margin-left: 30px; color: white;">stella</h1></div>
+<h1 style="color: white; font-family: 'stella-typeface',sans-serif; margin-left: 30px;"id="title"></h1>
+<center>
+    <div style="" id="containerplayer"></div>
+</center>
+</body>
+</html>

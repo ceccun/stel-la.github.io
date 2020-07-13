@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<title>exchange - stella</title>
+<link href="../light.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+<style>
+h1{
+font-family: 'Quicksand', sans-serif;
+}
+p{
+font-family: 'Quicksand', sans-serif;
+}
+button{
+font-family: 'Quicksand', sans-serif;
+}
+</style>
+<body onload="loadcall()" style="margin: 0; padding: 0;">
+<script src="../cookies.min.js"></script>
+<script src="redirect.js"></script>
+<script>
+function loadcall() {
+if (screen.width <= 1125){
+	  var warned = new URL(window.location).searchParams.get('warned');
+	  if (warned != "1"){
+	  goTo("index.html");
+	  } else{
+	  var title = document.getElementById("title");
+	  var sd = document.getElementById("sd");
+	  var content = document.getElementById("content");
+	  title.innerHTML = "₪";
+	  sd.setAttribute("style", "display: none;")
+	  content.setAttribute("style", "padding-left: 10%; padding-right: 10%; font-family: 'Quicksand', sans-serif")
+	  }
+}
+}
+</script>
+<div style="width: 100%; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(74,74,74,1) 100%); padding-top: 30px; font-family: 'Quicksand', sans-serif;">
+<div style="margin-left: 10%; margin-right: 10%; display: flex; justify-content: space-between;">
+<h1 id="title" style="margin: 0; color: white; font-family: 'Quicksand', sans-serif; display: inline-block;">₪ exchange</h1>
+<a href="streamdepracated.html"><p id="sd" style="color: white; display: inline-block;">STREAM Developers</p></a>
+</div>
+</div>
+<div id="content" style=" padding-left: 20%; padding-right: 20%; font-family: 'Quicksand', sans-serif;">
+<a href="#">
+<img onclick="goTo('blocks.html');" style="width: 100%; border-radius: 10px; margin-top: 10px;" src="images/front-page1.png"></img>
+</a>
+</div>
+</body>
+</html>

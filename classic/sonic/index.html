@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <title id="title">stella</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../light.css" rel="stylesheet" type="text/css">
+<link rel="search"
+      type="application/opensearchdescription+xml"
+      title="stella"
+      href="opensearch.xml">
+ <script data-ad-client="ca-pub-1010710647557803" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+    <body onLoad="loadcall()">
+	<script type="text/javascript">
+	function loadcall(){
+	document.getElementById("tip").innerHTML = "You can use the search-bar to work out math. Try  " + (Math.floor(Math.random() * 100)) + "*" + (Math.floor(Math.random() * 1000)) + "!";
+	}
+	</script>
+   <div id="header" class="head"><h1 style="padding-top: 40px; padding-left: 30px; margin: 0px; display: inline-block;">stella</h1></div>
+   <div id="lan" style="" class="lan">
+   <h1>Search.</h1>
+<input type="search" id="searchbar" class="searchbar">
+<script id="searchbar" type="text/javascript">
+	var input = document.getElementById("searchbar");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+	document.getElementById("title").innerHTML = "stella.find - typing...";
+    if (event.keyCode === 13) {
+var input = encodeURIComponent(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+}
+});</script></input>
+<button onclick="search()" style="margin-top: 5px;"><script>
+function search(){
+var input = encodeURI(document.getElementById("searchbar").value);
+     window.location = "search.html?q=" + input;
+	 }
+</script>search</button></a>
+<p id="tip">Waiting for the page to finish loading...</p>
+<h2>Services</h2>
+<a class="service-a" href="new.html" style="display: inline-block; width: 100px;">
+<div style="width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<img class="reversable-image" style="width: 40px;" src="../images/new.png">
+<p style="margin: 0; font-weight: 700;">What's New?</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">See updates and changes.</p>
+</div>
+</a>
+<a class="service-a" href="../speed-test/index.html" style="display: inline-block; width: 100px;">
+<div style="width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<img class="reversable-image" style="width: 40px;" src="../images/speedtest.png">
+<p style="margin: 0; font-weight: 700;">Speed</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Test your internet speed.</p>
+</div>
+</a>
+<a class="service-a" href="../one" style="display: inline-block; width: 100px;">
+<div style="width: 100px; display: inline-block; padding-top: 10px; text-align: center; border-radius: 10px;">
+<img class="reversable-image" style="width: 40px;" src="../images/cloud.png">
+<p style="margin: 0; font-weight: 700;">Cloud Box</p>
+<p style="margin: 0; margin-top: 5px; font-size: 15px; margin-bottom: 10px;">Personal cloud storage.</p>
+</div>
+</a>
+<p>v2.1.783 - "Sonic" - <a style="text-decoration: none; color: #00ff59" href="https://icons8.com">Icons by Icons8</a> - <a style="text-decoration: none; color: #00ff59" href="../privacy.html">Privacy</a> - <a style="text-decoration: none; color: #00ff59" href="../status/europe">Status</a><a id="location"></a></p>
+   </div>
+   <script src="../blocks/location.js"></script>
+    </body>
+</html>

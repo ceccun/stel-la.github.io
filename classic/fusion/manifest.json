@@ -1,0 +1,14 @@
+{  
+  "name": "stella",  
+  "short_name": "stella",  
+  "display": "fullscreen",  
+  "scope": "https://stella.hs.vc/",
+  "start_url": "index.html",
+  "icons": [
+    {
+      "src": "images/touch-icon-iphone.png",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "white",
+}  
