@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<title>Stella - Things to change the world.</title>
+<meta charset="UTF-8">
+<link href="desk.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth < window.innerHeight){
+window.location.replace("index-m.html");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="text-align: right; width: 100%; margin-bottom: 40px;">
+&nbsp
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); 
+window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: 15vh;">
+<center>
+<h1 style="font-size: 50px;">Stella</h1>
+<div class="input-out"><input id="sb" placeholder="Search the Internet."><script>
+var input = document.getElementById("sb");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+var inputa = encodeURIComponent(document.getElementById("sb").value);
+     window.location = "search/index-d.html?q=" + inputa;
+}
+});
+</script></input><image src="../images/search.png"></image></div>
+</center>
+</div>
+<div style="margin-top: 100px;">
+<center>
+<image style="width: 60px;" src="../images/wavelogo.png"></image>
+<p>Stories worth your attention.<br>Make way for Wave.</p>
+</center>
+</div>
+</div>
+<!-- Cookie Notification -->
+<div id="cookienot" style="width: 300px; text-align: right; position: absolute; right: 40px; bottom: 40px;">
+<h3>Our Use of Cookies</h3>
+<p>Stella uses cookies to keep track of updates, handle sessions and send data to other pages. By using this service, you also agree to the Privacy & Cookie Policy.</p>
+<button onclick="document.getElementById('cookienot').setAttribute('style', 'display: none;')">Okay! 😆</button>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+
+<script src="global_ass/script.js"></script>
+</body>
+</html>
