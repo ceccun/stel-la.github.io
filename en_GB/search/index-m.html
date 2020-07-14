@@ -30,7 +30,16 @@ window.location.replace("index-d.html?" + params[1]);
 </div>
 </div>
 <div style="margin-top: -40px;">
-<div class="input-out" style="vertical-align: middle;"><input type="search" id="sb" style="width: 100% !important;" placeholder="Search the Internet."></input></div>
+<div class="input-out" style="vertical-align: middle;"><input type="search" id="sb" style="width: 100% !important;" placeholder="Search the Internet."><script>
+var input = document.getElementById("sb");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+var inputa = encodeURIComponent(document.getElementById("sb").value);
+     window.location = "search/index-m.html?q=" + inputa;
+}
+});
+</script></input></div>
 <div class="crossbar"><a href=""><button onclick="text_click()" id="text-btn">
 <script type="text/javascript">
 function text_click(){
