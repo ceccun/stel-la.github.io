@@ -34,14 +34,14 @@ if (readCookie('omniupdate') == null){
 createCookie('omniupdate','1',7);
 window.location.replace("en_GB/index-d.html");
 	} else{
-		createCookie('omniupdate','0',7);
-		window.location.replace("https://stella.hs.vc/classic");
+		createCookie('omniupdate','1',7);
+		window.location.replace("en_GB/index-d.html");
 	}
 } else{
 	if (readCookie('omniupdate') == "0"){
 		window.location.replace("https://stella.hs.vc/classic");
 	} else{
-	window.location.replace("en_GB/index-d.html")
+	window.location.replace("en_GB/index-d.html");
 	}
 }
 console.log(readCookie('omniupdate'));
