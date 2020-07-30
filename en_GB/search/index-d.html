@@ -8,10 +8,34 @@ var params = document.URL.split("?");
 if (window.innerWidth < window.innerHeight){
 window.location.replace("index-m.html?" + params[1]);
 }
+function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <!-- Adrenaline Engine 5 -->
@@ -61,7 +85,40 @@ document.getElementById("image-btn").setAttribute("class", "crossbar-button-acti
 document.getElementById("text-btn").setAttribute("class", "crossbar");
 }
 </script>
-Images</button></div>
+Images</button>
+<button onclick="tab_click()" id="tab-btn">
+<script type="text/javascript">
+var query = new URL(window.location).searchParams.get('q');
+var tabs = readCookie("tabs");
+if (tabs.includes(encodeURIComponent(query) + ",")){
+document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
+document.getElementById("tab-btn").innerText = "Tabbed";
+} else{
+document.getElementById("tab-btn").setAttribute("class", "crossbar");
+document.getElementById("tab-btn").innerText = "Tab";
+}
+function tab_click(){
+if (readCookie("tabs") == null){
+createCookie("tabs", encodeURIComponent(query) + ",", 30);
+} else{
+if (readCookie("tabs").includes(encodeURIComponent(query) + ",") == false){
+var tabs = readCookie("tabs");
+eraseCookie("tabs");
+createCookie("tabs", encodeURIComponent(query) + "," + tabs, 30);
+document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
+document.getElementById("tab-btn").innerText = "Tabbed";
+} else{
+var tabs = readCookie("tabs");
+var tab1 = tabs.split(encodeURIComponent(query) + ",")[0];
+var tab2 = tabs.split(encodeURIComponent(query) + ",")[1];
+eraseCookie("tabs");
+createCookie("tabs", tab1 + tab2, 30);
+document.getElementById("tab-btn").setAttribute("class", "crossbar");
+document.getElementById("tab-btn").innerText = "Tab";
+}
+}
+}
+</script></button></div>
 <script onload="loadcall()" async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
 </div>
@@ -85,6 +142,7 @@ window.addEventListener('click', function(e){
 var query = new URL(window.location).searchParams.get('q');
 document.getElementById("title").innerText = "Stella - " + query;
 document.getElementById("sb").value = query;
+
 function loadcall(){
 setTimeout("tab_location()", 300);
 }
