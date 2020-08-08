@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Your Space Story</title>
+<meta charset="UTF-8">
+<link href="mob.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth > window.innerHeight){
+window.location.replace("index-d.html");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body id="body">
+<div class="space-landing">
+&nbsp
+<img id="cust-spaceshoot" style="width: 30%; position: absolute; top: 56%; left: 60%; transform: rotate(16deg);"></img>
+</div>
+<div class="f-body">
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content" id="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="font-size: 24px; margin-top: 10vh; text-align: center;">
+</div>
+<div id=1 style="display: none;">
+<h1>Space 😮</h1>
+<p>Hi <a class="name">%NAME</a>! This is your interactive personalised space story, created just for you 😊. This story progresses with real-time so it will take some time to finish. </p>
+<h2>How do I play?</h2>
+<p>So <a class="name">%NAME</a>, playing this story is simple. Start the story today, complete another bit of it overmorrow and gradually progress through the custom story-line.<br>To continue the story, just come back to this page every few days for an updated line.</p>
+<h2>Why is this a thing?</h2>
+<p>This project is a test for Stella ML, a machine learning algorithm that aims to question your next actions based on previous data that has been collected (from other Stella services).</p>
+<h2>Saving & Backups</h2>
+<p>This story uses auto-save technology to Stella's servers to ensure the story keeps moving. If at any point you lose data, you can select the "I lost my data" option and enter a code you are given at the bottom of every level. Keep in mind: codes are unique to ensure that manipulation cannot take place with code exchanging.</p>
+<h2>Swapping</h2>
+<p>Swapping links with other members is permitted, but to prevent choice manipulation you'll be reading with your existing progress and any progress you gain with another character will only impact your characters progress.</p>
+<h2>Auto-generation</h2>
+<p>Most of this story will be generated using AI in real-time but you could clash at any time with another user's story if the choices you make lead to it. Things could get weird.</p>
+<h2>Content Descriptor</h2>
+<p>This story has been rated PG, and contains the following materials:<br>Mild Violence, Cartoon Violence and Comic Mischief.</p>
+<button onclick='storyline(2,1,true)'>Let's Start!</button>
+<p onclick='storyline(999,1,false)'>I lost my data</p>
+<p id="1code">
+<script>
+document.getElementById("1code").innerText = btoa(name + ":1");
+</script>
+</p>
+</div>
+
+<div id=2 style="display: none;">
+<h1>Day 1</h1>
+<p>%NAME is awoken by a message asking to cancel their space flight to make way for another family that had been complaining for months.<br>It's the 22nd century and %NAME hasn't gone to space ever before, despite it being extremely common and easy to setup.<br>Choose what you want to do as %NAME:</p>
+<img id="2img" style="max-width: 100%;">
+</img>
+<button onclick='storyline(20,2,true); addPoints("Anger", 2);'>Refuse Cancellation</button>
+<button onclick='storyline(30,2,true); addPoints("Curiosity", 2)'>Ask to fit in</button>
+<p>One possible option hidden. Stella keeps your gender neutral throughout this story.</p>
+<p id="2code">
+<script>
+document.getElementById("2code").innerText = btoa(name + ":2");
+</script>
+</p>
+</div>
+
+<div id=30 style="display: none;">
+<h1>Day 1.3</h1>
+<p>%NAME: "Would it be fine to fit in with the family? ...<br>Choose what to say next as %NAME:</p>
+<button onclick='storyline(31,30,true); addPoints("Anger", 1);'>It's just one person!"</button>
+<button onclick='storyline(32,30,true); addPoints("Anger", 2)'>or you could send me out earlier." 😏</button>
+<p>Stella ML can often add cheeky responses and actions that can lengthen the story.</p>
+<p id="30code">
+<script>
+document.getElementById("30code").innerText = btoa(name + ":30");
+</script>
+</p>
+</div>
+
+<div id=31 style="display: none;">
+<h1>Come back again!</h1>
+<p>This part of your story will continue overmorrow.<br>Use the same link you used to open this story to continue from it as well.<br>If you see this message after 2 days, contact Stella about it.<br>You can copy the progress code at the bottom of this page incase you want to access on another device.</p>
+<p id="31code">
+<script>
+document.getElementById("31code").innerText = btoa(name + ":31");
+</script>
+</p>
+</div>
+
+<div id=32 style="display: none;">
+<h1>Come back again!</h1>
+<p>This part of your story will continue overmorrow.<br>Use the same link you used to open this story to continue from it as well.<br>If you see this message after 2 days, contact Stella about it.<br>You can copy the progress code at the bottom of this page incase you want to access on another device.</p>
+<p id="32code">
+<script>
+document.getElementById("32code").innerText = btoa(name + ":32");
+</script>
+</p>
+</div>
+
+<div id=20 style="display: none;">
+<h1>Day 1.2</h1>
+<p>%NAME: "I am not cancelling...<br>Choose what to say next as %NAME:</p>
+<button onclick='storyline(21,20,true); addPoints("Happiness", 1);'>This means the world to me."</button>
+<button onclick='storyline(25,20,true); addPoints("Anger", 2)'>This is poor customer service!"</button>
+<p>Stella keeps track of your neurality during this story.</p>
+<p id="20code">
+<script>
+document.getElementById("20code").innerText = btoa(name + ":20");
+</script>
+</p>
+</div>
+
+<div id=21 style="display: none;">
+<h1>Day 1.3</h1>
+<p>Space Y Operator: "Okay. I'll see what I can do for you, I can't control what happens down here so it's up to management to sort it out...</p>
+<button onclick='storyline(22,21,true);'>Advance</button>
+<p>You cannot go back on this story for manipulation purposes.</p>
+<p id="21code">
+<script>
+document.getElementById("21code").innerText = btoa(name + ":21");
+</script>
+</p>
+</div>
+
+<div id=22 style="display: none;">
+<h1>Day 1.3</h1>
+<p>... Worst case scenario: We won't be able to place you onto this ship, just call you up, postpone to next year or give you a refund."</p>
+<button onclick='storyline(23,22,true);'>Hang Up.</button>
+<p>Sometimes, we could decide to try and push your story with only one option to match someone else's, if they show signs of enjoyment.</p>
+<p id="22code">
+<script>
+document.getElementById("22code").innerText = btoa(name + ":22");
+</script>
+</p>
+</div>
+
+<div id=23 style="display: none;">
+<h1>Come back again!</h1>
+<p>This part of your story will continue overmorrow.<br>Use the same link you used to open this story to continue from it as well.<br>If you see this message after 2 days, contact Stella about it.<br>You can copy the progress code at the bottom of this page incase you want to access on another device.</p>
+<p id="23code">
+<script>
+document.getElementById("23code").innerText = btoa(name + ":23");
+</script>
+</p>
+</div>
+
+<div id=25 style="display: none;">
+<h1>Day 1.3</h1>
+<p>The phone line disconnects. %NAME is tired.</p>
+<button onclick='storyline(23,25,true); addPoints("Hunger", 1);'>Force yourself up.</button>
+<p>We may often try to force you to change your actions by removing your choices. This will occur a lot.</p>
+<p id="25code">
+<script>
+document.getElementById("25code").innerText = btoa(name + ":25");
+</script>
+</p>
+</div>
+
+<div id=999 style="display: none;">
+<h2>Recover your progress</h2>
+<p>If you have lost your progress unexpectedly, you can no longer help out in Stella ML. However, you may still proceed to read the stories and participate in the space events.<br>To continue: type the code of a page you want to continue from. Codes can be found at the end of every page and are completely unique.</p>
+<input id="999input1"></input>
+<button onclick='recovery();'>Attempt Recovery</button>
+</div>
+<div id=998 style="display: none;">
+<h2>Cannot restore data</h2>
+<p>The code you have entered may be incorrect or not suitable for use with this Stella session.<br>Contact Stella to generate a code for you to use to get back into the story.</p>
+</div>
+</div>
+</center>
+</div>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+</div>
+<script src="../global_ass/script.js"></script>
+<script>
+var astroid = new URL(window.location).searchParams.get('astroid');
+var astroid = atob(decodeURIComponent(astroid));
+document.getElementById("cust-spaceshoot").setAttribute("src", astroid);
+var name = new URL(window.location).searchParams.get('astroname');
+var name = atob(decodeURIComponent(name));
+document.getElementById("content").innerHTML = document.getElementById("content").innerHTML.replace(/%NAME/g, name);
+if (name.endsWith("s")){ var namews = name + "'es"; }
+else{ var namews = name + "'s"; }
+document.getElementById("title").innerText = name + " - Stella Space Journey";
+if (readCookie("spacejourney") == null || undefined){
+createCookie("spacejourney", 1, 60);
+createCookie("space_Happiness", 0, 60);
+createCookie("space_Anger", 0, 60);
+createCookie("space_Curiosity", 0, 60);
+createCookie("space_Hunger", 0, 60);
+createCookie("space_Attention", 0, 60);
+storyline(readCookie("spacejourney"), 1, true);
+} else{
+storyline(readCookie("spacejourney"), 1, true);
+}
+
+function storyline(section, from, save){
+document.getElementById(from).setAttribute("style", "display: none;");
+document.getElementById(section).setAttribute("style", "");
+if (save == true){
+eraseCookie("spacejourney");
+createCookie("spacejourney", section, 60);
+}
+if (section == 2){
+document.getElementById("2img").setAttribute("src", astroid);
+}
+}
+
+function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+function recovery(){
+var rec = atob(document.getElementById("999input1").value); 
+rec = rec.split(":"); 
+if (rec[0] == name){
+storyline(rec[1],999);
+eraseCookie("spacejourney");
+createCookie("spacejourney", rec[1], 60);
+} else {
+storyline(998, 999);
+ }
+}
+
+function addPoints(sector, amount){
+var sectorcu = readCookie("space_" + sector);
+createCookie("space_" + sector, parseInt(sectorcu) + amount, 60);
+}
+</script>
+</body>
+</html>
