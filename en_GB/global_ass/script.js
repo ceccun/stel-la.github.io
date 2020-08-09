@@ -22,18 +22,4 @@ function readCookie(name) {
 function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
-
-if (readCookie('omniupdate') == null){
-	var cookie = Math.floor(Math.random()*2);
-	if (cookie == 1){
-createCookie('omniupdate','1',7);
-	} else{
-		createCookie('omniupdate','0',7);
-		window.location.replace("https://stella.hs.vc/classic");
-	}
-} else{
-	if (readCookie('omniupdate') == "0"){
-		window.location.replace("https://stella.hs.vc/classic");
-	}
-}
 console.log(readCookie('omniupdate'));
