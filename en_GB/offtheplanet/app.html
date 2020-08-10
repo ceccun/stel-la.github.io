@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Astronomical App</title>
+<link href="mob.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth > window.innerHeight){
+window.location.replace("privacy-d.html?");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<A class="a" href="../index-m.html"><h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></A></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="margin-top: 10vh; text-align: center;">
+<center>
+<img src="img/appicon.png" style="max-width: 40%;">
+<h2>Astronomical App</h3>
+<p>Available for Android</p>
+<h2>Permissions</h2>
+<p>Internet Access<br>Data Encryption<br>Vibration Motors<br>Stella Services</p>
+<h2>Stella Services API</h2>
+<p>This app includes the Stella Services API which can be used to create Maps, Search, Accounts and AI integration all from a single import link.</p>
+<a href="Astronomical.apk"><button>Download</button></a>
+<p>&nbsp</p>
+</center>
+</div>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="../global_ass/scrit.js"></script>
+</body>
+</html>
