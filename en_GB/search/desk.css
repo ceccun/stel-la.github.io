@@ -144,11 +144,11 @@ top: 0px;
 }
 .crossbar button:hover{
 	background-color: rgba(0,0,0,0.4);
-	transition: background-color 0.2s linear;
+	transition: background-color 0.2s linear, transform 0.2s cubic-bezier(0,0,.06,.97), width 0.2s cubic-bezier(0,0,.06,.97);
 }
 .crossbar button:active{
 	transform: scale(0.9);
-	transition: transform 0.2s cubic-bezier(0,0,.06,.97);
+	transition: transform 0.2s cubic-bezier(0,0,.06,.97), width 0.2s cubic-bezier(0,0,.06,.97);
 }
 .crossbar-button-active{
 	border: 0;

@@ -134,7 +134,9 @@ top: 0px;
 
 }
 .crossbar{
-	
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
 .crossbar button{
 	border: 0;
