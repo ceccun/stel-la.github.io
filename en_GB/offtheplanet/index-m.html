@@ -392,6 +392,11 @@ window.addEventListener('click', function(e){
 </div>
 <script src="../global_ass/script.js"></script>
 <script>
+var cont = new URL(window.location).searchParams.get('cont');
+var cont = atob(decodeURIComponent(cont));
+if (cont != "ée"){
+recoverycont();
+}
 var astroid = new URL(window.location).searchParams.get('astroid');
 var astroid = atob(decodeURIComponent(astroid));
 document.getElementById("cust-spaceshoot").setAttribute("src", astroid);
@@ -449,13 +454,24 @@ function eraseCookie(name) {
 }
 function recovery(){
 var rec = atob(document.getElementById("999input1").value); 
-rec = rec.split(":"); 
+rec = rec.split(":");
 if (rec[0] == name){
 storyline(rec[1],999);
 eraseCookie("spacejourney");
 createCookie("spacejourney", rec[1], 60);
 } else {
 storyline(998, 999);
+ }
+}
+
+function recoverycont(){
+cont = cont.split(":");
+if (cont[0] == name){
+storyline(cont[1],1);
+eraseCookie("spacejourney");
+createCookie("spacejourney", cont[1], 60);
+} else {
+storyline(998, 1, false);
  }
 }
 
