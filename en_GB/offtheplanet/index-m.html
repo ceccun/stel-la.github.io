@@ -58,11 +58,6 @@ var name = atob(decodeURIComponent(name));
 <p>This story has been rated PG, and contains the following materials:<br>Mild Violence, Cartoon Violence and Comic Mischief.</p>
 <button onclick='storyline(2,1,true)'>Let's Start!</button>
 <p onclick='storyline(999,1,false)'>I lost my data</p>
-<p id="1code">
-<script>
-document.getElementById("1code").innerText = btoa(name + ":1");
-</script>
-</p>
 </div>
 
 <div id=2 style="display: none;">
@@ -73,11 +68,6 @@ document.getElementById("1code").innerText = btoa(name + ":1");
 <button onclick='storyline(20,2,true); addPoints("Anger", 2);'>Refuse Cancellation</button>
 <button onclick='storyline(30,2,true); addPoints("Curiosity", 2)'>Ask to fit in</button>
 <p>One possible option hidden. Stella keeps your gender neutral throughout this story.</p>
-<p id="2code">
-<script>
-document.getElementById("2code").innerText = btoa(name + ":2");
-</script>
-</p>
 </div>
 
 <div id=30 style="display: none;">
@@ -86,33 +76,18 @@ document.getElementById("2code").innerText = btoa(name + ":2");
 <button onclick='storyline(31,30,true); addPoints("Anger", 1);'>It's just one person!"</button>
 <button onclick='storyline(32,30,true); addPoints("Anger", 2)'>or you could send me out earlier." 😏</button>
 <p>Stella ML can often add cheeky responses and actions that can lengthen the story.</p>
-<p id="30code">
-<script>
-document.getElementById("30code").innerText = btoa(name + ":30");
-</script>
-</p>
 </div>
 
 <div id=31 style="display: none;">
 <h1>Day 1.3</h1>
 <p>Space Y Operator: "No can do! We have a strict 4 passengers per shuttle policy for safety and that cannot be challenged. I'll let you know later today what we come up with!"</p>
 <button onclick='storyline(23,31,true); addPoints("Anger", 2)'>Hang up & get up.</button>
-<p id="31code">
-<script>
-document.getElementById("31code").innerText = btoa(name + ":31");
-</script>
-</p>
 </div>
 
 <div id=32 style="display: none;">
 <h1>Day 1.3</h1>
 <p>Space Y Operator: "I'll try, but I doubt any luck. I'll let you know later today what we come up with!"</p>
 <button onclick='storyline(23,32,true); addPoints("Anger", 2)'>Hang up & get up.</button>
-<p id="32code">
-<script>
-document.getElementById("32code").innerText = btoa(name + ":32");
-</script>
-</p>
 </div>
 
 <div id=20 style="display: none;">
@@ -121,11 +96,6 @@ document.getElementById("32code").innerText = btoa(name + ":32");
 <button onclick='storyline(21,20,true); addPoints("Happiness", 1);'>This means the world to me."</button>
 <button onclick='storyline(25,20,true); addPoints("Anger", 2)'>This is poor customer service!"</button>
 <p>Stella keeps track of your neurality during this story.</p>
-<p id="20code">
-<script>
-document.getElementById("20code").innerText = btoa(name + ":20");
-</script>
-</p>
 </div>
 
 <div id=21 style="display: none;">
@@ -134,10 +104,6 @@ document.getElementById("20code").innerText = btoa(name + ":20");
 <button onclick='storyline(22,21,true);'>Advance</button>
 <p>You cannot go back on this story for manipulation purposes.</p>
 <p id="21code">
-<script>
-document.getElementById("21code").innerText = btoa(name + ":21");
-</script>
-</p>
 </div>
 
 <div id=22 style="display: none;">
@@ -145,11 +111,6 @@ document.getElementById("21code").innerText = btoa(name + ":21");
 <p>... Worst case scenario: We won't be able to place you onto this ship, just call you up, postpone to next year or give you a refund."</p>
 <button onclick='storyline(23,22,true);'>Hang Up.</button>
 <p>Sometimes, we could decide to try and push your story with only one option to match someone else's, if they show signs of enjoyment.</p>
-<p id="22code">
-<script>
-document.getElementById("22code").innerText = btoa(name + ":22");
-</script>
-</p>
 </div>
 
 <div id=23 style="display: none;">
@@ -158,11 +119,6 @@ document.getElementById("22code").innerText = btoa(name + ":22");
 <button onclick='storyline(24,23,true); addPoints("Hunger", -1);'>Make Breakfast.</button>
 <button onclick='storyline(600,23,true); addPoints("Happiness", 5);'>Have a shower.</button>
 <button onclick='storyline(500,23,true);'>Brush your teeth.</button>
-<p id="23code">
-<script>
-document.getElementById("23code").innerText = btoa(name + ":23");
-</script>
-</p>
 </div>
 
 <div id=600 style="display: none;">
@@ -170,11 +126,6 @@ document.getElementById("23code").innerText = btoa(name + ":23");
 <p>%NAME just had a shower.<br>Choose what %NAME should do next:</p>
 <button onclick='storyline(500,600,true); addPoints("Hunger", -1);'>Brush your teeth.</button>
 <button onclick='storyline(24,600,true); addPoints("Happiness", 5);'>Have breakfast.</button>
-<p id="600code">
-<script>
-document.getElementById("600code").innerText = btoa(name + ":600");
-</script>
-</p>
 </div>
 
 <div id=500 style="display: none;">
@@ -182,22 +133,12 @@ document.getElementById("600code").innerText = btoa(name + ":600");
 <p>%NAME is about to brush their teeth. <br>Choose what toothpaste %NAME should use:</p>
 <button onclick='storyline(501,500,true); addPoints("Happiness", 5);'>Colbridge.</button>
 <button onclick='storyline(501,500,true); addPoints("Curiosity", 5);'>Olal-C.</button>
-<p id="500code">
-<script>
-document.getElementById("500code").innerText = btoa(name + ":500");
-</script>
-</p>
 </div>
 
 <div id=501 style="display: none;">
 <h1>Day 1.5</h1>
 <p>%NAME just brushed their teeth.<br>Choose what %NAME should do next:</p>
 <button onclick='storyline(24,501,true); addPoints("Happiness", 5);'>Have breakfast.</button>
-<p id="501code">
-<script>
-document.getElementById("501code").innerText = btoa(name + ":501");
-</script>
-</p>
 </div>
 
 <div id=24 style="display: none;">
@@ -206,11 +147,6 @@ document.getElementById("501code").innerText = btoa(name + ":501");
 <button onclick='storyline(40,24,true);'>Open the fridge.</button>
 <button onclick='storyline(44,24,true);'>Pick out cereal.</button>
 <button onclick='storyline(49,24,true);'>Pick out bread.</button>
-<p id="24code">
-<script>
-document.getElementById("24code").innerText = btoa(name + ":24");
-</script>
-</p>
 </div>
 
 <div id=40 style="display: none;">
@@ -219,11 +155,6 @@ document.getElementById("24code").innerText = btoa(name + ":24");
 <button onclick='storyline(41,40,true);'>Pick out milk.</button>
 <button onclick='storyline(42,40,true);'>Close fridge.</button>
 <p>In some cases, if we believe you're fussy, we may allow you to go back on your actions.</p>
-<p id="40code">
-<script>
-document.getElementById("40code").innerText = btoa(name + ":40");
-</script>
-</p>
 </div>
 
 <div id=42 style="display: none;">
@@ -232,11 +163,6 @@ document.getElementById("40code").innerText = btoa(name + ":40");
 <button onclick='storyline(40,42,true);'>Open the fridge.</button>
 <button onclick='storyline(43,42,true);'>Open the larder cupboard.</button>
 <p>In some cases, if we believe you're fussy, we may allow you to go back on your actions.</p>
-<p id="42code">
-<script>
-document.getElementById("42code").innerText = btoa(name + ":42");
-</script>
-</p>
 </div>
 
 <div id=43 style="display: none;">
@@ -245,22 +171,12 @@ document.getElementById("42code").innerText = btoa(name + ":42");
 <button onclick='storyline(40,43,true);'>Open the fridge.</button>
 <button onclick='storyline(44,43,true);'>Pick out cereal.</button>
 <button onclick='storyline(49,43,true);'>Pick out bread.</button>
-<p id="43code">
-<script>
-document.getElementById("43code").innerText = btoa(name + ":43");
-</script>
-</p>
 </div>
 
 <div id=49 style="display: none;">
 <h1>Day 1.6</h1>
 <p>%NAME is now eating bread and has also added a little bit of Jam.<br><br>It gets finished quickly.<br>%NAME heads back upstairs.</p>
 <button onclick='storyline(55,49,true);'>Advance.</button>
-<p id="49code">
-<script>
-document.getElementById("49code").innerText = btoa(name + ":49");
-</script>
-</p>
 </div>
 
 <div id=41 style="display: none;">
@@ -269,11 +185,6 @@ document.getElementById("49code").innerText = btoa(name + ":49");
 <button onclick='storyline(45,41,true);'>Pick out cereal.</button>
 <button onclick='storyline(40,41,true);'>Put milk back.</button>
 <p>In some cases, if we believe you're fussy, we may allow you to go back on your actions.</p>
-<p id="41code">
-<script>
-document.getElementById("41code").innerText = btoa(name + ":41");
-</script>
-</p>
 </div>
 
 <div id=44 style="display: none;">
@@ -281,11 +192,6 @@ document.getElementById("41code").innerText = btoa(name + ":41");
 <p>%NAME now has the cereal.<br>Choose what to do as %NAME.</p>
 <button onclick='storyline(45,44,true);'>Pick out milk.</button>
 <button onclick='storyline(43,44,true);'>Put back cereal.</button>
-<p id="44code">
-<script>
-document.getElementById("44code").innerText = btoa(name + ":44");
-</script>
-</p>
 </div>
 
 <div id=45 style="display: none;">
@@ -294,23 +200,13 @@ document.getElementById("44code").innerText = btoa(name + ":44");
 <button onclick='storyline(46,45,true);'>Pour the milk.</button>
 <button onclick='storyline(47,45,true);'>Pour the cereal.</button>
 <p>Stella AI may generate story-lines based off trends and events.</p>
-<p id="40code">
-<script>
-document.getElementById("45code").innerText = btoa(name + ":45");
-</script>
-</p>
 </div>
 
 <div id=46 style="display: none;">
 <h1>Day 1.6</h1>
 <p>%NAME pours the milk first followed by the cereal and sits to enjoy; only to find out it tastes a little off.<br><br>%NAME finishes the cereal and heads back upstairs to decide what to do.</p>
-<button onclick='storyline(55,45,true);'>Advance</button>
+<button onclick='storyline(55,46,true);'>Advance</button>
 <p>Stella AI may generate story-lines based off trends and events.</p>
-<p id="46code">
-<script>
-document.getElementById("46code").innerText = btoa(name + ":46");
-</script>
-</p>
 </div>
 
 <div id=47 style="display: none;">
@@ -318,11 +214,6 @@ document.getElementById("46code").innerText = btoa(name + ":46");
 <p>%NAME pours the cereal first followed by the milk and sits to enjoy; only to find out it tastes exceptionally well today.<br><br>%NAME finishes the cereal and heads back upstairs to decide what to do.</p>
 <button onclick='storyline(55,47,true);'>Advance</button>
 <p>Stella believes cereal is always first.</p>
-<p id="46code">
-<script>
-document.getElementById("46code").innerText = btoa(name + ":46");
-</script>
-</p>
 </div>
 
 <div id=55 style="display: none;">
@@ -330,21 +221,103 @@ document.getElementById("46code").innerText = btoa(name + ":46");
 <p>%NAME gets rushed to work with a single phone call.</p>
 <button onclick='storyline(56,55,true);'>Advance</button>
 <p>Stella may force you to complete actions you haven't already completed.</p>
-<p id="55code">
-<script>
-document.getElementById("55code").innerText = btoa(name + ":55");
-</script>
-</p>
 </div>
 
 <div id=56 style="display: none;">
-<h1>Come back again!</h1>
-<p>This part of your story will continue tomorrow.<br>Use the same link you used to open this story to continue from it as well.<br>If you see this message after 2 days, contact Stella about it.<br>You can copy the progress code at the bottom of this page incase you want to access on another device.</p>
-<p id="56code">
-<script>
-document.getElementById("56code").innerText = btoa(name + ":56");
-</script>
-</p>
+<h1>Day 1.7</h1>
+<p>You rush to the garage in hurry to grab your cars. You have an option on what car to drive.<br>Choose what car you want to drive as %NAME:</p>
+<button onclick='storyline(700,56,true);'>Lambagunies Hunta (£80K)</button>
+<button onclick='storyline(710,56,true);'>CWM 5 series 2020 (£40K)</button>
+<button onclick='storyline(720,56,true);'>Bunda Chavic (£3K)</button>
+<p>Stella hides official branding for copyright reasons.</p>
+</div>
+
+<div id=700 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME gets into the Lambagunies Hunta and...<br>Choose what %NAME does next:</p>
+<button onclick='storyline(701,700,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,700,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,700,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,700,true);'>Drives into the wall.</button>
+<button onclick='storyline(702,700,true);'>Drives to work.</button>
+<p>Using the Astronomical app gives you a secure environment for your progress.</p>
+</div>
+
+<div id=710 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME gets into the CWM and...<br>Choose what %NAME does next:</p>
+<button onclick='storyline(701,710,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,710,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,710,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,710,true);'>Drives into the wall.</button>
+<button onclick='storyline(702,710,true);'>Drives to work.</button>
+<p>Using the Astronomical app gives you a secure environment for your progress.</p>
+</div>
+
+<div id=720 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME gets into the Bunda and...<br>Choose what %NAME does next:</p>
+<button onclick='storyline(701,720,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,720,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,720,true);'>Drives into the wall.</button>
+<button onclick='storyline(701,720,true);'>Drives into the wall.</button>
+<button onclick='storyline(702,720,true);'>Drives to work.</button>
+<p>Using the Astronomical app gives you a secure environment for your progress.</p>
+</div>
+
+<div id=701 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME drives into the wall but luckily doesn't die from it. There's blood everywhere, %NAME is going to die out if he does not make it to a hospital fast. %NAME needs to get to the hospital fast.<br>Choose how %NAME should get to the hospital.</p>
+<button onclick='storyline(707,701,true);'>Drive the dead whips.</button>
+<button onclick='storyline(706,701,true);'>Call a Boober.</button>
+<button onclick='storyline(705,701,true);'>He shouldn't. Just die 😤</button>
+<p>There was a bug for the Astronomical app. If you see this, looks like the fix worked hehe.</p>
+</div>
+
+<div id=702 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME drove into the wall anyways like a reet.</p>
+<button onclick='storyline(701,702,true);'>Advance</button>
+<p>There was a bug for the Astronomical app. If you see this, looks like the fix worked hehe.</p>
+</div>
+
+<div id=706 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME called a Boober. Dispatcher said it should arrive in the next half an hour.</p>
+<button onclick='storyline(800,706,true);'>Got it!</button>
+<p>I wonder if this story ever ends.</p>
+</div>
+
+<div id=707 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME got into the dead whip anyways and </p>
+<button onclick='storyline(900,707,true);'>Got it!</button>
+<p>I wonder if this story ever ends.</p>
+</div>
+<div id=900 style="display: none;">
+<h1>Come back soon!</h1>
+<p>%NAME will be ready for you overmorrow. If this message still shows after 2 days, press the "Is there a problem?" button below and submit a report.</p>
+<p>I wonder if this story ever ends.</p>
+</div>
+
+<div id=800 style="display: none;">
+<h1>Come back soon!</h1>
+<p>%NAME will be ready for you overmorrow. If this message still shows after 2 days, press the "Is there a problem?" button below and submit a report.</p>
+<p>I wonder if this story ever ends.</p>
+</div>
+
+<div id=705 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME died.</p>
+<button onclick='storyline(710,705,true);'>NOOOO SUMMON BACK %NAME I STG YOU LIKKL YUTEDEM.</button>
+<p>I wonder if this story ever ends.</p>
+</div>
+
+<div id=710 style="display: none;">
+<h1>Day 1.7</h1>
+<p>%NAME magically came back alive after dying. %NAME actually didn't die from the impact but the fact that he had no insurance for the car.<br>Which actually makes sense</p>
+<button onclick='storyline(701,710,true);'>Advance.</button>
+<p>I wonder if this story ever ends.</p>
 </div>
 
 <div id=25 style="display: none;">
@@ -352,11 +325,6 @@ document.getElementById("56code").innerText = btoa(name + ":56");
 <p>The phone line disconnects. %NAME is tired.</p>
 <button onclick='storyline(23,25,true); addPoints("Hunger", 1);'>Force yourself up.</button>
 <p>We may often try to force you to change your actions by removing your choices. This will occur a lot.</p>
-<p id="25code">
-<script>
-document.getElementById("25code").innerText = btoa(name + ":25");
-</script>
-</p>
 </div>
 
 <div id=999 style="display: none;">
@@ -370,7 +338,10 @@ document.getElementById("25code").innerText = btoa(name + ":25");
 <p>The code you have entered may be incorrect or not suitable for use with this Stella session.<br>Contact Stella to generate a code for you to use to get back into the story.</p>
 </div>
 </div>
-<p style="text-align: center;">Is there a problem?</p>
+<p style="text-align: center;" onclick="var copyText = document.getElementById('status'); copyText.select(); copyText.setSelectionRange(0, 99999); document.execCommand('copy');
+  window.location = 'https://docs.google.com/forms/d/e/1FAIpQLSfAeYPH77qbGp5pCtfLPeDTzBFM5QaT15WGyoZESVXVE64xTw/formResponse'">Is there a problem?</p>
+
+<p id="status"></p>
 </center>
 </div>
 </div>
@@ -394,8 +365,10 @@ window.addEventListener('click', function(e){
 <script>
 var cont = new URL(window.location).searchParams.get('cont');
 var cont = atob(decodeURIComponent(cont));
+if (readCookie("spacejourney") == null || undefined){
 if (cont != "ée"){
 recoverycont();
+}
 }
 var astroid = new URL(window.location).searchParams.get('astroid');
 var astroid = atob(decodeURIComponent(astroid));
@@ -417,6 +390,7 @@ storyline(readCookie("spacejourney"), 1, true);
 }
 
 function storyline(section, from, save){
+document.getElementById("status").innerText = btoa(name + ":" + section);
 document.getElementById(from).setAttribute("style", "display: none;");
 document.getElementById(section).setAttribute("style", "");
 if (save == true){
