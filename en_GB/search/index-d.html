@@ -46,11 +46,17 @@ function eraseCookie(name) {
 </div>
 </div>
 <div class="content">
+<div class="tabindex" tabindex=1><p>Press the index key again to scroll through the list of available actions.</p></div>
+<div class="tabindex" tabindex=2><p>A popup will show with your action, press the index key again to visit that action.</p></div>
+<a class="tabindex" tabindex=3><p>Focus on search box.</p></a>
+<a class="tabindex" tabindex=5><p>Focus on "Text" button in crossbar.</p></a>
+<a class="tabindex" tabindex=7><p>Focus on "Images" button in crossbar.</p></a>
+<a class="tabindex" tabindex=9><p>Focus on "Tab" button in crossbar.</p></a>
 <div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
 <div style="margin-top: -20px;">
 <a href="../index-d.html" class="a">
 <h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a>
-<div class="input-out" style="display: inline-block; vertical-align: middle;"><input type="search" id="sb" style="width: 100%;" placeholder="Search the Internet.">
+<div class="input-out" style="display: inline-block; vertical-align: middle;"><input tabindex=4 type="search" id="sb" style="width: 100%;" placeholder="Search the Internet.">
 <script>
 var input = document.getElementById("sb");
 input.addEventListener("keyup", function(event) {
@@ -67,7 +73,7 @@ var inputa = encodeURIComponent(document.getElementById("sb").value);
 </div>
 </div>
 <div style="margin-top: -40px;">
-<div class="crossbar"><a href=""><button onclick="text_click()" id="text-btn">
+<div class="crossbar"><a href=""><button tabindex=6 onclick="text_click()" id="text-btn">
 <script type="text/javascript">
 function text_click(){
 var q = new URL(window.location).searchParams.get('q');
@@ -76,7 +82,7 @@ document.getElementById("text-btn").setAttribute("class", "crossbar-button-activ
 document.getElementById("img-btn").setAttribute("class", "crossbar");
 }
 </script>
-Text</button></a><button onclick="img_click()" id="image-btn">
+Text</button></a><button tabindex=8 onclick="img_click()" id="image-btn">
 <script type="text/javascript">
 function img_click(){
 var q = new URL(window.location).searchParams.get('q');
@@ -86,7 +92,7 @@ document.getElementById("text-btn").setAttribute("class", "crossbar");
 }
 </script>
 Images</button>
-<button onclick="tab_click()" id="tab-btn">
+<button onclick="tab_click()" tabindex=10 id="tab-btn">
 <script type="text/javascript">
 var query = new URL(window.location).searchParams.get('q');
 var tabs = readCookie("tabs");
@@ -126,6 +132,7 @@ document.getElementById("tab-btn").innerText = "Tab";
 }
 }
 </script></button></div>
+<a class="tabindex" tabindex=11><p>Focus on content</p></a>
 <script async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
 <p id="resgog" style="display: none;">Results from Google</p>

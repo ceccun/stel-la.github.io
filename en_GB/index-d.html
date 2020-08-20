@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Stella - Things to change the world.</title>
-	<script data-ad-client="ca-pub-1010710647557803" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Stella - Things to change the world.</title>
 <meta charset="UTF-8">
 <link href="desk.css" rel="stylesheet"/>
 <script type="text/javascript">
@@ -23,6 +22,11 @@ window.location.replace("index-m.html");
 </div>
 </div>
 <div class="content">
+<div class="tabindex" tabindex=1><p>Press the index key again to scroll through the list of available actions.</p></div>
+<div class="tabindex" tabindex=2><p>A popup will show with your action, press the index key again to visit that action.</p></div>
+<a class="tabindex" tabindex=3><p>Focus on search box.</p></a>
+<a class="tabindex" tabindex=5><p>Focus on cookie notification.</p></a>
+<a class="tabindex" tabindex=7><p>END</p></a>
 <div style="text-align: right; width: 100%; margin-bottom: 40px;">
 &nbsp
 <div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); 
@@ -33,7 +37,7 @@ window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 <div style="margin-top: 15vh;">
 <center>
 <h1 style="font-size: 50px;">Stella</h1>
-<div class="input-out"><input id="sb" placeholder="Search the Internet."><script>
+<div class="input-out"><input id="sb" tabindex=4 placeholder="Search the Internet."><script>
 var input = document.getElementById("sb");
 input.addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -56,7 +60,7 @@ var inputa = encodeURIComponent(document.getElementById("sb").value);
 <div id="cookienot" style="width: 300px; text-align: right; position: absolute; right: 40px; bottom: 40px;">
 <h3>Our Use of Cookies</h3>
 <p>Stella uses cookies to keep track of updates, handle sessions and send data to other pages. By using this service, you also agree to the Privacy & Cookie Policy.</p>
-<button onclick="document.getElementById('cookienot').setAttribute('style', 'display: none;')">Okay! 😆</button>
+<button tabindex=6 onclick="document.getElementById('cookienot').setAttribute('style', 'display: none;')">Okay! 😆</button>
 </div>
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar-h">
