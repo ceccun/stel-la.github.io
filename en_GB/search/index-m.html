@@ -33,6 +33,8 @@ function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
 </script>
+<script src="../../blocks/cdn.js"></script>
+<script src="../../blocks/math.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
@@ -125,6 +127,7 @@ document.getElementById("tab-btn").innerText = "Tab";
 }
 }
 </script></button></div></div>
+<div id="resInfo-0"></div>
 <script onload="loadcall()" async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
 </div>
@@ -148,8 +151,22 @@ window.addEventListener('click', function(e){
 var query = new URL(window.location).searchParams.get('q');
 document.getElementById("title").innerText = "Stella - " + query;
 document.getElementById("sb").value = query;
+var qu = 0;
 function loadcall(){
 setTimeout("tab_location()", 300);
+checkBlock(query);
+}
+
+function placement(result, type, processed){
+	if (qu == 0){
+	var res = document.getElementById("resInfo-0");
+	if (type == "fact"){
+	res.innerHTML = res.innerHTML + "<div class=\"block-results\"><h1>" + processed + "</h1><p>" + result + "</p></div><a class=\"a\" href=\"https://forms.gle/qgNQNK7GFJ46MXz3A\"><p>Feedback</p></a>";
+	} else{
+	res.innerHTML = res.innerHTML + "<div class=\"block-results\"><p>" + processed + "</p><h1>" + result + "</h1></div><a class=\"a\" href=\"https://forms.gle/qgNQNK7GFJ46MXz3A\"><p>Feedback</p></a>";
+	}
+	qu = 1;
+	}
 }
 
 function tab_location(){
