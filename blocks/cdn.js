@@ -43,22 +43,22 @@ function checkBlock(queryw){
 		var newquestion = newquestion[newquestion.length - 1];
 		if (newquestion == " christmas" || newquestion == "christmas"){
 					var result = "Christmas Day is on the 25th of December.";
-			placement(result);
+			placement(result, "fact", newquestion);
 			return;
 		}
 		if (newquestion == " eid" || newquestion == "eid"){
 					var result = "Eid al-Fitr 2020 begins at night on Saturday 23rd May.";
-			placement(result);
+			placement(result, "fact", newquestion);
 			return;
 		}
 				if (newquestion == " eid al-fitr" || newquestion == "eid al-fitr" || newquestion == " eid fitr" || newquestion == " eid al fitr"){
 					var result = "Eid al-Fitr 2020 begins at night on Saturday 23rd May.";
-			placement(result);
+			placement(result, "fact", newquestion);
 			return;
 		}
 				if (newquestion == " eid al-adha" || newquestion == "eid al-adha" || newquestion == " eid adha" || newquestion == " eid al adha"){
 					var result = "Eid al-Adha 2020 begins at night on Thursday 30th July. Compared to Eid al-Fitr, it lasts approximately 3 days.";
-			placement(result);
+			placement(result, "fact", newquestion);
 			return;
 		}		
 	}
@@ -82,7 +82,7 @@ function checkBlock(queryw){
 		  try{
 	  math.eval(question);
 	  var result = math.eval(question).toString();
-	placement(result);
+	  placement(result, "math", question);
 	return;
   }
     catch(err){
@@ -92,10 +92,14 @@ Http.open("GET", url);
 Http.send();
 console.log("BlocksAI - running.");
 Http.onreadystatechange = (e) => {
-  var result = (Http.responseText.split('"extract":"'));
-	  	  var result1 = result[1].split('"}');
-		  var result = result1[0];
-	  placement(result);
+	if (Http.readyState == 4 && Http.status == 200){
+  var result = JSON.parse(Http.responseText);
+  question = result.query.normalized[0].to;
+  var res = result.query.pages[0].extract;
+  if (res != ""){
+	  placement(res, "fact", question);
+  }
+	}
 };
 	}
 }
@@ -122,7 +126,7 @@ function sendDate(){
 			if (date.slice(date.length - 1) == "3"){ var prefix = "rd" }
 			if (date.slice(date.length - 1) == "2"){ var prefix = "nd" }
 			var result = "It is the " + date + prefix + " of " + month + ".";
-			placement(result);
+			placement(result, "fact", newquestion);
 			return;
 }
 function sendDay(){
@@ -130,6 +134,6 @@ function sendDay(){
 			var commonSense_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 			var day = commonSense_days[timing.getDay() - 1];
 			var result = "Today is " + day + ".";
-			placement(result);
+			placement(result, "fact", newquestion);
 			return;
 }
