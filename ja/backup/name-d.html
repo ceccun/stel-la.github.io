@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Name this backup.</title>
+<link href="../desk.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth < window.innerHeight){
+window.location.replace("privacy-m.html");
+}
+function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<a href="index-d.html" class="a">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="font-size: 34px; margin-top: 10vh; text-align: center;">
+<h1 style="margin: 0; padding: 0;">Name this backup</h1>
+</div>
+<div class="content">
+<center>
+<p>Choose a name for this backup, it will be shown on devices attempting to restore from it.</p>
+<div class="input-out"><input id="name"></input></div>
+<p></p>
+<button onclick="submit()">
+<script>
+function submit(){
+var name = document.getElementById("name").value;
+createCookie("backup_name", name, 30);
+window.location.replace("backup.html")
+}
+</script>
+Start</button>
+</div>
+</center>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="../global_ass/script.js"></script>
+</body>
+</html>

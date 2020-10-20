@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - タブリスト。</title>
+<meta charset="UTF-8">
+<link href="tabs-mob.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth > window.innerHeight){
+window.location.replace("tabs-d.html");
+}
+function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<a href="index-d.html" class="a">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="font-size: 25px; margin-top: 10vh; text-align: center;">
+<h1 style="margin: 0; padding: 0;">タブリスト</h1>
+<p id="stats" style="font-size: 17px; margin-top: 5px; padding: 0;">情報の収集...</p>
+</div>
+<div style="display: none;" id="notab">
+<center>
+<img src="../images/empty.svg" style="height: 30vh;">
+<p>検索とコンテンツで[+]をタップして、タブに追加します。</p>
+</center>
+</div>
+<div class="tl" id="tab-list">
+<center id="appendzone">
+
+
+</center>
+</div>
+</div>
+</div>
+<script>
+var tabs = readCookie("tabs");
+var tabs = tabs.split(",");
+tabs.forEach(tabParse);
+
+function tabParse(item, index){
+var zone = document.getElementById("appendzone");
+var container = document.createElement("div");
+container.innerHTML = "<p>" + decodeURIComponent(item) + "</p><a href='#' class='a' style='text-decoration: none;' onclick='removeTab(\"" + item + "\")'><p>✖</p></a>";
+if (item != ""){ zone.append(container); }
+document.getElementById("stats").innerText = ""
+}
+
+function removeTab(item){
+var tabs = readCookie("tabs");
+var tab1 = tabs.split(item + ",")[0];
+var tab2 = tabs.split(item + ",")[1];
+eraseCookie("tabs");
+createCookie("tabs", tab1 + tab2, 30);
+window.location.replace("");
+}
+</script>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="global_ass/script.js"></script>
+</body>
+</html>
