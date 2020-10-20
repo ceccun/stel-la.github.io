@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Donate to Stella.</title>
+<meta charset="UTF-8">
+<link href="../mob.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth > window.innerHeight){
+window.location.replace("ether-donate-d.html?");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<style>
+.button{
+border: solid 1px rgba(0,0,0,0.3);
+opacity: 0.7;
+border-radius: 10px;
+height: 60px;
+padding: 10px;
+transition: opacity 0.3s linear, border 0.3s linear;
+text-align: left;
+}
+.button p{
+display: inline-block;
+line-height: 60px;
+color: black;
+opacity: 1;
+margin: 0;
+padding: 0;
+vertical-align: top;
+font-size: 20px;
+}
+.button img{
+display: inline-block;
+height: 100%;
+}
+@media (prefers-color-scheme: dark) {
+.button{
+border: solid 1px rgba(255,255,255,0.3);
+opacity: 0.7;
+}
+.button p{
+display: inline-block;
+line-height: 60px;
+color: white;
+opacity: 1;
+margin: 0;
+padding: 0;
+vertical-align: top;
+font-size: 20px;
+}
+.button img{
+filter: invert();
+}
+}
+</style>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<A class="a" href="index-m.html"><h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></A></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="font-size: 24px; margin-top: 10vh; text-align: center;">
+<h1 style="margin: 0; padding: 0;">Donate to Stella.</h1>
+<p style="font-size: 20px; margin-top: 5px; padding: 0;">Thank you for choosing the decision to help Stella strive.</p>
+<image src="../images/love.svg" style="width: 100%;"></image>
+<p>Below are payment options to help you donate to Stella.</p>
+</center>
+<a class="a" href="donations/ether-donate-m.html"><div class="button"><image src="../images/ethereum.svg"></image>
+<p>Cryptocurrency</p>
+</div>
+</a>
+<p>❤</p>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="../global_ass/scrit.js"></script>
+</body>
+</html>

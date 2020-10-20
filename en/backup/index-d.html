@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Backup Your Data.</title>
+<link href="../desk.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth < window.innerHeight){
+window.location.replace("privacy-m.html");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<a href="index-d.html" class="a">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="font-size: 34px; margin-top: 10vh; text-align: center;">
+<h1 style="margin: 0; padding: 0;">Backup & Recovery</h1>
+</div>
+<div class="content">
+<center>
+<div style="border: solid 1px red; border-radius: 10px; padding: 10px; margin-top: 20px"><p>Stella Pay information is never included in backups or imports of data.</p></div>
+<p>You can back up Tabs, update settings and search preferences to be used on another device or on this device in the future. You will receive a URL at the end of the backup allowing you to paste it onto any other device. The URL is a unique identifier that should not be shared if you have personal data stored in this session.<br>Backups only last 30 days like all other data stored on this session.<br>Restoring from a backup will always erase any existing data.<br>It is recommended to only back up your data if you need to put it onto another device, erase this browser or using a different version of Stella.</p>
+<a href="name-d.html"><button>Create a backup</button></a>
+</div>
+</center>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="../global_ass/script.js"></script>
+</body>
+</html>

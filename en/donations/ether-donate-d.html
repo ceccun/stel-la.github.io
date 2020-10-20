@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Ethereum Donation.</title>
+<link href="../desk.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth < window.innerHeight){
+window.location.replace("ether-donate-m.html");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<style>
+.button{
+border: solid 1px rgba(0,0,0,0.3);
+opacity: 0.7;
+border-radius: 10px;
+height: 60px;
+padding: 10px;
+transition: opacity 0.3s linear, border 0.3s linear;
+}
+.button p{
+display: inline-block;
+line-height: 60px;
+color: black;
+opacity: 1;
+margin: 0;
+padding: 0;
+vertical-align: top;
+}
+.button img{
+display: inline-block;
+height: 100%;
+}
+.button:hover{
+border: solid 1px rgba(0,0,0,1);
+color: black;
+opacity: 1 !important;
+transition: opacity 0.3s linear, border 0.3s linear;
+}
+@media (prefers-color-scheme: dark) {
+.button{
+border: solid 1px rgba(255,255,255,0.3);
+opacity: 0.7;
+}
+.button p{
+display: inline-block;
+line-height: 60px;
+color: white;
+opacity: 1;
+}
+.button img{
+filter: invert();
+}
+.button:hover{
+border: solid 1px rgba(255,255,255,1);
+opacity: 1;
+transition: opacity 0.3s linear, border 0.3s linear;
+}
+}
+</style>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<a href="index-d.html" class="a">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../../images/hamburger.svg"></image>
+</div>
+</div>
+<div class="content">
+<div style="width: 100%">
+<div style="width: 50%; text-align: right; display: inline-block;">
+<image class="r-img" style="width: 200px;" src="../../images/ether-qr.svg"></image></div><div style="width: 50%; text-align: left; display: inline-block; vertical-align: top;">
+<h1 style="padding: 0; margin: 0;">Pay Via QR.</h1>
+<p>You can use this Quick Response (QR) code to quickly complete a purchase from your wallet. This code is only valid for <a title="This link will open in a new tab. Stella is not responsible for any content on the end page." class="a" href="https://wikipedia.org/wiki/Ethereum" target="_BLANK">Ethereum.<img style="height: 20px; vertical-align: bottom;" class="r-img" src="../../images/external.svg"></a></p>
+<p>1. Scan the code using your wallet.<br>2. Choose amount to pay.<br>3. Accept payment.</p>
+</div>
+</div>
+<center>
+<p>or, pay using Ethereum address.</p>
+</center>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="../global_ass/script.js"></script>
+</body>
+</html>
