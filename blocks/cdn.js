@@ -3,6 +3,19 @@
 function checkBlock(queryw){
 	var newquestion = queryw;
 	var newquestion = newquestion.toLowerCase();
+	if (readCookie("kaou") == "3"){
+		placement("How's it going? We want to know if you're okay. If you're just researching topics like these, you can skip this otherwise continue. We're trying our best to look out for you so we want to let you know that help is available.<br>United Kingdom: Text 'SHOUT' to 85258; SHOUT<br>United States: Dial +1-800-273-8255; the NSPL<br>Canada: Dial +1-818-831-1234; Thursday's Child<br> Australia: 1800 650 890; headspace<br>Japan: Dial 03-4550-1146 (English); TELL<br><br>We love you.", "fact", "Hey, over here!");
+		return;
+	}
+	if (newquestion.includes("anxiety") || newquestion.includes("suicide") || newquestion.includes("eating disorder") || newquestion.includes("kill myself") || newquestion.includes("killing myself") || newquestion.includes("sad")){
+		if (readCookie("kaou") == null){
+			createCookie("kaou", "0", 30);
+		}
+		var newkao = parseInt(readCookie("kaou"));
+		createCookie("kaou", String(newkao + 1), 30);
+		placement("Whatever you're going through, we're standing with you. <br>Get help for the mental state you're in:<br>United Kingdom: Text 'SHOUT' to 85258; SHOUT<br>United States: Dial +1-800-273-8255; the NSPL<br>Canada: Dial +1-818-831-1234; Thursday's Child<br> Australia: 1800 650 890; headspace<br>Japan: Dial 03-4550-1146 (English); TELL<br><br>You shouldn't have to suffer and stay quiet about it, whatever it is, you'll get through to see the end of it.<br>Love, Stella.", "fact", "Standing With You");
+		return;
+	}
 	if (newquestion.includes("?") == true) {
 			var newquestion = newquestion.split("?")[0];
 		}
