@@ -1,18 +1,36 @@
 <!doctype html>
 <html>
 <head>
-<title id="title">Stella - Backup Your Data.</title>
+<title id="title">Stella - Back up your data.</title>
 <link href="../desk.css" rel="stylesheet"/>
 <script type="text/javascript">
 if (window.innerWidth < window.innerHeight){
-window.location.replace("privacy-m.html");
+window.location.replace("index-m.html");
 }
 </script>
+<style>
+  input{
+	border-radius: 10px;
+	padding: 10px;
+	border: solid 1px rgba(0,0,0,0.3);
+	font-family: 'Inter';
+	width: 90%;
+	outline: 0;
+  margin:auto;
+	}
+  @media(prefers-color-scheme: dark){
+    input{
+		border: solid 1px rgba(255,255,255,0.3);
+		background-color: rgba(0,0,0,1);
+		color: white;
+		}
+  }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
 </head>
-<body>
+<body onload="loadcall()">
 <!-- Adrenaline Engine 5 -->
 <div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
 <div class="rainbow-head">
@@ -25,19 +43,97 @@ window.location.replace("privacy-m.html");
 <div style="margin-top: -20px;">
 <a href="index-d.html" class="a">
 <h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
-<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
+<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 <image src="../../images/hamburger.svg"></image>
 </div>
 </div>
 <div style="margin-top: -40px;">
-<div style="font-size: 34px; margin-top: 10vh; text-align: center;">
-<h1 style="margin: 0; padding: 0;">Backup & Recovery</h1>
-</div>
 <div class="content">
 <center>
-<div style="border: solid 1px red; border-radius: 10px; padding: 10px; margin-top: 20px"><p>Stella Pay information is never included in backups or imports of data.</p></div>
-<p>You can back up Tabs, update settings and search preferences to be used on another device or on this device in the future. You will receive a URL at the end of the backup allowing you to paste it onto any other device. The URL is a unique identifier that should not be shared if you have personal data stored in this session.<br>Backups only last 30 days like all other data stored on this session.<br>Restoring from a backup will always erase any existing data.<br>It is recommended to only back up your data if you need to put it onto another device, erase this browser or using a different version of Stella.</p>
-<a href="name-d.html"><button>Create a backup</button></a>
+  <div id="1">
+  <div style="font-size: 24px; margin-top: 10vh; text-align: center;">
+    <h1 style="margin: 0; padding: 0;">Back up your data</h1>
+    <p style="font-size: 16px; margin-top: 5px; padding: 0;">Save your Stella session into a URL that can be accessed from another device to restore your session.</p>
+    <button onclick="document.getElementById('1').setAttribute('style', 'display: none;'); document.getElementById('2').setAttribute('style', '');">Next</button>
+    </div>
+    </div>
+    <div style="display: none;" id="2">
+      <div style="font-size: 24px; margin-top: 10vh; text-align: center;">
+        <h1 style="margin: 0; padding: 0;">Some more information</h1>
+        <p style="font-size: 16px; margin-top: 5px; padding: 0;">Here are some things you should know before you back up:<br>Your backup data should not exceed 32.8 KB, if you decide to encrypt your backup it will be limited to 8.2 KB instead.<br>Your backup will not include Stella Pay information.<br>Standing With You information will be included in the backup.<br>Diagnostic data, including how you use Xick as well as other Stella and other services will be included.<br>Account tokens and device UIDs will not be transferred.<br>Restoring from a backup will create a new session rather than using the original one.</p>
+        <button onclick="document.getElementById('2').setAttribute('style', 'display: none;'); document.getElementById('3').setAttribute('style', '');">Next</button>
+        </div>
+  </div>
+  <div id="3" style="display: none;">
+    <div style="font-size: 24px; margin-top: 10vh; text-align: center; width: 60%;">
+      <h1 style="margin: 0; padding: 0;">Basic information</h1>
+      <p style="font-size: 16px; margin-top: 5px; padding: 0;"></p>
+      <input id="bn" style="display: block;" placeholder="Backup Name"></input>&nbsp;<p style="font-size: 16px; margin-top: 0px;">Add a note or message to display for when you restore from this backup.</p><input id="bm" style="display: block; margin-bottom: 20px;" placeholder="Note"></input>&nbsp;
+      <input type="checkbox" id="enccheck" style="width: auto;" value="Encrypt this backup."></input><p style="font-size: 16px; display: inline-block; margin: 0; margin-left: 10px;">Encrypt Backup</p>
+      <p id="backupsize" style="font-size: 16px">Backup Size:</p>
+      <p id="3_stat"style="font-size: 16px"></p>
+      <button onclick="bnclick()">Next</button>
+      <script>
+        function bnclick(){
+          var size = document.getElementById("backupsize").innerText.split(": ")[1].split(" B")[0];
+          if(size < 8200){
+            if (document.getElementById("bn").value == ""){
+              document.getElementById('3_stat').innerText = "Your backup needs to be named.";
+              return;
+            }
+            var c = "4";
+            var ps = btoa("name=" + btoa(document.getElementById("bn").value) + "`memo=" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie));
+            if (document.getElementById("enccheck").checked == true){
+              c = "10";
+            } else{
+              window.history.pushState("","Copy this page URL!","index.html?bu=" + ps);
+            }
+          document.getElementById('3').setAttribute('style', 'display: none;');
+          document.getElementById(c).setAttribute('style', '');
+          } else{
+            document.getElementById('3_stat').innerText = "Your backup is too big for Stella to handle, clear some data first.";
+          }
+        }
+      </script>
+      </div>
+</div>
+<div id="4" style="display: none;">
+  <div style="font-size: 24px; margin-top: 10vh; text-align: center; width: 60%;">
+    <h1 style="margin: 0; padding: 0;">Backup Uploaded!</h1>
+    <p style="font-size: 16px; margin-top: 5px; padding: 0;">Your backup was successfully sent to Stella. Use the URL of this page to restore at another device or browser.</p>
+    <p id="4_stat"style="font-size: 16px"></p>
+    </div>
+</div>
+    <div id="10" style="display: none;">
+      <div style="font-size: 24px; margin-top: 10vh; text-align: center; width: 60%;">
+        <h1 style="margin: 0; padding: 0;">Choose a password</h1>
+        <p style="font-size: 16px; margin-top: 5px; padding: 0;">You chose to encrypt your backup, meaning you will need to secure it using a password. Notes and names you have added will also be encrypted.</p>
+        <input id="e1" style="display: block; margin-bottom: 5px;" type="password" placeholder="Password"></input>
+        <input id="e2" style="display: block; margin-bottom: 20px;" type="password" placeholder="Confirm Password"></input>
+        <p id="10_stat"style="font-size: 16px"></p>
+        <button onclick="document.getElementById('10').setAttribute('style', 'display: none;'); document.getElementById('3').setAttribute('style', '');">Back</button><button onclick="bnclick10()">Next</button>
+      <script>
+        function bnclick10(){
+          if (document.getElementById("e1").value == document.getElementById("e2").value){
+            document.getElementById('10').setAttribute('style', 'display: none;'); 
+            document.getElementById('11').setAttribute('style', '');
+            var nv = btoa("ENC#" + encrypt(btoa("name=" + btoa(document.getElementById("bn").value) + "`memo=" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie)), btoa(document.getElementById("e1").value)));
+            document.getElementById('11').setAttribute('style', 'display: none;'); 
+            document.getElementById('4').setAttribute('style', '');
+            
+            window.history.pushState("","Copy this page URL!","index.html?bu=" + nv);
+          } else{
+            document.getElementById("10_stat").innerText = "Your passwords do not match."
+          }
+        }
+      </script>
+      </div>
+</div>
+<div id="11" style="display: none;">
+  <div style="font-size: 24px; margin-top: 10vh; text-align: center; width: 60%;">
+    <h1 style="margin: 0; padding: 0;">Processing...</h1>
+    <p style="font-size: 16px; margin-top: 5px; padding: 0;">Your backup is being processed before it is sent, this page will refresh.</p>
+    </div>
 </div>
 </center>
 </div>
@@ -56,6 +152,27 @@ window.addEventListener('click', function(e){
   }
 });
 </script>
+<script>
+  var cookies = document.cookie;
+  var size = cookies.length;
+
+  function loadcall(){
+  document.getElementById("backupsize").innerText = "Backup Size: " + btoa("name=" + btoa(document.getElementById("bn").value) + "`memo=" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie)).length + " B / 8200 B";
+  document.getElementById("bn").addEventListener("input", updatebcount);
+  document.getElementById("bm").addEventListener("input", updatebcount);
+  document.getElementById("enccheck").addEventListener("click", updatebcount);
+  }
+
+  function updatebcount(){
+    var d = btoa("name=" + btoa(document.getElementById("bn").value) + "`memo=" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie)).length;
+    if (document.getElementById("enccheck").checked == true){
+      document.getElementById("backupsize").innerText = "Backup Size: " + (d*3) + " B / 8200 B";
+    } else{
+      document.getElementById("backupsize").innerText = "Backup Size: " + (d) + " B / 8200 B";
+    }
+  }
+</script>
+<script src="https://stella.hs.vc/downtable-encryption/downtable.js" type="text/javascript"></script>
 <script src="../global_ass/script.js"></script>
 </body>
 </html>

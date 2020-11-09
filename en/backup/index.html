@@ -1,39 +1,22 @@
 <!doctype html>
 <html>
 <head>
-<title id="title">Stella - Restore from Backup</title>
-<link href="../desk.css" rel="stylesheet"/>
-<script type="text/javascript">
-function createCookie(name,valued,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+valued+expires+"; path=/";
-}
-
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
-</script>
+<title id="title">Stella - Restore from backup.</title>
+<link href="desk.css" rel="stylesheet"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
 </head>
-<body>
+<body onload="loadcall()">
 <!-- Adrenaline Engine 5 -->
+<script>
+  function loadcall(){  
+  var backup = atob(new URL(window.location).searchParams.get("bu"));
+  if (backup.startsWith("ENC#")){
+    
+  }
+  }
+</script>
 <div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
 <div class="rainbow-head">
 <div class="rainbow-head-inner">
@@ -47,29 +30,17 @@ function eraseCookie(name) {
 <h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
 </div>
 <div style="margin-top: -40px;">
+<div style="font-size: 24px; margin-top: 10vh; text-align: center;">
+</div>
 <div class="content">
 <center>
-<p id="status">Do you want to restore from this backup?<br>This will delete any existing data stored on this Stella session. Stella cannot verify the integrity of backups.</p>
-<button onclick="restore()">
-<script>
-function restore(){
-var cookies = new URL(window.location).searchParams.get('id');
-cookies = atob(cookies);
-console.log(cookies);
-var ind = cookies.split(';');
-console.log(ind);
-ind.forEach(indc);
-}
-
-function indc(item, index){
-var cook = name.split("=");
-createCookie(cook[0], cook[1], 30);
-}
-</script>
-Restore</button>
-</div>
+  <div id="bui">
+    <h1 style="margin: 0; padding: 0;">Restore from backup</h1>
+    <p>You are about to restore from <a id="b1"></a>. This will push you onto another Stella session.</p>
+  </div>
 </center>
 </div>
 <script src="../global_ass/script.js"></script>
+<script src="https://stella.hs.vc/downtable-encryption/downtable.js" type="text/javascript"></script>
 </body>
 </html>
