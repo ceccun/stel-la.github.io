@@ -82,7 +82,7 @@ window.location.replace("index-m.html");
               return;
             }
             var c = "4";
-            var ps = btoa("name=" + btoa(document.getElementById("bn").value) + "`memo=" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie));
+            var ps = btoa("name:" + btoa(document.getElementById("bn").value) + "`memo:" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie));
             if (document.getElementById("enccheck").checked == true){
               c = "10";
             } else{
@@ -117,7 +117,7 @@ window.location.replace("index-m.html");
           if (document.getElementById("e1").value == document.getElementById("e2").value){
             document.getElementById('10').setAttribute('style', 'display: none;'); 
             document.getElementById('11').setAttribute('style', '');
-            var nv = btoa("ENC#" + encrypt(btoa("name=" + btoa(document.getElementById("bn").value) + "`memo=" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie)), btoa(document.getElementById("e1").value)));
+            var nv = btoa("ENC#" + encrypt(btoa("name:" + btoa(document.getElementById("bn").value) + "`memo:" + btoa(document.getElementById("bm").value) + " SEPDAT " + btoa(document.cookie)), btoa(document.getElementById("e1").value)));
             document.getElementById('11').setAttribute('style', 'display: none;'); 
             document.getElementById('4').setAttribute('style', '');
             

@@ -2,19 +2,91 @@
 <html>
 <head>
 <title id="title">Stella - Restore from backup.</title>
-<link href="desk.css" rel="stylesheet"/>
+<link href="../desk.css" rel="stylesheet"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+ <style>
+  input{
+	border-radius: 10px;
+	padding: 10px;
+	border: solid 1px rgba(0,0,0,0.3);
+	font-family: 'Inter';
+	width: 90%;
+	outline: 0;
+  margin:auto;
+	}
+  @media(prefers-color-scheme: dark){
+    input{
+		border: solid 1px rgba(255,255,255,0.3);
+		background-color: rgba(0,0,0,1);
+		color: white;
+		}
+  }
+</style>
 </head>
 <body onload="loadcall()">
 <!-- Adrenaline Engine 5 -->
 <script>
+  var backup = ""
   function loadcall(){  
-  var backup = atob(new URL(window.location).searchParams.get("bu"));
+  backup = atob(new URL(window.location).searchParams.get("bu"));
   if (backup.startsWith("ENC#")){
-    
+    document.getElementById("authui").setAttribute("style","");
+    return;
   }
+  parse();
+  }
+
+  function authuisub(){
+    document.getElementById("e1s").innerText = "";
+    var p = document.getElementById("e1").value;
+    try{
+      var tp = atob(decode(backup.split("#")[1], btoa(p)));
+    }catch(error){
+      document.getElementById("e1s").innerText = "Sorry! That didn't work, try again.";
+      return;
+    }
+    console.log(tp);
+    if (tp.startsWith("name:")) {
+      console.log("YES");
+      backup = tp;
+      document.getElementById("authui").setAttribute("style","display: none;");
+      parse();
+    } else{
+      document.getElementById("e1s").innerText = "Sorry! That didn't work, try again.";
+    }
+  }
+
+  function parse(){
+    document.getElementById("bui").setAttribute("style", "");
+    var name = atob(backup.split("`")[0].split(":")[1]);
+    var memo = atob(backup.split("`")[1].split(":")[1].split(" SEPDAT ")[0]);
+    document.getElementById("b1").innerText = name;
+    if (memo != ""){
+      document.getElementById("m1").innerText = "The following note has been left for this backup by the creator: \n" + memo;
+    }
+  }
+
+  function restore(){
+    var data = atob(backup.split("SEPDAT ")[1]);
+    var keyval = data.split("; ");
+    var itemsl = []
+    var item_num = 1
+    keyval.forEach(function(item, index){
+      var name = keyval[index].split("=")[0];
+      var val = keyval[index].split("=")[1];
+      window[item_num + "_name"] = name;
+      window[item_num + "_val"] = val;
+      itemsl.push(item_num);
+      console.log(window[item_num + "_name"]);
+      item_num = item_num + 1;
+    });
+    itemsl.forEach(function(item, index){
+      createCookie(window[(index + 1) + "_name"], window[(index + 1) + "_val"], 30);
+    });
+    document.getElementById("bui").setAttribute("style","display: none;");
+    document.getElementById("eui").setAttribute("style","");
   }
 </script>
 <div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
@@ -34,9 +106,29 @@
 </div>
 <div class="content">
 <center>
-  <div id="bui">
+  <div id="bui" style="display: none;">
     <h1 style="margin: 0; padding: 0;">Restore from backup</h1>
     <p>You are about to restore from <a id="b1"></a>. This will push you onto another Stella session.</p>
+    <p id="m1"></p>
+    <button onclick="restore()">Restore</button>
+  </div>
+  <div id="eui" style="display: none;">
+    <h1 style="margin: 0; padding: 0;">Restore Complete</h1>
+    <p>Your restore has completed. All information in your backup has been successfully downloaded.<br>You may exit this page, or try the backup again.</p>
+  </div>
+  <div id="authui" style="display: none;">
+    <h1 style="margin: 0; padding: 0;">Encrypted Backup</h1>
+    <p>This backup is encrypted. To unlock it, enter the password that was assigned when creating the backup.</p>
+    <p id="n1"></p>
+    <input id="e1" type="password"><script>
+      document.getElementById("e1").addEventListener("keydown", function (e){
+        if (e.keyCode == 13){
+          authuisub();
+        }
+      })
+    </script></input>
+    <p id="e1s"></p>
+    <button onclick="authuisub()">Submit</button>
   </div>
 </center>
 </div>
