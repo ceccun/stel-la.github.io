@@ -8,7 +8,7 @@ function checkBlock(queryw){
 		return;
 	}
 	if (newquestion.includes("ihfaz")){
-		placement("Professional Curry Muncher", "fact", "Risham \"Ihfaz\" Syed");
+		placement("Professional Curry Muncher", "fact", "pussymagnet69");
 		return;
 	}
 	
