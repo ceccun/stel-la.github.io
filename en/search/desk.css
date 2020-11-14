@@ -142,6 +142,10 @@ top: 0px;
 	transition: right 0.4s cubic-bezier(0,0,.06,.97);
 
 }
+.crossbar{
+	display: flex;
+	justify-content: space-between;
+}
 .crossbar button{
 	border: 0;
 	padding: 20px;
@@ -169,6 +173,9 @@ top: 0px;
 	color: white;
 	outline: none;
 	transition: width 0.2s cubic-bezier(0,0,.06,.97) !important;
+	}
+	.crossbar-button-active img{
+	filter: invert();	
 	}
 .gsc-tabsArea{
 	display: none;
@@ -258,6 +265,9 @@ transition: left 0.2s cubic-bezier(0,0,.06,.97);
 }
 
 @media (prefers-color-scheme: dark) {
+	.crossbar-button-active img{
+		filter: invert(0);	
+		}
 	.block-results{
 		color: white;
 		border: solid 1px rgba(255,255,255,0.1);

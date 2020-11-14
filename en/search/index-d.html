@@ -75,13 +75,13 @@ var inputa = encodeURIComponent(document.getElementById("sb").value);
 </div>
 </div>
 <div style="margin-top: -40px;">
-<div class="crossbar"><button tabindex=6 onclick="text_click()" id="text-btn">
+<div class="crossbar"><div><button tabindex=6 onclick="text_click()" id="text-btn">
 <script type="text/javascript">
 function text_click(){
 var q = new URL(window.location).searchParams.get('q');
 window.location = ("index-d.html?q=" + q + "#gsc.tab=0&gsc.q=" + q);
 document.getElementById("text-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("image-btn").setAttribute("class", "crossbar");
+document.getElementById("image-btn").setAttribute("class", "");
 }
 </script>
 Text</button><button tabindex=8 onclick="img_click()" id="image-btn">
@@ -90,11 +90,10 @@ function img_click(){
 var q = new URL(window.location).searchParams.get('q');
 window.location = ("index-d.html?q=" + q + "#gsc.tab=1&gsc.q=" + q);
 document.getElementById("image-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("text-btn").setAttribute("class", "crossbar");
+document.getElementById("text-btn").setAttribute("class", "");
 }
 </script>
-Images</button>
-<button onclick="tab_click()" tabindex=10 id="tab-btn"></button>
+Images</button><button onclick="tab_click()" tabindex=10 id="tab-btn"></button>
 <script type="text/javascript">
 	var query = new URL(window.location).searchParams.get('q');
 	var tabs = readCookie("tabs");
@@ -103,7 +102,7 @@ Images</button>
 	document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
 	document.getElementById("tab-btn").innerText = "Tabbed";
 	} else{
-	document.getElementById("tab-btn").setAttribute("class", "crossbar");
+	document.getElementById("tab-btn").setAttribute("class", "");
 	document.getElementById("tab-btn").innerText = "Tab";
 	}
 	
@@ -139,12 +138,26 @@ Images</button>
 	var tab2 = tabs.split(encodeURIComponent(query) + ",")[1];
 	eraseCookie("tabs");
 	createCookie("tabs", tab1 + tab2, 30);
-	document.getElementById("tab-btn").setAttribute("class", "crossbar");
+	document.getElementById("tab-btn").setAttribute("class", "");
 	document.getElementById("tab-btn").innerText = "Tab";
 	}
 	}
 	}
-	</script></div>
+	</script>
+	</div>
+	<div>
+		<button id="sharebtn" onclick="qropen()" style="padding: 15px;"><image style="opacity: 1;" class="r-img" src="/images/qr-code.png"></image><script>
+			function qropen(){
+				var button = document.getElementById("sharebtn");
+				if (button.getAttribute("class") == "crossbar-button-active"){
+					sharesheet("close");
+				} else{
+					sharesheet("open");
+				}
+			}
+		</script></button>
+	</div>
+</div>
 <a class="tabindex" tabindex=11><p>Focus on content</p></a>
 <script async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
 <div class="gcse-searchresults-only"></div>
@@ -203,6 +216,73 @@ document.getElementById("image-btn").setAttribute("class", "crossbar-button-acti
 }
 }
 </script>
+<!-- QR sheet -->
+<div class="sharesheet" id="sharesheet" style="visibility: hidden;"><center><h2>QR Code</h2><div id="qrjs" class="qr"></div><p>Scan this code using your phone or tablet.</p></center></div>
+<script>
+	document.body.addEventListener("mouseup", bodyclick);
+
+	function bodyclick(e){
+		if(e.target.getAttribute("id") != "sharesheet"){
+			sharesheet("close");
+		}
+	}
+	function sharesheet(state){
+		var button = document.getElementById("sharebtn");
+		document.getElementById("qrjs").innerHTML = ""
+		new QRCode(document.getElementById("qrjs"), {
+	text: window.location.href,
+	width: 200,
+	height: 200,
+	colorDark : "#000000",
+	colorLight : "#FFFFFF00",
+	correctLevel : QRCode.CorrectLevel.H
+});
+		if (state == "open"){
+			document.getElementById("sharesheet").setAttribute("style", "top: 170px;");
+			button.setAttribute("class", "crossbar-button-active");
+		}
+		if (state == "close"){
+			document.getElementById("sharesheet").setAttribute("style", "visibility: hidden;");
+			button.setAttribute("class", "");
+		}
+	}
+</script>
+<style>
+.sharesheet{
+width: 300px;
+height: 350px;
+background-color: rgba(0,0,0,0.8);
+border-radius: 10px;
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(10px);
+position: absolute;
+top: 160px;
+right: 10.3%;
+transition: top 0.2s cubic-bezier(0,0,.06,.97);
+}
+.sharesheet h2, .sharesheet p {
+	color: white;
+}
+.qr{
+	filter: invert();
+	margin-top: 10px;
+	opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark){
+	.sharesheet{
+background-color: rgba(255,255,255,0.8);
+}
+.qr{
+	filter: invert(0);
+}
+
+.sharesheet h2, .sharesheet p {
+	color: black;
+}
+}
+</style>
 <script src="../global_ass/script.js"></script>
+<script src="qrcode.js"></script>
 </body>
 </html>
