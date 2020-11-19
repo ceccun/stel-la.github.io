@@ -99,6 +99,23 @@ document.getElementById("tab-btn").setAttribute("class", "crossbar");
 document.getElementById("tab-btn").innerText = "Tab";
 }
 
+function sync(){
+		if (readCookie("acid") != null){
+		var tabsync = new XMLHttpRequest();
+		tabsync.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/add");
+		tabsync.withCredentials = true;
+		tabsync.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
+		}
+	}
+	function rm(torm){
+		if (readCookie("acid") != null){
+		var tabsrm = new XMLHttpRequest();
+		tabsrm.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/rm");
+		tabsrm.withCredentials = true;
+		tabsrm.send(readCookie("acid") + ";" + readCookie("devid") + ";" + torm);
+		}
+	}
+
 function tab_click(){
 if (readCookie("tabs") == null){
 createCookie("tabs", encodeURIComponent(query) + ",", 30);
@@ -107,6 +124,7 @@ eraseCookie("tabs");
 createCookie("tabs", encodeURIComponent(query) + "," + tabs, 30);
 document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
 document.getElementById("tab-btn").innerText = "Tabbed";
+sync();
 } else{
 if (readCookie("tabs").includes(encodeURIComponent(query) + ",") == false){
 var tabs = readCookie("tabs");
@@ -122,6 +140,7 @@ eraseCookie("tabs");
 createCookie("tabs", tab1 + tab2, 30);
 document.getElementById("tab-btn").setAttribute("class", "crossbar");
 document.getElementById("tab-btn").innerText = "Tab";
+rm(encodeURIComponent(query));
 }
 }
 }

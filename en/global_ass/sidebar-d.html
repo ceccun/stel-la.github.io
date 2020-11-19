@@ -10,6 +10,39 @@
 </head>
 <body>
 <div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div style="display: none;" id="id_section">
+<h1 style="margin: 30px">ID</h1>
+<div id="id_not_logged_in" style="display: none;" class="id-box">
+<a class="a" target="_TOP" href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/loginen-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="><p style="padding: 0; margin: 0;">Log in to Stella ID</p></a>
+<a class="a" target="_TOP" href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/signupen-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="><p style="padding: 0; margin: 0;">Sign up to Stella ID</p></a>
+</div>
+<div id="id_logged_in" style="display: none;" class="id-box">
+	<a class="a-img">
+		<style>
+			.a-img{
+				background-image: url('/images/id-placeholder-thick.png'); background-size: contain;
+				background-repeat: no-repeat;
+				background-position: left;
+				width: 50px;
+				height: 50px;
+				display: inline-block;
+				vertical-align: top;
+				opacity: 0.7;
+			}
+			@media(prefers-color-scheme: dark){
+				.a-img{
+				filter: invert();
+			}
+			}
+		</style>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><h2 id="nawa" style="padding: 0; margin: 0; display: inline-block; vertical-align: top; line-height: 50px; margin-left: 10px;">Hello from Stella :D</h2>
+		<p style="margin: 0; margin-top: 10px;">Account Management</p>
+		<a onclick="logout();" class="a"><p style="margin: 0;">Log Out</p></a>
+	</div>
+	<div id="id_sync_not_working" style="display: none;" class="id-box">
+		<h2 style="margin: 0; padding: 0;">Sync isn't working!</h2>
+		<p style="margin: 0; padding: 0;">Sorry! Sync isn't working right now, it will be available shortly. Account information will not update.</p>
+	</div>
+</div>
 <h1 style="margin: 30px">Locale</h1>
 <div class="country"><p><b>Country: </b>United Kingdom</p><p><b>Language: </b>English</p><p style="font-size: 12px;">Hello!</p></div>
 <h1 style="margin: 30px">Services</h1>
@@ -21,5 +54,77 @@
  <a class="a" href="../maps/maps-d.html" target="_TOP"><p>Maps Alpha</p></a>
 </div>
 </div>
+
+<script>
+function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+if (readCookie("supidcoutry") != null){
+if (readCookie("acid") == null){
+document.getElementById("id_section").setAttribute("style", "");
+document.getElementById("id_not_logged_in").setAttribute("style", "");
+} else{
+	if(readCookie("acinfo") == null){
+document.getElementById("id_section").setAttribute("style", "");
+document.getElementById("id_logged_in").setAttribute("style", "");
+var acinforeq = new XMLHttpRequest();
+acinforeq.open("POST", "https://s.stella.hs.vc/api/synchronise/account/get");
+acinforeq.onreadystatechange = function (){
+	if (this.readyState == 4){
+		if (this.status == 200){
+			var resp = JSON.parse(this.responseText);
+			createCookie("acinfo", this.responseText, 10);
+			document.getElementById("nawa").innerText = resp.name;
+		} else{
+			document.getElementById("id_sync_not_working").setAttribute("style", "");
+		}
+	}
+}
+acinforeq.withCredentials = true;
+acinforeq.send(readCookie("acid") + ";" + readCookie("devid"));
+	} else{
+		var resp = JSON.parse(readCookie("acinfo"));
+		document.getElementById("id_section").setAttribute("style", "");
+		document.getElementById("id_logged_in").setAttribute("style", "");
+		document.getElementById("nawa").innerText = resp.name;
+	}
+}
+}
+
+function logout(){
+	var logoutreq = new XMLHttpRequest();
+	logoutreq.open("POST", "https://s.stella.hs.vc/api/synchronise/account/devices/rm");
+	logoutreq.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200){
+			eraseCookie("acinfo");
+			eraseCookie("acid");
+			window.location.reload();
+		}
+	}
+	logoutreq.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("devid"));
+}
+</script>
 </body>
 </html>

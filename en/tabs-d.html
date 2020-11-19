@@ -74,10 +74,15 @@ function eraseCookie(name) {
 </div>
 </div>
 <script>
-var synchronization = new XMLHttpRequest();
-synchronization.withCredentials = true;
-synchronization.open("POST", "https://s.stella.hs.vc/")
 var tabs = readCookie("tabs");
+var relver = new URL(window.location).searchParams.get("rel");
+if (relver != "verified"){
+if (gettabs() == true){
+window.location.replace("tabs-d.html?rel=verified");
+}
+} else{
+	window.history.replaceState("","Stella - Tabs List.", "tabs-d.html");
+}
 var tabs = tabs.split(",");
 tabs.forEach(tabParse);
 
@@ -95,8 +100,64 @@ var tab1 = tabs.split(item + ",")[0];
 var tab2 = tabs.split(item + ",")[1];
 eraseCookie("tabs");
 createCookie("tabs", tab1 + tab2, 30);
+if (readCookie("acid") != null){
+	if (rm(item) == true){
+		window.location.replace("");
+	}
+} else{
 window.location.replace("");
 }
+}
+
+function gettabs(){
+		if (readCookie("acid") != null){
+		var tabsync = new XMLHttpRequest();
+		tabsync.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/get");
+		tabsync.withCredentials = true;
+		tabsync.onreadystatechange = function (){
+			if (this.readyState == 4){
+				console.log(this.responseText);
+				createCookie("tabs", this.responseText, 30);
+				tabs = this.responseText;
+				return true;
+			}
+		}
+		tabsync.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
+		} else{
+			return false;
+		}
+	}
+function appendtabs(){
+		if (readCookie("acid") != null){
+		var tabap = new XMLHttpRequest();
+		tabap.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/add");
+		tabsync.onreadystatechange = function (){
+			if (this.readyState == 4){
+				return true;
+			}
+		}
+		tabap.withCredentials = true;
+		tabap.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
+		} else{
+			return false;
+		}
+	}
+	function rm(torm){
+		if (readCookie("acid") != null){
+		var tabsrm = new XMLHttpRequest();
+		tabsrm.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/rm");
+		tabsrm.onreadystatechange = function (){
+			if (this.readyState == 4){
+				window.location.reload();
+				return true;
+			}
+		}
+		tabsrm.withCredentials = true;
+		tabsrm.send(readCookie("acid") + ";" + readCookie("devid") + ";" + torm);
+		} else{
+			return false;
+		}
+	}
 </script>
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar-h">

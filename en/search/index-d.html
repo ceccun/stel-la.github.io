@@ -109,9 +109,17 @@ Images</button><button onclick="tab_click()" tabindex=10 id="tab-btn"></button>
 	function sync(){
 		if (readCookie("acid") != null){
 		var tabsync = new XMLHttpRequest();
-		tabsync.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/add",);
+		tabsync.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/add");
 		tabsync.withCredentials = true;
-		tabsync.send();
+		tabsync.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
+		}
+	}
+	function rm(torm){
+		if (readCookie("acid") != null){
+		var tabsrm = new XMLHttpRequest();
+		tabsrm.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/rm");
+		tabsrm.withCredentials = true;
+		tabsrm.send(readCookie("acid") + ";" + readCookie("devid") + ";" + torm);
 		}
 	}
 	
@@ -140,6 +148,7 @@ Images</button><button onclick="tab_click()" tabindex=10 id="tab-btn"></button>
 	createCookie("tabs", tab1 + tab2, 30);
 	document.getElementById("tab-btn").setAttribute("class", "");
 	document.getElementById("tab-btn").innerText = "Tab";
+	rm(encodeURIComponent(query));
 	}
 	}
 	}
@@ -258,7 +267,7 @@ backdrop-filter: blur(20px);
 position: absolute;
 top: 160px;
 right: 10.3%;
-transition: top 0.2s cubic-bezier(0,0,.06,.97);
+transition: top 0.2s cubic-bezier(0.05, 0.95, 0.94, 0.95)
 }
 .sharesheet h2, .sharesheet p {
 	color: white;
