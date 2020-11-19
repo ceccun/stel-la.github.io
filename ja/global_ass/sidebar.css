@@ -41,8 +41,22 @@ h1, h2, h3, h4, h5, h6, p{
 	padding: 0px;
 	line-height: 30px;
 }
+.id-box{
+	margin: 30px;
+	background-color: rgba(0,0,0,0.1);
+	padding: 10px;
+	border-radius: 10px;
+	line-height: 30px;
+}
 
 @media (prefers-color-scheme: dark) {
+	.id-box{
+		margin: 30px;
+		background-color: rgba(255,255,255,0.1);
+		padding: 10px;
+		border-radius: 10px;
+		line-height: 30px;
+	}
 	.items{
 	margin: 30px;
 	background-color: rgba(255,255,255,0.1);
