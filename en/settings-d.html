@@ -1,14 +1,14 @@
 <!doctype html>
 <html>
 <head>
-<title>Stella - Things to change the world.</title>
-<link href="mob.css" rel="stylesheet"/>
+<title id="title">Stella - Settings</title>
+<link href="desk.css" rel="stylesheet"/>
 <script type="text/javascript">
-if (window.innerWidth > window.innerHeight){
-window.location.replace("index-d.html");
+if (window.innerWidth < window.innerHeight){
+window.location.replace("privacy-m.html");
 }
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
 </head>
@@ -21,34 +21,30 @@ window.location.replace("index-d.html");
 </div>
 </div>
 <div class="content">
-<div style="text-align: right; width: 100%; margin-bottom: 40px;">
-&nbsp
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<a href="index-d.html" class="a">
+<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
 <div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 <image src="../images/hamburger.svg"></image>
 </div>
 </div>
+<div style="margin-top: -40px;">
+  <div id="main_ui" style="display: none;">
 <center>
-<div style="margin-top: 5vh;">
-
-<h1 style="font-size: 50px;">Stella</h1>
-
-<div class="input-out"><input id="sb" placeholder="Search the Internet."><script>
-var input = document.getElementById("sb");
-input.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-var inputa = encodeURIComponent(document.getElementById("sb").value);
-     window.location = "search/index-m.html?q=" + inputa;
-}
-});
-</script></input></div>
-
-</div></center>
-<div style="margin-top: 100px;">
-<center id="local-area">
-
+<h1>Settings</h1>
+<div id="settingsoverview_main_ui" class="buttonarray">
+<div><p>Search</p></div>
+<div><p>Appearance</p></div>
+<div><p>Telemetry</p></div>
+<div><p>AI</p></div>
+</div>
 </center>
 </div>
+<div id="ai_ui">
+  <h1>Artificial Intelligence</h1>
+  <p>Stella is using Artificial Intelligence to help you get things done faster.</p>
+  <h3>Here are some insights as you've used Stella.</3>
 </div>
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar-h">
@@ -65,10 +61,6 @@ window.addEventListener('click', function(e){
   }
 });
 </script>
-<script src="global_ass/titlescript.js"></script>
-<script>
-filla();
-</script>
-<script src="global_ass/script.js"></script>
+<script src="../global_ass/script.js"></script>
 </body>
 </html>
