@@ -21,19 +21,22 @@
                 }</style></div>
             <input></input>
             <div style="margin-top: 30px;" id="tray-inner-nearby-service">
-                <div id="tray-inner-nearby-loading">
+                <div style="visibility: hidden;" id="tray-inner-nearby-loading">
                     <image style="width: 50px;" class="r-img" src="../../images/loading.gif"></image>
                 </div>
                 <div id="tray-inner-nearby" style="display: none;" class="tray-inner-nearby">
                     <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/><p>Food</p></div>
-                    <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/><p id="groceries-label">Groceries</p></div>
+                    <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/><p id="groceries-label">Grocers</p></div>
                     <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-gas-icon.png"/><p id="gas-label">Gas</p></div>
                     <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/><p id="hotels-label">Hotels</p></div>
                     <div id="wifi-nearby-icon" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-wifi-icon.png"/><p>Wi-Fi</p></div>
                 </div>
-                <div id="tray-inner-nearby-broken"></div>
+                <div style="display: none;" id="tray-inner-nearby-broken">
+                    <image class="r-img" src="../../images/map/cloud-error.png"></image><h3>Aw Snap!</h3><p>Stella Location Services encountered an error while determining your location.</p>
+                </div>
                 <script>
                     function initializeNearby(){
+                        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "");
                         if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(e){
         console.log(e.coords.longitude);
@@ -42,24 +45,42 @@
         geocoding.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ e.coords.longitude.toString() +"," + e.coords.latitude.toString() + ".json?types=place&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
         geocoding.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200){
+                
+            document.getElementById("tray-inner-nearby").setAttribute("style", "");
+                        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
                 console.log(this.responseText);
                 var json = JSON.parse(this.responseText);
-                if (json.features[0].context[2].short_code == "gb"){
+                if (json.features[0].context[json.features[0].context.length - 1].short_code == "gb"){
                     document.getElementById("hotels-label").innerText = "Stay";
                     document.getElementById("gas-label").innerText = "Petrol";
                     document.getElementById("groceries-label").innerText = "Shops";
                 }
                 if (json.features[0].text != "Barking"){
-                    document.getElementById("wifi-nearby-icon").setAttribute("style", "display: none;");
+                    
+                    setTimeout(function (){document.getElementById("wifi-nearby-icon").setAttribute("class", "tray-inner-nearby-item-deactivating")}, 500);
+                    setTimeout(function () { document.getElementById("wifi-nearby-icon").setAttribute("style", "display: none;") }, 1000);
                 }
-                document.getElementById("tray-inner-nearby").setAttribute("style", "");
-                document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
             }
         }
         geocoding.send();
+    }, function (e){
+        document.getElementById("tray-inner-nearby-broken").setAttribute("style", "");
+        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
+        console.log(e.code);
+        if (e.code == 1){
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/location-off.png"></image><h3>Location Denied</h3><p>Stella Location Services are off, so nearby services aren\'t being shown.</p>';
+        }
+        if (e.code == 2){
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/cloud-error.png"></image><h3>Aw Snap!</h3><p>Stella Location Services encountered an error while determining your location, so nearby services aren\'t being shown.</p>';
+        }
+        if (e.code == 3){
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/cloud-error.png"></image><h3>Something Happened</h3><p>Your phone did something unexpected, so nearby services aren\'t being shown.</p>';
+        }
     });
   } else {
-    console.log("Stella Location Services is not supported by this browser.");
+    document.getElementById("tray-inner-nearby-broken").setAttribute("style", "");
+        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/location-off.png"></image><h3>Unsupported Device</h3><p>This device doesn\'t support Stella Location Services, so nearby services aren\'t being shown.</p>';
   }
                     }
                 </script>
@@ -69,11 +90,18 @@
                     justify-content: space-around;
                     align-content: stretch;
                     flex-wrap: wrap;
+                    transition: all 0.2s linear;
                 }
                 .tray-inner-nearby-item{
+                    transform: scale(1);
                     flex-grow: 1;
+                    transition: all 0.2s linear, background-color 0s linear;
                 }
-                
+                .tray-inner-nearby-item-deactivating{
+                    transform: scale(0);
+                    flex-grow: 0;
+                    transition: all 0.2s linear;
+                }
                 .tray-inner-nearby-item:active{
                     background-color: rgba(0,0,0,0.2);
                 }
@@ -131,6 +159,7 @@
         }
         
         p, h1, h2, h3, h4, h5, h6{
+            margin:0;
                     font-family: 'Inter', sans-serif;
                     opacity: 0.7;
                 }
@@ -157,11 +186,21 @@
         }
     </style>
     <script>
+        var nearbyactive = 0
+        function scrolllistener(e){
+            if (window.scrollY >= 150){
+                if (nearbyactive == 0){
+                initializeNearby();
+                nearbyactive = 1;
+                }
+            }
+        }
+
         function loadcall(){
             document.getElementById("tray").setAttribute("style", "margin-top:" + (window.innerHeight - 31) + "px;");
         window.scroll({top: 100, left: 0, behavior: "smooth"});
         var x = document.getElementById("demo");
-        initializeNearby();
+        setTimeout(function () { window.addEventListener("scroll", scrolllistener) }, 500);
         }
 
         function maptap(){
