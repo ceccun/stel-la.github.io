@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stella - STDiag Utility</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="1" style="">
+        <h1>Stella Diagnostic Service</h1>
+        <hr>
+        <p>Run a scan to check your Stella setup information. This should be used when reporting bugs and issues that occur. <br>スキャンを実行して、Stellaのセットアップ情報を確認します。 これは、発生したバグや問題を報告するときに使用する必要があります。</p>
+        <button onclick="networktest('1')">Run Scan</button>
+        <hr>
+        <p>Status Code 200</p>
+        </div>
+        <div style="display: none;" id="scan">
+            <h1>Scanning...</h1>
+            <hr>
+            <p id="status"></p>
+        </div>
+        <script>
+            var networkstatus = "";
+
+            function networktest(number){
+                document.getElementById(number).setAttribute("style", "display: none;");
+                document.getElementById("scan").setAttribute("style", "");
+                document.getElementById("status").innerText = "Currently testing network connections... \n 現在、ネットワーク接続をテストしています...";
+                var networktest = new XMLHttpRequest();
+                networktest.open("GET", "https://stella.hs.vc/captive");
+                networktest.onreadystatechange = function (){
+                    if (this.readyState == 4 && this.responseText == "Success"){
+                        networkstatus = "Work";
+                    }
+                    if (this.readyState == 4){
+                        screencheck(number);
+                    }
+                }
+                networktest.send();
+            }
+
+            var innerwidth = ""
+            var innerheight = ""
+            var outerwidth = ""
+            var outerheight = ""
+            function screencheck(number){
+                document.getElementById(number).setAttribute("style", "display: none;");
+                document.getElementById("scan").setAttribute("style", "");
+                document.getElementById("status").innerText = "Currently testing screen conditions... \n 現在、画面の状態をテストしています...";
+                var innerwidth = window.innerwidth.toString() + "px";
+                var innerheight = window.innerheight.toString() + "px";
+                var outerwidth = window.outerwidth.toString() + "px";
+                var outerheight = window.outerheight.toString() + "px";
+                cookiecheck(number);
+            }
+
+            var locale = "Not-set";
+            var cookiesallowed = "no";
+            var cookies = ""
+            function cookiecheck(number){
+                document.getElementById(number).setAttribute("style", "display: none;");
+                document.getElementById("scan").setAttribute("style", "");
+                document.getElementById("status").innerText = "Testing Session... \n テストセッション...";
+                createCookie("stdiag", "1", 30);
+                if (readCookie("stdiag") == "1"){
+                    cookiesallowed == "yes";
+                    eraseCookie("stdiag")
+                }
+                cookies = document.cookie;
+                navigatora(number);
+            }
+
+            var ua = navigator.userAgent;
+            var ncookiesenab = navigator.cookieEnabled;
+            function navigatora(number){
+                document.getElementById(number).setAttribute("style", "display: none;");
+                document.getElementById("scan").setAttribute("style", "");
+                document.getElementById("status").innerText = "Testing Session... \n テストセッション...";
+                createCookie("stdiag", "1", 30);
+                if (readCookie("stdiag") == "1"){
+                    cookiesallowed == "yes";
+                    eraseCookie("stdiag")
+                }
+                cookies = document.cookie;
+            }
+
+
+            function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+        </script>
+    </body>
+</html>
