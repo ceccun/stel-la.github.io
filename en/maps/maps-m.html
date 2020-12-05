@@ -97,7 +97,12 @@ function getSearchResults(){
             var t = JSON.parse(this.responseText)
             t.features.forEach(function (item, index){
                 var cat = item.properties.category.split(", ");
-                document.getElementById("tray-inner-nearby-list-service").innerHTML = document.getElementById("tray-inner-nearby-list-service").innerHTML + '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + cat[0] + '</p></div>';
+                var cate = cat[0].split(" ");
+                var newcate = "";
+                cate.forEach(function (item, index){
+                    newcate = newcate + item.charAt(0).toUpperCase() + item.slice(1) + " "
+                });
+                document.getElementById("tray-inner-nearby-list-service").innerHTML = document.getElementById("tray-inner-nearby-list-service").innerHTML + '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + newcate + '</p></div>';
             })
         }
     }
@@ -115,7 +120,7 @@ function getSearchResults(){
                 .tray-inner-nearby-item{
                     transform: scale(1);
                     flex-grow: 1;
-                    transition: all 0.2s linear, background-color 0s linear;
+                    transition: all 0.2s linear, background-color 0s linear, transform 0.1s linear;
                 }
                 .tray-inner-nearby-item-deactivating{
                     transform: scale(0);
@@ -123,7 +128,9 @@ function getSearchResults(){
                     transition: all 0.2s linear;
                 }
                 .tray-inner-nearby-item:active{
+                    transform: scale(0.9);
                     background-color: rgba(0,0,0,0.2);
+                    transition: transform 0.1s linear;
                 }
                 .tray-inner-nearby-item p{
                     font-family: 'Inter', sans-serif;
