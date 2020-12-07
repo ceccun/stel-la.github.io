@@ -42,7 +42,9 @@ if (this.readyState == 4 && this.status == 200){
 	var resp = JSON.parse(this.responseText);
 	var co = readCookie("country");
 	console.log(resp[co]);
+	if (resp[co] != undefined){
 	document.getElementById("local-area").innerHTML = resp[co];
+	}
 }
 }
 r.send();
