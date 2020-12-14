@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<title id="title">Stella - Request Your Data</title>
+<link href="mob.css" rel="stylesheet"/>
+<script type="text/javascript">
+
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- Adrenaline Engine 5 -->
+<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
+<div class="rainbow-head">
+<div class="rainbow-head-inner">
+<p>&nbsp </p>
+</div>
+</div>
+<div class="content">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+<div style="margin-top: -20px;">
+<A class="a" href="index-m.html"><h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></A></div>
+</div>
+<div style="margin-top: -40px; word-wrap:break-word">
+  <center>
+  <div id="1">
+    <h1>Request Your Data</h1>
+    <p>Request data and information collected by Stella in this current session.<br>When you get access, you'll get the following types of information:<br>Device Information<br>Network Information<br>Session Information<br>AI assumptions<br>others</p>
+    <button onclick="requestData();">Request</button>
+  </div>
+  <div style="display: none;" id="2">
+    <h1>Your Data at Stella</h1>
+    <p>Data collected may be at any time, from the first visit you make to one of our services.</p>
+    <h2>Your Device</h2>
+    <p id="device_useragent"></p>
+    <p id="device_timezone"></p>
+    <p id="device_time"></p>
+    <p id="device_type"></p>
+    <p id="device_os"></p>
+    <p id="device_brow"></p>
+    <p id="device_engine"></p>
+    <p id="device_name"></p>
+    <h2>You</h2>
+    <p>Information we know about you.</p>
+    <p id="you_name"></p>
+    <p id="you_languges"></p>
+    <p id="you_p_languges"></p>
+    <p id="you_ment"></p>
+    <h2>Services</h2>
+    <p></p>
+  </div>
+  <script>
+    function requestData(){
+      document.getElementById("device_useragent").innerText = "Device UA: " + navigator.userAgent;
+      var d = new Date();
+      document.getElementById("device_timezone").innerText = "Time Zone: " + d.getTimezoneOffset();
+      document.getElementById("device_time").innerText = "Local Time: " + d.getHours() + ":" + d.getMinutes() + "." + d.getSeconds() + "^" + d.getMilliseconds();
+      if (window.outerHeight < window.outerWidth){
+        document.getElementById("device_type").innerText = "Device Type: Vertical-designed Mobile Device";
+      } else{
+        document.getElementById("device_type").innerText = "Device Type: Horizontal Device";
+      }
+      var parser = new UAParser();
+      try{ document.getElementById("device_os").innerText = "Device Operating System: " + parser.getResult().os.name + parser.getResult().os.version; } catch(err){ document.getElementById("device_os").innerText = "Device Operating System: Stella Omni"; }
+      try{ document.getElementById("device_brow").innerText = "Browser: " + parser.getResult().browser.name; } catch(err){ document.getElementById("device_brow").innerText = "Browser: Stella Omni"; }
+      try{ document.getElementById("device_engine").innerText = "Engine: " + parser.getResult().engine.name; } catch(err){ document.getElementById("device_engine").innerText = "Engine: Adrenaline Engine on ASP compliant device"; }
+      try{ document.getElementById("device_name").innerText = "Model: " + parser.getResult().device.vendor + " " + parser.getResult().device.model; } catch(err){ document.getElementById("device_name").innerText = "Model: Stella-compatible device"; }
+      document.getElementById("you_name").innerText = "Your Name: " + readCookie("uname");
+      document.getElementById("you_languges").innerText = "Your Languages: " + navigator.languages;
+      document.getElementById("you_p_languges").innerText = "Your Primary Language: " + navigator.language;
+      if(readCookie("kaou") == null){
+        document.getElementById("you_ment").innerText = "[ai] Mental Health Issues: Either a healthy mental state or not enough data.";
+      }
+      if(readCookie("kaou") == "1"){
+        document.getElementById("you_ment").innerText = "[ai] Mental Health Issues: Stella has recognised patterns that suggests that you appear to have a normal life.";
+      }
+      if(readCookie("kaou") == "2"){
+        document.getElementById("you_ment").innerText = "[ai] Mental Health Issues: Stella has recognised patterns that suggests you are possible to have mental struggles and issues.";
+      }
+      if(readCookie("kaou") == "3"){
+        document.getElementById("you_ment").innerText = "[ai] Mental Health Issues: Stella has recognised patterns that suggests you are highly likely to have mental struggles and issues.";
+      }
+      if(readCookie("kaou") == "4"){
+        document.getElementById("you_ment").innerText = "[ai] Mental Health Issues: Stella has recognised patterns that suggests you have mental struggles and issues.";
+      }
+      document.getElementById("1").setAttribute("style", "display: none;");
+      document.getElementById("2").setAttribute("style", "");
+    }
+
+
+
+    function createCookie(name,valued,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+valued+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+  </script>
+  </center>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
+</body>
+</html>

@@ -3,6 +3,7 @@
     <head>
         <title>New Stella Maps - What's nearby?</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
         <meta name="description" content="Stella Maps is a mapping service.">
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
@@ -19,7 +20,26 @@
                 <div class="tray-inner-top-tab">&nbsp;<style>.tray-inner-top-tab{ width:20%; height: 8px; background-color: rgba(0,0,0,0.3); margin-top: -5px; margin-bottom: 10px; border-radius: 10px;} @media(prefers-color-scheme: dark) {
                     .tray-inner-top-tab{ background-color: rgba(255,255,255,0.3); }
                 }</style></div>
-            <input></input>
+            <input placeholder="Search Food" id="tray-input-show" onmouseup="openSearch()"></input>
+            <script>
+                document.getElementById("tray-input-show").setAttribute("placeholder", "Say “Hey Stella!”");
+                function openSearch(){
+                    if (country == "gb"){
+                        document.getElementById("p31").innerText = "There may be more personalised services on your nearby feed.";
+                    }
+                    
+                    document.getElementById("tray-input-show").blur();
+                    document.getElementById("search-screen").setAttribute("style", "");
+                    setTimeout(function (){ document.getElementById("search-screen").setAttribute("class", "search-screen");
+                    document.getElementById("realSearchBox").focus(); }, 100);
+                    
+                }
+                function closeSearch(){
+                    document.getElementById("search-screen").setAttribute("class", "search-screen-h");
+                    document.getElementById("realSearchBox").blur();
+                    setTimeout(function (){ document.getElementById("search-screen").setAttribute("style", "display: none;"); }, 200)
+                }
+            </script>
             <div style="margin-top: 30px;" id="tray-inner-nearby-service">
                 <div style="visibility: hidden;" id="tray-inner-nearby-loading">
                     <image style="width: 50px;" class="r-img" src="../../images/loading.gif"></image>
@@ -57,13 +77,15 @@
                     document.getElementById("hotels-label").innerText = "Stay";
                     document.getElementById("gas-label").innerText = "Petrol";
                     document.getElementById("groceries-label").innerText = "Shops";
-                    country = "gb"
+                    country = "gb";
                 }
                 if (json.features[0].text != "Barking"){
                     
                     setTimeout(function (){document.getElementById("wifi-nearby-icon").setAttribute("class", "tray-inner-nearby-item-deactivating")}, 500);
                     setTimeout(function () { document.getElementById("wifi-nearby-icon").setAttribute("style", "display: none;") }, 1000);
                 }
+                document.getElementById(
+                    "tray-inner-nearby-list-title").innerText = json.features[0].text;
                 getSearchResults();
             }
         }
@@ -145,9 +167,7 @@ function getSearchResults(){
             </div>
             <div id="tray-inner-nearby-list">
                 <div id="tray-inner-nearby-list-service">
-                <h2 id="tray-inner-nearby-list-title" style="margin-top: 15px; margin-bottom: 9px; text-align: left;">Barking</h2>
-                <div class="tray-inner-nearby-list-block"><h3>Valet Dry Cleaners</h3>
-                <p>Dry Cleaning</p></div>
+                <h2 id="tray-inner-nearby-list-title" style="margin-top: 15px; margin-bottom: 9px; text-align: left;">Explore Nearby</h2>
                 </div>
                 <style>
                     .tray-inner-nearby-list-block{
@@ -172,6 +192,53 @@ function getSearchResults(){
                 </center>
             </div>
         </div>
+        <div id="search-screen" style="display: none;" class="search-screen-h">
+            <center>
+            <div class="tray-inner"><div style="display: flex; justify-content: space-around; vertical-align: middle; align-content: stretch; margin-top: 20px;"><p style="vertical-align: middle; line-height: 40px; padding-right: 10px;" onclick="closeSearch()">Cancel</p><input id="realSearchBox" style="vertical-align: middle;" placeholder="Search the world"></input></div>
+        <div id="search-screen-notext">
+            <div style="margin-top: 20px;" class="tray-inner-nearby">
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/></div>
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/></div>
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-gas-icon.png"/></div>
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/></div>
+            </div>
+            <p id="p31" style="margin-top: 10px;">There may be more personalized services on your nearby feed.</p>
+        </div>
+            </div>
+            </center>
+        </div>
+            <style>
+            .search-screen{
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                z-index: 100;
+                top: 0;
+                left: 0;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                background-color: rgba(255,255,255,1);
+                transition: top 0.4s cubic-bezier(0,0,.06,.97), background-color 0.4s cubic-bezier(0,0,.06,.97);
+            }
+            .search-screen-h{
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                z-index: 100;
+                top: 100%;
+                left: 0;
+                background-color: rgba(255,255,255,0);
+                transition: top 0.4s cubic-bezier(0,0,.06,.97), background-color 0.4s cubic-bezier(0,0,.06,.97);
+            }
+            @media(prefers-color-scheme: dark){
+                .search-screen{
+                background-color: rgba(0,0,0,1);
+            }
+            .search-screen-h{
+                background-color: rgba(0,0,0,0);
+            }
+            }
+        </style>
     </div>
     </body>
     <style>
@@ -205,6 +272,7 @@ function getSearchResults(){
             font-size: 17px;
             background-color: rgba(0,0,0,0.3);
             border: 0;
+            font-family: 'Inter', sans-serif;
             border-radius: 10px;
         }
         .r-img{
@@ -232,6 +300,7 @@ function getSearchResults(){
             background-color: rgba(255,255,255,0.3);
             border: 0;
             border-radius: 10px;
+            color: white;
         }
         .r-img{
             filter: invert();
@@ -241,7 +310,7 @@ function getSearchResults(){
     <script>
         var nearbyactive = 0
         function scrolllistener(e){
-            if (window.scrollY >= 150){
+            if (window.scrollY >= 60){
                 if (nearbyactive == 0){
                 initializeNearby();
                 nearbyactive = 1;
@@ -250,10 +319,27 @@ function getSearchResults(){
         }
 
         function loadcall(){
-            document.getElementById("tray").setAttribute("style", "margin-top:" + (window.innerHeight - 31) + "px;");
-        window.scroll({top: 100, left: 0, behavior: "smooth"});
+            document.getElementById("tray").setAttribute("style", "margin-top:" + (window.innerHeight - 100) + "px;");
+        window.scroll({top: 0, left: 0, behavior: "smooth"});
         var x = document.getElementById("demo");
         setTimeout(function () { window.addEventListener("scroll", scrolllistener) }, 500);
+        newSearchPH();
+        }
+
+        function newSearchPH(){
+            var numerics = Math.floor(Math.random() * 4);
+            if (numerics == 0){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "Search for monuments");
+            }
+            if (numerics == 1){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "Search for restuarants");
+            }
+            if (numerics == 2){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "Search for shops");
+            }
+            if (numerics == 3){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "Search for hotels");
+            }
         }
 
         function maptap(){
