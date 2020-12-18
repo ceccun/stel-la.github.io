@@ -62,8 +62,8 @@
                         document.getElementById("tray-inner-nearby-loading").setAttribute("style", "");
                         if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(e){
-        longitude = e.coords.longitude;
-        latitude = e.coords.latitude;
+        window["longitude"] = e.coords.longitude;
+        window["latitude"] = e.coords.latitude;
         var geocoding = new XMLHttpRequest();
         geocoding.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ e.coords.longitude.toString() +"," + e.coords.latitude.toString() + ".json?types=place&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
         geocoding.onreadystatechange = function(){
@@ -194,7 +194,76 @@ function getSearchResults(){
         </div>
         <div id="search-screen" style="display: none;" class="search-screen-h">
             <center>
-            <div class="tray-inner"><div style="display: flex; justify-content: space-around; vertical-align: middle; align-content: stretch; margin-top: 20px;"><p style="vertical-align: middle; line-height: 40px; padding-right: 10px;" onclick="closeSearch()">Cancel</p><input id="realSearchBox" style="vertical-align: middle;" placeholder="Search the world"></input></div>
+            <div class="tray-inner"><div style="display: flex; justify-content: space-around; vertical-align: middle; align-content: stretch; margin-top: 20px;"><p style="vertical-align: middle; line-height: 40px; padding-right: 10px;" onclick="closeSearch()">Cancel</p><input id="realSearchBox" style="vertical-align: middle;" placeholder="Search the world"></input>
+            <script>
+                document.getElementById("realSearchBox").addEventListener("keyup", searchForRB);
+
+                function searchForRB(){
+                    console.log("searchForRB");
+                    document.getElementById("search-screen-loading").setAttribute("style", "");
+                            document.getElementById("search-screen-notext").setAttribute("style", "display: none");
+                            document.getElementById("search-screen-search").setAttribute("style", "display: none");
+                    var st = document.getElementById("realSearchBox").value;
+                    if (document.getElementById("realSearchBox").value == ""){
+                        document.getElementById("search-screen-search").setAttribute("style", "display: none;");
+                        
+                        document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-notext").setAttribute("style", "");
+                            return;
+                    }
+                    setTimeout(function(){
+                        if (document.getElementById("realSearchBox").value == st){ document.getElementById("search-screen-search-block").innerHTML = '<div onclick="searchForRBL()" class="tray-inner-nearby-list-block"><h3>Need local results?</h3><p>Tap here to just search nearby services.</p></div>'; } else{ return; }
+                        var searchreq = new XMLHttpRequest();
+                    searchreq.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(document.getElementById("realSearchBox").value) + ".json?access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
+                    searchreq.onreadystatechange = function (){
+                        if (this.status == 200 && this.readyState == 4){
+                            console.log(this.responseText);
+                            document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-search").setAttribute("style", "");
+                            var t = JSON.parse(this.responseText);
+                            t.features.forEach(function (item, index){
+                                document.getElementById("search-screen-search-block").innerHTML += '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + item.place_name + '</p></div>';
+                            });
+                        }
+                    }
+                    searchreq.send();
+                    }, 3000);
+                    
+                }
+
+                function searchForRBL(){
+                    console.log("searchForRBL");
+                    document.getElementById("search-screen-loading").setAttribute("style", "");
+                            document.getElementById("search-screen-notext").setAttribute("style", "display: none");
+                            document.getElementById("search-screen-search").setAttribute("style", "display: none");
+                    var st = document.getElementById("realSearchBox").value;
+                    if (document.getElementById("realSearchBox").value == ""){
+                        document.getElementById("search-screen-search").setAttribute("style", "display: none;");
+                        
+                        document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-notext").setAttribute("style", "");
+                            return;
+                    }
+                    setTimeout(function(){
+                        if (document.getElementById("realSearchBox").value == st){ document.getElementById("search-screen-search-block").innerHTML = '<div class="tray-inner-nearby-list-block"><h3>Limited results?</h3><p>Tap here to search the world.</p></div>'; } else{ return; }
+                        var searchreq = new XMLHttpRequest();
+                    searchreq.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/" + document.getElementById("realSearchBox").value + ".json?proximity=" + window["longitude"] + ","+ window["latitude"] +"&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
+                    searchreq.onreadystatechange = function (){
+                        if (this.status == 200 && this.readyState == 4){
+                            console.log(this.responseText);
+                            document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-search").setAttribute("style", "");
+                            var t = JSON.parse(this.responseText);
+                            t.features.forEach(function (item, index){
+                                document.getElementById("search-screen-search-block").innerHTML += '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + item.place_name + '</p></div>';
+                            });
+                        }
+                    }
+                    searchreq.send();
+                    }, 3000);
+                    
+                }
+            </script></div>
         <div id="search-screen-notext">
             <div style="margin-top: 20px;" class="tray-inner-nearby">
                 <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/></div>
@@ -203,6 +272,16 @@ function getSearchResults(){
                 <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/></div>
             </div>
             <p id="p31" style="margin-top: 10px;">There may be more personalized services on your nearby feed.</p>
+        </div>
+        <div id="search-screen-search" style="display: none;">
+            <div id="search-screen-search-block" style="margin-top: 20px; overflow: scroll; height: 100vh; padding-bottom: 40px;">
+
+            </div>
+        </div>
+        <div id="search-screen-loading" style="display: none;">
+            <div style="margin-top: 20px;">
+                <image class="r-img" style="width: 50px;" src="../../images/loading.gif"></image>
+            </div>
         </div>
             </div>
             </center>
