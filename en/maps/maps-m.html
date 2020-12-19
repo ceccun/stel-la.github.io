@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     </head>
-    <body style="overflow-x: hidden;" onload="loadcall()">
+    <body style="overflow-x: hidden;" onload="loadcall()" ontouchstart="">
     <div>
         <div id='map' onmouseup="maptap()" class="map" style='width: 100vw; height: 100vh;'></div>
         <div style="margin-top: 100vh;" id='tray' class='tray'>
@@ -151,8 +151,9 @@ function getSearchResults(){
                 }
                 .tray-inner-nearby-item:active{
                     transform: scale(0.9);
+                    border-radius: 5px;
                     background-color: rgba(0,0,0,0.2);
-                    transition: transform 0.1s linear;
+                    transition: transform 0.1s linear, border-radius 0.1s linear;
                 }
                 .tray-inner-nearby-item p{
                     font-family: 'Inter', sans-serif;
@@ -162,6 +163,9 @@ function getSearchResults(){
                     .tray-inner-nearby-item:active{
                     background-color: rgba(255,255,255,0.2);
                 }
+                }
+                img {
+                    pointer-events: none !important;
                 }
             </style>
             </div>
@@ -190,6 +194,9 @@ function getSearchResults(){
                 </style>
             </div>
                 </center>
+
+
+            <a onclick="openPage('About');"><p style="margin-top: 2px;">About</p></a>
             </div>
         </div>
         <div id="search-screen" style="display: none;" class="search-screen-h">
@@ -319,6 +326,82 @@ function getSearchResults(){
             }
         </style>
     </div>
+
+    <div id="pages">
+
+    </div>
+    <style>
+        .page-fs-h{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255,255,255,1);
+            position: fixed;
+            top: 0;
+            left: 100%;
+            transition: left 0.2s cubic-bezier(0,0,.06,.97);
+        }
+        .page-fs{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255,255,255,1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: left 0.2s cubic-bezier(0,0,.06,.97);
+        }
+        .page-topbar{
+            height: 50px;
+            border-bottom: solid 1px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+        }
+        .page-topbar p{
+            line-height: 50px;
+            margin-left: 10px;
+        }
+        @media(prefers-color-scheme: dark){
+            .page-fs-h{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,1);
+            position: fixed;
+            top: 0;
+            left: 100%;
+            transition: left 0.2s cubic-bezier(0,0,.06,.97);
+        }
+            .page-fs{
+            background-color: rgba(0,0,0,1);
+        }
+        .page-topbar{
+            border-bottom: solid 1px rgba(255,255,255,0.3);
+            color: white !important;
+        }
+        }
+        </style>
+    <script>
+        pageMgr = 10;
+
+        function openPage(page){
+            pageMgr += 1;
+            var target = document.getElementById("pages");
+            var newpage = document.createElement('div');
+            newpage.setAttribute("class", "page-fs-h");
+            newpage.setAttribute("style", "z-index: " + pageMgr + " !important;");
+            newpage.setAttribute("id", "page-" + pageMgr.toString());
+            newpage.innerHTML = '<div class="page-topbar"><a onclick="closePage(' + pageMgr + ')"><p>Back</p></a><p><b>' + page +'</b></p><p>&nbsp;</p></div>';
+            if(page == 'About'){
+                newpage.innerHTML += '<div style="margin-top: 10px;"><h1>Stella Maps</h1><p>© Ejaz Ali</p><div class="about-page-bblock"><p>© Maxar</p><p>© OpenStreetMap</p><p>Mapbox</p></div></div><style>.about-page-bblock{ display: flex; justify-content: space-around; } .about-page-bblock p { margin-top: 10px; padding: 10px; border: solid 1px rgba(0,0,0,0.3); border-radius: 20px; } @media(prefers-color-scheme: dark){ .about-page-bblock p { border: solid 1px rgba(255,255,255,0.3); } }</style>';
+            }
+            target.appendChild(newpage);
+            setTimeout(function () { document.getElementById("page-" + pageMgr.toString()).setAttribute("class", "page-fs"); }, 300);
+        }
+
+        function closePage(number){
+            var target = document.getElementById("page-" + number);
+            target.setAttribute("class", "page-fs-h");
+            setTimeout(function (){ target.remove(); }, 300);
+        }
+    </script>
     </body>
     <style>
         body{
@@ -436,4 +519,6 @@ function getSearchResults(){
                 style: 'mapbox://styles/mapbox/streets-v11'
                 });
                 </script>
-</html>
+                
+                
+                </html>
