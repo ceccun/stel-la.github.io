@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="html">
     <head>
         <title>New Stella Maps - What's nearby?</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +20,9 @@
                 <div class="tray-inner-top-tab">&nbsp;<style>.tray-inner-top-tab{ width:20%; height: 8px; background-color: rgba(0,0,0,0.3); margin-top: -5px; margin-bottom: 10px; border-radius: 10px;} @media(prefers-color-scheme: dark) {
                     .tray-inner-top-tab{ background-color: rgba(255,255,255,0.3); }
                 }</style></div>
-            <input placeholder="Search Food" id="tray-input-show" onmouseup="openSearch()"></input>
+            <input placeholder="Say “Hey Stella!”" id="tray-input-show" onmouseup="openSearch()"></input>
             <script>
+                var units = "km";
                 document.getElementById("tray-input-show").setAttribute("placeholder", "Say “Hey Stella!”");
                 function openSearch(){
                     if (country == "gb"){
@@ -44,12 +45,12 @@
                 <div style="visibility: hidden;" id="tray-inner-nearby-loading">
                     <image style="width: 50px;" class="r-img" src="../../images/loading.gif"></image>
                 </div>
-                <div id="tray-inner-nearby" style="display: none;" class="tray-inner-nearby">
-                    <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/><p>Food</p></div>
-                    <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/><p id="groceries-label">Grocers</p></div>
-                    <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-gas-icon.png"/><p id="gas-label">Gas</p></div>
-                    <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/><p id="hotels-label">Hotels</p></div>
-                    <div id="wifi-nearby-icon" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-wifi-icon.png"/><p>Wi-Fi</p></div>
+                <div  id="tray-inner-nearby" style="display: none;" class="tray-inner-nearby">
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'fast food'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/><p>Food</p></div>
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'shop'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/><p id="groceries-label">Grocers</p></div>
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'fuel'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-gas-icon.png"/><p id="gas-label">Gas</p></div>
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'hotel'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/><p id="hotels-label">Hotels</p></div>
+                    <div onclick="openPage('Find Wi-Fi', atob('PGRpdiBzdHlsZT0ibWFyZ2luLXRvcDogMTBweDsgbWFyZ2luLWxlZnQ6IDEwcHg7IG1hcmdpbi1yaWdodDogMTBweDsiPjxjZW50ZXI+PGltYWdlIGNsYXNzPSJyLWltZyIgc3JjPSIuLi8uLi9pbWFnZXMvbWFwL3NlcnZpY2Utd2lmaS1pY29uLnBuZyI+PC9pbWFnZT48aDI+TmVlZCBpbnRlcm5ldD88L2gyPjxwPk9uY2Ugc2V0IHVwLCB5b3VyIHBob25lIHdpbGwgYmUgc2V0IHRvIGNvbm5lY3QgdG8gU3RlbGxhIFdpLUZpIEhvdHNwb3RzIHdoZW4gdGhleSdyZSBhdmFpbGFibGUuPGJyPjxicj5UaGlzIHNlcnZpY2UgaXMgY3VycmVudGx5IGF2YWlsYWJsZSBpbiBCYXJraW5nLjwvcD48L2NlbnRlcj48L2Rpdj4='));" id="wifi-nearby-icon" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-wifi-icon.png"/><p>Wi-Fi</p></div>
                 </div>
                 <div style="display: none;" id="tray-inner-nearby-broken">
                     <image class="r-img" src="../../images/map/cloud-error.png"></image><h3>Aw Snap!</h3><p>Stella Location Services encountered an error while determining your location.</p>
@@ -78,6 +79,7 @@
                     document.getElementById("gas-label").innerText = "Petrol";
                     document.getElementById("groceries-label").innerText = "Shops";
                     country = "gb";
+                    units = "mi";
                 }
                 if (json.features[0].text != "Barking"){
                     
@@ -205,7 +207,7 @@ function getSearchResults(){
             <script>
                 document.getElementById("realSearchBox").addEventListener("keyup", searchForRB);
 
-                function searchForRB(){
+                function searchForRB(bypass){
                     console.log("searchForRB");
                     document.getElementById("search-screen-loading").setAttribute("style", "");
                             document.getElementById("search-screen-notext").setAttribute("style", "display: none");
@@ -213,7 +215,7 @@ function getSearchResults(){
                     var st = document.getElementById("realSearchBox").value;
                     if (document.getElementById("realSearchBox").value == ""){
                         document.getElementById("search-screen-search").setAttribute("style", "display: none;");
-                        
+                        document.getElementById("search-screen-search").setAttribute("style", "height: " + (window.innerHeight - 80) + "px;");
                         document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
                             document.getElementById("search-screen-notext").setAttribute("style", "");
                             return;
@@ -234,43 +236,67 @@ function getSearchResults(){
                         }
                     }
                     searchreq.send();
-                    }, 3000);
+                    }, 1500);
                     
                 }
 
-                function searchForRBL(){
+                function searchForRBL(bypass){
                     console.log("searchForRBL");
                     document.getElementById("search-screen-loading").setAttribute("style", "");
                             document.getElementById("search-screen-notext").setAttribute("style", "display: none");
                             document.getElementById("search-screen-search").setAttribute("style", "display: none");
                     var st = document.getElementById("realSearchBox").value;
                     if (document.getElementById("realSearchBox").value == ""){
-                        document.getElementById("search-screen-search").setAttribute("style", "display: none;");
-                        
+                        document.getElementById("search-screen-search").setAttribute("style", "height: " + (window.innerHeight - 80) + "px;");
                         document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
                             document.getElementById("search-screen-notext").setAttribute("style", "");
                             return;
                     }
                     setTimeout(function(){
-                        if (document.getElementById("realSearchBox").value == st){ document.getElementById("search-screen-search-block").innerHTML = '<div class="tray-inner-nearby-list-block"><h3>Limited results?</h3><p>Tap here to search the world.</p></div>'; } else{ return; }
+                        if (document.getElementById("realSearchBox").value == st){ document.getElementById("search-screen-search-block").innerHTML = '<div onclick="searchForRB(true);" class="tray-inner-nearby-list-block"><h3>Limited results?</h3><p>Tap here to search the world.</p></div>'; 
+                        if(st == "fast food"){
+                            document.getElementById("search-screen-search-block").innerHTML = '<div onclick="document.getElementById(\'realSearchBox\').value = \'restaurant\'; searchForRBL(true);" class="tray-inner-nearby-list-block"><h3>Restaurants</h3><p>Find restaurants instead.</p></div>'; 
+                        }
+                    } else{ return; }
                         var searchreq = new XMLHttpRequest();
-                    searchreq.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/" + document.getElementById("realSearchBox").value + ".json?proximity=" + window["longitude"] + ","+ window["latitude"] +"&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
+                    searchreq.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/" + document.getElementById("realSearchBox").value + ".json?proximity=" + window["longitude"] + ","+ window["latitude"] +"&limit=15&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
                     searchreq.onreadystatechange = function (){
                         if (this.status == 200 && this.readyState == 4){
-                            console.log(this.responseText);
                             document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
-                            document.getElementById("search-screen-search").setAttribute("style", "");
+                            document.getElementById("search-screen-search").setAttribute("style", "height: " + (window.innerHeight - 80) + "px;");
                             var t = JSON.parse(this.responseText);
                             t.features.forEach(function (item, index){
-                                document.getElementById("search-screen-search-block").innerHTML += '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + item.place_name + '</p></div>';
+                                var distance = getDistanceFromLatLonInKm(window["latitude"], window["longitude"], item.geometry.coordinates[1], item.geometry.coordinates[0]);
+                                console.log(distance);
+                                if (units == "mi"){ distance = distance/1.609; }
+                                document.getElementById("search-screen-search-block").innerHTML += '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + item.place_name + '</p><p><br>' + distance.toFixed(1) + ' ' + units + '</p></div>';
                             });
                         }
                     }
                     searchreq.send();
-                    }, 3000);
+                    }, 1500);
                     
                 }
-            </script></div>
+                
+                function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+                
+                </script></div>
         <div id="search-screen-notext">
             <div style="margin-top: 20px;" class="tray-inner-nearby">
                 <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/></div>
@@ -281,13 +307,14 @@ function getSearchResults(){
             <p id="p31" style="margin-top: 10px;">There may be more personalized services on your nearby feed.</p>
         </div>
         <div id="search-screen-search" style="display: none;">
-            <div id="search-screen-search-block" style="margin-top: 20px; overflow: scroll; height: 100vh; padding-bottom: 40px;">
+            <div id="search-screen-search-block" style="margin-top: 20px; overflow: scroll; height: 100%; padding-bottom: 40px;">
 
             </div>
         </div>
+
         <div id="search-screen-loading" style="display: none;">
             <div style="margin-top: 20px;">
-                <image class="r-img" style="width: 50px;" src="../../images/loading.gif"></image>
+                <image class="r-img" style="width: 80px;" src="../../images/loadinga.gif"></image>
             </div>
         </div>
             </div>
@@ -332,6 +359,7 @@ function getSearchResults(){
     </div>
     <style>
         .page-fs-h{
+            box-shadow: -2px 0px 5px rgba(0,0,0,0.3);
             width: 100vw;
             height: 100vh;
             background-color: rgba(255,255,255,1);
@@ -341,6 +369,7 @@ function getSearchResults(){
             transition: left 0.2s cubic-bezier(0,0,.06,.97);
         }
         .page-fs{
+            box-shadow: -2px 0px 5px rgba(0,0,0,0.3);
             width: 100vw;
             height: 100vh;
             background-color: rgba(255,255,255,1);
@@ -381,7 +410,7 @@ function getSearchResults(){
     <script>
         pageMgr = 10;
 
-        function openPage(page){
+        function openPage(page, customhtml){
             pageMgr += 1;
             var target = document.getElementById("pages");
             var newpage = document.createElement('div');
@@ -389,9 +418,16 @@ function getSearchResults(){
             newpage.setAttribute("style", "z-index: " + pageMgr + " !important;");
             newpage.setAttribute("id", "page-" + pageMgr.toString());
             newpage.innerHTML = '<div class="page-topbar"><a onclick="closePage(' + pageMgr + ')"><p>Back</p></a><p><b>' + page +'</b></p><p>&nbsp;</p></div>';
+            if (customhtml == undefined){
             if(page == 'About'){
-                newpage.innerHTML += '<div style="margin-top: 10px;"><h1>Stella Maps</h1><p>© Ejaz Ali</p><div class="about-page-bblock"><p>© Maxar</p><p>© OpenStreetMap</p><p>Mapbox</p></div></div><style>.about-page-bblock{ display: flex; justify-content: space-around; } .about-page-bblock p { margin-top: 10px; padding: 10px; border: solid 1px rgba(0,0,0,0.3); border-radius: 20px; } @media(prefers-color-scheme: dark){ .about-page-bblock p { border: solid 1px rgba(255,255,255,0.3); } }</style>';
+                var size = document.getElementById("html").innerHTML.split('').length;
+                console.log(size);
+                newpage.innerHTML += '<div style="margin-top: 10px;"><h1>Stella Maps</h1><p>© Ejaz Ali</p><div class="about-page-bblock"><p>© Maxar</p><p>© OpenStreetMap</p><p>Mapbox</p></div><p>3.0.10🅲<br>build id: MTk6NDAgMTkvMTIvMjAyMA==<br>client ram usage (exmap): ' + (size/1000)  +' KB</div><style>.about-page-bblock{ display: flex; justify-content: space-around; } .about-page-bblock p { margin-top: 10px; padding: 10px; border: solid 1px rgba(0,0,0,0.3); border-radius: 20px; } @media(prefers-color-scheme: dark){ .about-page-bblock p { border: solid 1px rgba(255,255,255,0.3); } }</style>';
             }
+        }
+        if (customhtml != undefined){
+            newpage.innerHTML += customhtml;
+        }
             target.appendChild(newpage);
             setTimeout(function () { document.getElementById("page-" + pageMgr.toString()).setAttribute("class", "page-fs"); }, 300);
         }

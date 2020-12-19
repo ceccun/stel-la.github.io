@@ -1,75 +1,556 @@
-<!doctype html>
-<html>
-<head>
-<title id="title">Stella - Pricvacy and Privacy Principles.</title>
-<link href="mob.css" rel="stylesheet"/>
-<script type="text/javascript">
-if (window.innerWidth > window.innerHeight){
-window.location.replace("privacy-d.html?");
-}
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/png" href="favicon.png"/>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
-</head>
-<body>
-<!-- Adrenaline Engine 5 -->
-<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
-<div class="rainbow-head">
-<div class="rainbow-head-inner">
-<p>&nbsp </p>
-</div>
-</div>
-<div class="content">
-<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
-<div style="margin-top: -20px;">
-<A class="a" href="index-m.html"><h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></A></div>
-<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
-<image src="../images/hamburger.svg"></image>
-</div>
-</div>
-<div style="margin-top: -40px;">
-<div style="font-size: 24px; margin-top: 10vh; text-align: center;">
-<h1 style="margin: 0; padding: 0;">Privacy with Stella.</h1>
-<p style="font-size: 20px; margin-top: 5px; padding: 0;">Updated on Monday 13 July 2020 at 19:00 BST.</p>
-</div>
-</div>
-<div style="border: solid 1px red; border-radius: 10px; padding: 10px;"><p>The policy on this page applies to the United Kingdom, and your use of Stella will follow these principles. If this is not your correct country, use the sidebar to switch your region and language.</p></div>
-<h1>Introduction</h1>
-<p>This privacy policy aims to help you understand how Stella manages and handles your data, information and usage of Stella Services.</p>
-<h1>Who's who?</h1>
-<p>"We"/"Us" refers to Stella Group Ltd of the United Kingdom.<br>"You" refers to the individual user accessing and sending data into our services either manually or automatically.<br>"Services" refers to the user-accessible products and platforms created or hosted by Stella.</p>
-<h1>Welcome</h1>
-<p>We are committed to protecting and respecting your privacy. This privacy policy covers the experience we provide for users age 13 and over on our services.</p>
-<h1>What information do we collect?</h1>
-<p>We automatically collect information when you first visit or use a service. We also collect information you submit to us manually.</p>
-<h2>Information we automatically collect.</h2>
-<p>We only collect information automatically while you are using a platform to technically tailor sites and data to be optimised for the device that is receiving information from us. Defined Below:<br><br>Device Information - We collect information about your device including your IP address, screen dimensions, device browser, operating systems, time zones, language settings and geolocation related data.<br>Location data - We collect information about your location, including location information based on your IP address. With your permission, we may also collect Global Positioning System (GPS) data.<br>Cookies - We and our service providers use cookies and other similar technologies (e.g web beacons, flash cookies, etc.)("Cookies") to automatically collect information, serve updates and changes, keep records of what you have agreed to and keep records of sessions and cache encryption keys. We also allow our service providers to collect information about your online activities through Cookies. Our service providers may link your contact or subsciber information with your activity on our services across all your devices, using your email or other device information. Our service providers may use this information to display advertisements on our services and elsewhere online and across your devices tailored to your interests, preferences and characteristics. We are not responsible for the privacy practices of these service providers, and the information practices of these service providers and business partners are not covered by this Privacy Policy.</p>
-<h1>How we use your information</h1>
-<p>As explained below, we use your information to fulfill and enforce our Terms of Service, to improve and administer services, and to allow you to use its functionalities.<br><br>We generally use the information we collect:<br>To fulfill requests for services, functionality, support and information for internal operations, including troubleshooting and statistical purposes and to solicit your feedback.</p>
-<h1>Your Choices</h1>
-<p>You may be able to refuse or disable Cookies by adjusting your browser settings. Because each browser is different, please consult the instructions provided by your browser. Please note that you may need to take additional steps to refuse or disable certain types of Cookies.<br>You can manage third-party advertising preferences for some of the third parties we work with to serve advertising across the Internet by clicking here and by utilizing the choices available at <a href="https://www.networkadvertising.org/managing/opt_out.asp" class="a">www.networkadvertising.org/managing/opt_out.asp</a> and <a href="https://www.aboutads.info/choices" class="a">www.aboutads.info/choices.</a><br><br>Some devices transmit "do-not-track" signals to servers. Because of differences in how devices incorporate and activate this feature, it is not always clear whether users intend for these signals to be transmitted, or whether they even are aware of them. We currently do not take action in response to these signals.</p><h1>Security</h1><p>We use reasonable measures to help protect information from loss, theft, misuse and unauthorised access, disclosure, alteration, and destruction. You should understand that no data storage system or transmission of data over the Internet or any other public network can be guaranteed to be 100 percent secure. Please note that information collected by third parties may not have the same security protections as information you submit to us, and we are not responsible for protecting the security of such information.</p><h1>Children</h1><p>The privacy of users under the age of 13 (“Younger Users”) is important to us. We attempt to minimise all data collection so we do not have any ways to distinguish a Younger User.</p>
-<h1>Where do we store your personal data?</h1>
-<p>The personal data that we collect from you will be transferred to, and stored at, a destination inside or outside of the European Economic Area ("EEA").<br><br>We send data to Stella Servers in countries such as Ireland, Netherlands and the United Kingdom.</p>
-</div>
-</center>
-</div>
-</div>
-<!-- Sidebar -->
-<div id="sidebar" class="sidebar-h">
-&nbsp
-<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
-</div>
-<script>
-window.addEventListener('click', function(e){   
-  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
-    // Clicked in box
-  } else{
-    // Clicked outside the box
-	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
+<!DOCTYPE html>
+<html id="html">
+    <head>
+        <title>新しいStellaマップ - 近くに何がありますか？</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="description" content="Stella Maps はマッピングサービスです。">
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body style="overflow-x: hidden;" onload="loadcall()" ontouchstart="">
+    <div>
+        <div id='map' onmouseup="maptap()" class="map" style='width: 100vw; height: 100vh;'></div>
+        <div style="margin-top: 100vh;" id='tray' class='tray'>
+            &nbsp;
+            <div class="tray-inner">
+                <center>
+                <div class="tray-inner-top-tab">&nbsp;<style>.tray-inner-top-tab{ width:20%; height: 8px; background-color: rgba(0,0,0,0.3); margin-top: -5px; margin-bottom: 10px; border-radius: 10px;} @media(prefers-color-scheme: dark) {
+                    .tray-inner-top-tab{ background-color: rgba(255,255,255,0.3); }
+                }</style></div>
+            <input placeholder="いう “ねえ Stella!”" id="tray-input-show" onmouseup="openSearch()"></input>
+            <script>
+                var units = "km";
+                document.getElementById("tray-input-show").setAttribute("placeholder", "Say “Hey Stella!”");
+                function openSearch(){
+                    if (country == "gb"){
+                        document.getElementById("p31").innerText = "近くのフィードには、よりパーソナライズされたサービスがあるかもしれません。";
+                    }
+                    document.getElementById("tray-input-show").blur();
+                    document.getElementById("search-screen").setAttribute("style", "");
+                    setTimeout(function (){ document.getElementById("search-screen").setAttribute("class", "search-screen");
+                    document.getElementById("realSearchBox").focus(); }, 100);
+                    
+                }
+                function closeSearch(){
+                    document.getElementById("search-screen").setAttribute("class", "search-screen-h");
+                    document.getElementById("realSearchBox").blur();
+                    setTimeout(function (){ document.getElementById("search-screen").setAttribute("style", "display: none;"); }, 200)
+                }
+            </script>
+            <div style="margin-top: 30px;" id="tray-inner-nearby-service">
+                <div style="visibility: hidden;" id="tray-inner-nearby-loading">
+                    <image style="width: 50px;" class="r-img" src="../../images/loading.gif"></image>
+                </div>
+                <div  id="tray-inner-nearby" style="display: none;" class="tray-inner-nearby">
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'fast food'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/><p>食物</p></div>
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'shop'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/><p id="groceries-label">ショップ</p></div>
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'fuel'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-gas-icon.png"/><p id="gas-label">ガス</p></div>
+                    <div onclick="openSearch(); document.getElementById('realSearchBox').value = 'hotel'; searchForRBL();" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/><p id="hotels-label">ホテル</p></div>
+                    <div onclick="openPage('Wi-Fiを探す', decodeURIComponent('%3Cdiv%20style%3D%22margin-top%3A%2010px%3B%20margin-left%3A%2010px%3B%20margin-right%3A%2010px%3B%22%3E%3Ccenter%3E%3Cimage%20class%3D%22r-img%22%20src%3D%22..%2F..%2Fimages%2Fmap%2Fservice-wifi-icon.png%22%3E%3C%2Fimage%3E%3Ch2%3E%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%A7%E3%81%99%E3%81%8B%EF%BC%9F%3C%2Fh2%3E%3Cp%3E%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%81%8C%E5%AE%8C%E4%BA%86%E3%81%99%E3%82%8B%E3%81%A8%E3%80%81%E9%9B%BB%E8%A9%B1%E3%81%8C%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%8D%E3%81%ABStellaWi-Fi%E3%83%9B%E3%83%83%E3%83%88%E3%82%B9%E3%83%9D%E3%83%83%E3%83%88%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E8%A8%AD%E5%AE%9A%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82%3Cbr%3E%3Cbr%3E%E3%81%93%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AF%E7%8F%BE%E5%9C%A8%E3%80%81%E3%83%90%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82%3C%2Fp%3E%3C%2Fcenter%3E%3C%2Fdiv%3E'));" id="wifi-nearby-icon" class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-wifi-icon.png"/><p>Wi-Fi</p></div>
+                </div>
+                <div style="display: none;" id="tray-inner-nearby-broken">
+                    <image class="r-img" src="../../images/map/cloud-error.png"></image><h3>ああスナップ！</h3><p>Stella Location Servicesで、現在地の特定中にエラーが発生しました。</p>
+                </div>
+                <script>
+                    var country = "US";
+                    var longitude = 0;
+                    var latitude = 0;
+                    function initializeNearby(){
+                        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "");
+                        if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(e){
+        window["longitude"] = e.coords.longitude;
+        window["latitude"] = e.coords.latitude;
+        var geocoding = new XMLHttpRequest();
+        geocoding.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ e.coords.longitude.toString() +"," + e.coords.latitude.toString() + ".json?types=place&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
+        geocoding.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                
+            document.getElementById("tray-inner-nearby").setAttribute("style", "");
+                        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
+                console.log(this.responseText);
+                var json = JSON.parse(this.responseText);
+                if (json.features[0].context[json.features[0].context.length - 1].short_code == "gb"){
+                    country = "gb";
+                    units = "mi";
+                }
+                if (json.features[0].text != "Barking"){
+                    
+                    setTimeout(function (){document.getElementById("wifi-nearby-icon").setAttribute("class", "tray-inner-nearby-item-deactivating")}, 500);
+                    setTimeout(function () { document.getElementById("wifi-nearby-icon").setAttribute("style", "display: none;") }, 1000);
+                }
+                document.getElementById(
+                    "tray-inner-nearby-list-title").innerText = json.features[0].text;
+                getSearchResults();
+            }
+        }
+        geocoding.send();
+    }, function (e){
+        document.getElementById("tray-inner-nearby-broken").setAttribute("style", "");
+        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
+        console.log(e.code);
+        if (e.code == 1){
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/location-off.png"></image><h3>場所が拒否されました</h3><p>Stella Location Servicesがオフになっているため、近くのサービスは表示されていません。</p>';
+        }
+        if (e.code == 2){
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/cloud-error.png"></image><h3>ああスナップ！</h3><p>Stella Location Servicesで現在地の特定中にエラーが発生したため、近くのサービスが表示されていません。</p>';
+        }
+        if (e.code == 3){
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/cloud-error.png"></image><h3>何かあった</h3><p>お使いの携帯電話が予期しないことをしたため、近くのサービスが表示されていません。</p>';
+        }
+    });
+  } else {
+    document.getElementById("tray-inner-nearby-broken").setAttribute("style", "");
+        document.getElementById("tray-inner-nearby-loading").setAttribute("style", "display: none;");
+            document.getElementById("tray-inner-nearby-broken").innerHTML = '<image class="r-img" src="../../images/map/location-off.png"></image><h3>サポートされていないデバイス</h3><p>このデバイスはStellaLocation Servicesをサポートしていないため、近くのサービスは表示されていません。</p>';
   }
+                    }
+
+function getSearchResults(){
+    var nearbyresults = new XMLHttpRequest();
+    nearbyresults.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ longitude + "," + latitude + ".json?types=poi&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ&limit=7");
+    nearbyresults.onreadystatechange = function (){
+        if (this.readyState == 4 && this.status == 200){
+            var t = JSON.parse(this.responseText)
+            t.features.forEach(function (item, index){
+                var cat = item.properties.category.split(", ");
+                var cate = cat[0].split(" ");
+                var newcate = "";
+                cate.forEach(function (item, index){
+                    newcate = newcate + item.charAt(0).toUpperCase() + item.slice(1) + " "
+                });
+                document.getElementById("tray-inner-nearby-list-service").innerHTML = document.getElementById("tray-inner-nearby-list-service").innerHTML + '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + newcate + '</p></div>';
+            })
+        }
+    }
+    nearbyresults.send();
+}
+                </script>
+            <style>
+                .tray-inner-nearby{
+                    display: flex;
+                    justify-content: space-around;
+                    align-content: stretch;
+                    flex-wrap: wrap;
+                    transition: all 0.2s linear;
+                }
+                .tray-inner-nearby-item{
+                    transform: scale(1);
+                    flex-grow: 1;
+                    transition: all 0.2s linear, background-color 0s linear, transform 0.1s linear;
+                }
+                .tray-inner-nearby-item-deactivating{
+                    transform: scale(0);
+                    flex-grow: 0;
+                    transition: all 0.2s linear;
+                }
+                .tray-inner-nearby-item:active{
+                    transform: scale(0.9);
+                    border-radius: 5px;
+                    background-color: rgba(0,0,0,0.2);
+                    transition: transform 0.1s linear, border-radius 0.1s linear;
+                }
+                .tray-inner-nearby-item p{
+                    font-family: 'Inter', sans-serif;
+                    margin:0;
+                }
+                @media (prefers-color-scheme: dark){
+                    .tray-inner-nearby-item:active{
+                    background-color: rgba(255,255,255,0.2);
+                }
+                }
+                img {
+                    pointer-events: none !important;
+                }
+            </style>
+            </div>
+            <div id="tray-inner-nearby-list">
+                <div id="tray-inner-nearby-list-service">
+                <h2 id="tray-inner-nearby-list-title" style="margin-top: 15px; margin-bottom: 9px; text-align: left;">近くを探索する</h2>
+                </div>
+                <style>
+                    .tray-inner-nearby-list-block{
+                        border: solid 1px rgba(0,0,0,0.3);
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+                        text-align: left;
+                        border-radius: 10px;
+                        margin-top: 5px;
+                    }
+                    .tray-inner-nearby-list-block h3, .tray-inner-nearby-list-block p{
+                        margin-left: 10px;
+                        margin-bottom: 3px;
+                    }
+                    @media (prefers-color-scheme: dark){
+                        .tray-inner-nearby-list-block{
+                        border: solid 1px rgba(255,255,255,0.3);
+                        }
+                    }
+                </style>
+            </div>
+                </center>
+
+
+            <a onclick="openPage('約');"><p style="margin-top: 2px;">約</p></a>
+            </div>
+        </div>
+        <div id="search-screen" style="display: none;" class="search-screen-h">
+            <center>
+            <div class="tray-inner"><div style="display: flex; justify-content: space-around; vertical-align: middle; align-content: stretch; margin-top: 20px;"><p style="vertical-align: middle; line-height: 40px; padding-right: 10px;" onclick="closeSearch()">ⓧ</p><input id="realSearchBox" style="vertical-align: middle;" placeholder="世界を検索する"></input>
+            <script>
+                document.getElementById("realSearchBox").addEventListener("keyup", searchForRB);
+
+                function searchForRB(bypass){
+                    console.log("searchForRB");
+                    document.getElementById("search-screen-loading").setAttribute("style", "");
+                            document.getElementById("search-screen-notext").setAttribute("style", "display: none");
+                            document.getElementById("search-screen-search").setAttribute("style", "display: none");
+                    var st = document.getElementById("realSearchBox").value;
+                    if (document.getElementById("realSearchBox").value == ""){
+                        document.getElementById("search-screen-search").setAttribute("style", "display: none;");
+                        document.getElementById("search-screen-search").setAttribute("style", "height: " + (window.innerHeight - 80) + "px;");
+                        document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-notext").setAttribute("style", "");
+                            return;
+                    }
+                    setTimeout(function(){
+                        if (document.getElementById("realSearchBox").value == st){ document.getElementById("search-screen-search-block").innerHTML = '<div onclick="searchForRBL()" class="tray-inner-nearby-list-block"><h3>ローカル結果が必要ですか？</h3><p>近くのサービスを検索するには、ここをタップしてください。</p></div>'; } else{ return; }
+                        var searchreq = new XMLHttpRequest();
+                    searchreq.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(document.getElementById("realSearchBox").value) + ".json?access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
+                    searchreq.onreadystatechange = function (){
+                        if (this.status == 200 && this.readyState == 4){
+                            console.log(this.responseText);
+                            document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-search").setAttribute("style", "");
+                            var t = JSON.parse(this.responseText);
+                            t.features.forEach(function (item, index){
+                                document.getElementById("search-screen-search-block").innerHTML += '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + item.place_name + '</p></div>';
+                            });
+                        }
+                    }
+                    searchreq.send();
+                    }, 1500);
+                    
+                }
+
+                function searchForRBL(bypass){
+                    console.log("searchForRBL");
+                    document.getElementById("search-screen-loading").setAttribute("style", "");
+                            document.getElementById("search-screen-notext").setAttribute("style", "display: none");
+                            document.getElementById("search-screen-search").setAttribute("style", "display: none");
+                    var st = document.getElementById("realSearchBox").value;
+                    if (document.getElementById("realSearchBox").value == ""){
+                        document.getElementById("search-screen-search").setAttribute("style", "height: " + (window.innerHeight - 80) + "px;");
+                        document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-notext").setAttribute("style", "");
+                            return;
+                    }
+                    setTimeout(function(){
+                        if (document.getElementById("realSearchBox").value == st){ document.getElementById("search-screen-search-block").innerHTML = '<div onclick="searchForRB(true);" class="tray-inner-nearby-list-block"><h3>限られた結果？</h3><p>ここをタップして世界を検索してください。</p></div>'; 
+                        if(st == "fast food"){
+                            document.getElementById("search-screen-search-block").innerHTML = '<div onclick="document.getElementById(\'realSearchBox\').value = \'restaurant\'; searchForRBL(true);" class="tray-inner-nearby-list-block"><h3>レストラン</h3><p>代わりにレストランを探してください。</p></div>'; 
+                        }
+                    } else{ return; }
+                        var searchreq = new XMLHttpRequest();
+                    searchreq.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/" + document.getElementById("realSearchBox").value + ".json?proximity=" + window["longitude"] + ","+ window["latitude"] +"&limit=15&access_token=pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ");
+                    searchreq.onreadystatechange = function (){
+                        if (this.status == 200 && this.readyState == 4){
+                            document.getElementById("search-screen-loading").setAttribute("style", "display: none;");
+                            document.getElementById("search-screen-search").setAttribute("style", "height: " + (window.innerHeight - 80) + "px;");
+                            var t = JSON.parse(this.responseText);
+                            t.features.forEach(function (item, index){
+                                var distance = getDistanceFromLatLonInKm(window["latitude"], window["longitude"], item.geometry.coordinates[1], item.geometry.coordinates[0]);
+                                console.log(distance);
+                                if (units == "mi"){ distance = distance/1.609; }
+                                document.getElementById("search-screen-search-block").innerHTML += '<div class="tray-inner-nearby-list-block"><h3>' + item.text + '</h3><p>' + item.place_name + '</p><p><br>' + distance.toFixed(1) + ' ' + units + '</p></div>';
+                            });
+                        }
+                    }
+                    searchreq.send();
+                    }, 1500);
+                    
+                }
+                
+                function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+                
+                </script></div>
+        <div id="search-screen-notext">
+            <div style="margin-top: 20px;" class="tray-inner-nearby">
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-food-icon.png"/></div>
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-grocery-icon.png"/></div>
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-gas-icon.png"/></div>
+                <div class="tray-inner-nearby-item"><img class="r-img" src="../../images/map/service-bed-icon.png"/></div>
+            </div>
+            <p id="p31" style="margin-top: 10px;">近くのフィードには、よりパーソナライズされたサービスがあるかもしれません。</p>
+        </div>
+        <div id="search-screen-search" style="display: none;">
+            <div id="search-screen-search-block" style="margin-top: 20px; overflow: scroll; height: 100%; padding-bottom: 40px;">
+
+            </div>
+        </div>
+
+        <div id="search-screen-loading" style="display: none;">
+            <div style="margin-top: 20px;">
+                <image class="r-img" style="width: 80px;" src="../../images/loadinga.gif"></image>
+            </div>
+        </div>
+            </div>
+            </center>
+        </div>
+            <style>
+            .search-screen{
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                z-index: 100;
+                top: 0;
+                left: 0;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                background-color: rgba(255,255,255,1);
+                transition: top 0.4s cubic-bezier(0,0,.06,.97), background-color 0.4s cubic-bezier(0,0,.06,.97);
+            }
+            .search-screen-h{
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                z-index: 100;
+                top: 100%;
+                left: 0;
+                background-color: rgba(255,255,255,0);
+                transition: top 0.4s cubic-bezier(0,0,.06,.97), background-color 0.4s cubic-bezier(0,0,.06,.97);
+            }
+            @media(prefers-color-scheme: dark){
+                .search-screen{
+                background-color: rgba(0,0,0,1);
+            }
+            .search-screen-h{
+                background-color: rgba(0,0,0,0);
+            }
+            }
+        </style>
+    </div>
+
+    <div id="pages">
+
+    </div>
+    <style>
+        .page-fs-h{
+            box-shadow: -2px 0px 5px rgba(0,0,0,0.3);
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255,255,255,1);
+            position: fixed;
+            top: 0;
+            left: 100%;
+            transition: left 0.2s cubic-bezier(0,0,.06,.97);
+        }
+        .page-fs{
+            box-shadow: -2px 0px 5px rgba(0,0,0,0.3);
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255,255,255,1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: left 0.2s cubic-bezier(0,0,.06,.97);
+        }
+        .page-topbar{
+            height: 50px;
+            border-bottom: solid 1px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+        }
+        .page-topbar p{
+            line-height: 50px;
+            margin-left: 10px;
+        }
+        @media(prefers-color-scheme: dark){
+            .page-fs-h{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,1);
+            position: fixed;
+            top: 0;
+            left: 100%;
+            transition: left 0.2s cubic-bezier(0,0,.06,.97);
+        }
+            .page-fs{
+            background-color: rgba(0,0,0,1);
+        }
+        .page-topbar{
+            border-bottom: solid 1px rgba(255,255,255,0.3);
+            color: white !important;
+        }
+        }
+        </style>
+    <script>
+        pageMgr = 10;
+
+        function openPage(page, customhtml){
+            pageMgr += 1;
+            var target = document.getElementById("pages");
+            var newpage = document.createElement('div');
+            newpage.setAttribute("class", "page-fs-h");
+            newpage.setAttribute("style", "z-index: " + pageMgr + " !important;");
+            newpage.setAttribute("id", "page-" + pageMgr.toString());
+            newpage.innerHTML = '<div class="page-topbar"><a onclick="closePage(' + pageMgr + ')"><p>バック</p></a><p><b>' + page +'</b></p><p>&nbsp;</p></div>';
+            if (customhtml == undefined){
+            if(page == '約'){
+                var size = document.getElementById("html").innerHTML.split('').length;
+                console.log(size);
+                newpage.innerHTML += '<div style="margin-top: 10px;"><h1>Stella マップ</h1><p>© Ejaz Ali</p><div class="about-page-bblock"><p>© Maxar</p><p>© OpenStreetMap</p><p>Mapbox</p></div><p>3.0.10🅲<br>ビルドID: MTk6NDAgMTkvMTIvMjAyMA==<br>クライアントRAMの使用法（例）: ' + (size/1000)  +' KB</div><style>.about-page-bblock{ display: flex; justify-content: space-around; } .about-page-bblock p { margin-top: 10px; padding: 10px; border: solid 1px rgba(0,0,0,0.3); border-radius: 20px; } @media(prefers-color-scheme: dark){ .about-page-bblock p { border: solid 1px rgba(255,255,255,0.3); } }</style>';
+            }
+        }
+        if (customhtml != undefined){
+            newpage.innerHTML += customhtml;
+        }
+            target.appendChild(newpage);
+            setTimeout(function () { document.getElementById("page-" + pageMgr.toString()).setAttribute("class", "page-fs"); }, 300);
+        }
+
+        function closePage(number){
+            var target = document.getElementById("page-" + number);
+            target.setAttribute("class", "page-fs-h");
+            setTimeout(function (){ target.remove(); }, 300);
+        }
+    </script>
+    </body>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            outline: none !important;
+        }
+        .map{
+            outline: none !important;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            position: fixed !important;
+            top: 0;
+            z-index: -1 !important;
+        }
+        .tray{
+            width: 100vw;
+            z-index: 1;
+            background-color: rgba(255,255,255,1);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding-bottom: 40px;
+        }
+        .tray-inner{
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        input{
+            width: 90%;
+            padding: 10px;
+            font-size: 17px;
+            background-color: rgba(0,0,0,0.3);
+            border: 0;
+            font-family: 'Inter', sans-serif;
+            border-radius: 10px;
+        }
+        .r-img{
+            opacity: 0.6;
+        }
+        
+        p, h1, h2, h3, h4, h5, h6{
+            margin:0;
+                    font-family: 'Inter', sans-serif;
+                    opacity: 0.7;
+                }
+
+        @media(prefers-color-scheme: dark){
+            p, h1, h2, h3, h4, h5, h6{
+                    font-family: 'Inter', sans-serif;
+                    color: white;
+                }
+            .tray{
+            background-color: rgba(0,0,0,1);
+        }
+        input{
+            width: 90%;
+            padding: 10px;
+            font-size: 17px;
+            background-color: rgba(255,255,255,0.3);
+            border: 0;
+            border-radius: 10px;
+            color: white;
+        }
+        .r-img{
+            filter: invert();
+        }
+        }
+    </style>
+    <script>
+        var nearbyactive = 0
+        function scrolllistener(e){
+            if (window.scrollY >= 60){
+                if (nearbyactive == 0){
+                initializeNearby();
+                nearbyactive = 1;
+                }
+            }
+        }
+
+        function loadcall(){
+            document.getElementById("tray").setAttribute("style", "margin-top:" + (window.innerHeight - 100) + "px;");
+        window.scroll({top: 0, left: 0, behavior: "smooth"});
+        var x = document.getElementById("demo");
+        setTimeout(function () { window.addEventListener("scroll", scrolllistener) }, 500);
+        newSearchPH();
+        }
+
+        function newSearchPH(){
+            var numerics = Math.floor(Math.random() * 4);
+            if (numerics == 0){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "モニュメントを検索する");
+            }
+            if (numerics == 1){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "レストランを検索する");
+            }
+            if (numerics == 2){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "お店を探す");
+            }
+            if (numerics == 3){
+            document.getElementById("tray-input-show").setAttribute("placeholder", "ホテルを検索する");
+            }
+        }
+
+        function maptap(){
+            window.scroll({
+  top: 0,
+  left: 0,
+  behavior: 'smooth'
 });
-</script>
-<script src="../global_ass/scrit.js"></script>
-</body>
-</html>
+        }
+    </script>
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1Ijoic3RyZWFtY29tcGFueSIsImEiOiJjam1odjZsZW0yZ2t4M3ZsaG0yaHZvMmJxIn0.REMyxJ7y41LJY_nX2GGwGQ';
+                var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11'
+                });
+                </script>
+                
+                
+                </html>
