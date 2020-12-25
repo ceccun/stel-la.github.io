@@ -10,10 +10,11 @@ window.location.replace("index-m.html");
 }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/blocks/bangs.js"></script>
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
 </head>
-<body>
+<body onload="loadcall()">
 <!-- Adrenaline Engine 5 -->
 <div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
 <div class="rainbow-head">
@@ -41,14 +42,77 @@ window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 var input = document.getElementById("sb");
 input.addEventListener("keyup", function(event) {
     event.preventDefault();
+    var bangav = queryBangs(document.getElementById("sb").value);
     if (event.keyCode === 13) {
+      if (bangav != null){
+      doBang(document.getElementById("sb").value);
+      } else{
 var inputa = encodeURIComponent(document.getElementById("sb").value);
      window.location = "search/index-d.html?q=" + inputa;
 }
-});
+}});
 </script></input><image src="../images/search.png"></image></div>
 </center>
 </div>
+<div>
+  <center>
+    <div id="bangs_field" class="bangs_field">
+
+    </div>
+  </center>
+  <script>
+    function loadcall(){
+      showBangs();
+    }
+
+    function showBangs(){
+      var bangs = getBangs();
+      var target = document.getElementById("bangs_field");
+      bangs.forEach(function (item, index){
+        var image = item["url"].split('/')[0] + item["url"].split('/')[2] + "/favicon.ico";
+        var newEl = document.createElement('div');
+        newEl.innerHTML = '<image src="' + image +'"></image>';
+        newEl.setAttribute("onclick", "inputBang('" + item["parameter"] + item["name"] + "');");
+        newEl.setAttribute("class","bangs_field_item");
+        target.appendChild(newEl);
+      });
+    }
+
+    function inputBang(bang){
+      document.getElementById("sb").value = bang + " ";
+      document.getElementById("sb").focus();
+    }
+  </script>
+</div>
+<style>
+  .bangs_field{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 40vw;
+    margin-top: 10px;
+  }
+  .bangs_field_item{
+    border: solid 1px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 2px;
+  }
+  .bangs_field_item img{
+    margin: auto;
+    display: block;
+    height: 16px;
+  }
+  @media(prefers-color-scheme: dark){
+  .bangs_field_item{
+    background-color: black;
+    border: solid 1px rgba(255,255,255,0.3);
+    border-radius: 5px;
+    padding: 5px;
+  }
+  }
+</style>
 <div style="margin-top: 100px;">
 <center id="local-area">
 
