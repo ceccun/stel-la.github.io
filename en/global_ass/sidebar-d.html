@@ -50,6 +50,7 @@
 <div class="items">
 <a class="a" href="../index-d.html" target="_TOP"><p>Search</p></a>
 <a class="a" href="../tabs-d.html" target="_TOP"><p>Tabs</p></a>
+<a class="a" id="devdashbtn" href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/developerdashen-d.html" style="display: none" target="_TOP"><p>Developer Dashboard</p></a> 
  <a class="a" href="https://pay.stella.hs.vc" target="_TOP"><p>Pay Beta</p></a>
 </div>
 </div>
@@ -109,6 +110,7 @@ acinforeq.send(readCookie("acid") + ";" + readCookie("devid"));
 		document.getElementById("id_logged_in").setAttribute("style", "");
 		document.getElementById("nawa").innerText = resp.name;
 	}
+	document.getElementById("devdashbtn").setAttribute("style", "");
 }
 }
 
