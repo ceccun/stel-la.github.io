@@ -69,7 +69,7 @@ var inputa = encodeURIComponent(document.getElementById("sb").value);
       var bangs = getBangs();
       var target = document.getElementById("bangs_field");
       bangs.forEach(function (item, index){
-        var image = item["url"].split('/')[0] + item["url"].split('/')[2] + "/favicon.ico";
+        var image = item["url"].split('/')[0] + "//" + item["url"].split('/')[2] + "/favicon.ico";
         var newEl = document.createElement('div');
         newEl.innerHTML = '<image src="' + image +'"></image>';
         newEl.setAttribute("onclick", "inputBang('" + item["parameter"] + item["name"] + "');");
