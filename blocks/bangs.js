@@ -61,6 +61,7 @@ function getBangs(){
 }
 
 function queryBangs(query){
+	try{
     var bangs = readCookie("bangs");
 	bangs = bangs.split(",");
 	bangs.splice(0,1);
@@ -87,6 +88,9 @@ function queryBangs(query){
 	} else{
 		return null;
 	}
+} catch(err){
+	return null;
+}
 }
 
 function doBang(bang){
