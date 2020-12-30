@@ -43,8 +43,9 @@ function quickJoin(){
 var myAudio = new Audio('amongusfiles/complete.wav'); myAudio.play();
 if (getMobileOperatingSystem() == "Android"){
 alert("You're on Android, make sure you have the app installed.");
+return;
 }
-if(getMobileOperatingSystem() == "iOS"){
+if(getMobileOperatingSystem() != "Android"){
   /* Get the text field */
   var copyText = document.getElementById("rc");
 
