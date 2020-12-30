@@ -43,13 +43,6 @@ function quickJoin(){
 var myAudio = new Audio('amongusfiles/complete.wav'); myAudio.play();
   /* Get the text field */
   var copyText = document.getElementById("rc");
-
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
   document.getElementById("btn").innerText = "Joining...";
   window.location = "https://appcomms/copynewtxt/" + document.getElementById("rc").value;
 }
