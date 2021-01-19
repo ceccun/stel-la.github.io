@@ -7,7 +7,14 @@ content="Search, Maps, Pay, ID - Stella provides services and content worthy eno
 </head>
 <body>
 <script>
+	try{
 var adit = new URL(window.location).searchParams.get("adit");
+ok();
+	}catch(error){
+		window.location.replace("notsupported.html");
+	}
+
+	function ok(){
 if (window.innerHeight > window.innerWidth){
 var mobile = 1;
 }
@@ -44,6 +51,7 @@ if (adit == "lan_notvalid2"){
 		window.location.replace("/en/index-d.html?adit=root_domain_flagfail");
 	}
 }
+	}
 </script>
 Couldn't bootstrap Stella Omni. There may be an issue with your browser or network. Check the console for more details. <3 <br>~Stella
 </body>
