@@ -1,0 +1,71 @@
+body{
+    background-color: rgba(0,0,0,0.8);
+    margin:0;
+    padding: 0;
+}
+.desktop{
+    margin-left: 18%;
+    margin-right: 18%;
+    background-color: white;
+    padding-top: 200px;
+    padding-left: 50px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-bottom: 50px;
+}
+h1,h2,h3,h4,h5,h6,p{
+    font-family: 'Inter';
+}
+.desktopbox{
+    position: relative;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-right: 10px;
+    transform: scale(1);
+    transition: transform 1s cubic-bezier(.17,.67,.51,.99);
+    margin-bottom: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+}
+.mobilebox{
+    position: relative;
+    height: 200px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-right: 10px;
+    transform: scale(1);
+    transition: transform 1s cubic-bezier(.17,.67,.51,.99);
+    margin-bottom: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+}
+.desktopbox:hover{
+    transform: scale(1.05);
+    transition: transform 1s cubic-bezier(.17,.67,.51,.99);
+}
+.mobilebox:active{
+    transform: scale(0.9);
+    transition: transform 1s cubic-bezier(.17,.67,.51,.99);
+}
+.desktopbox h2{
+	position: absolute;
+	bottom: 0px;
+}
+.mobilebox h2{
+	position: absolute;
+	bottom: 0px;
+}
+a{
+    text-decoration: none;
+}
+.mobile{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    padding-top: 200px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-bottom: 10px;
+}
