@@ -3,118 +3,17 @@
     <head>
         <title>ejaz</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <flsemobilehide><div class="desktop">
-            <!-- Desktop Workspace -->
-<h2 style="font-size: 30px;" flsestring="helloimejaz"></h2>
-<p></p>
-<h3 flsestring="projects">Projects</h3>
-<a href="https://stella.hs.vc/"><div style="background: #ff7e5f;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #feb47b, #ff7e5f);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #feb47b, #ff7e5f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-" class="desktopbox"><h2 flsestring="stella" style="color: black !important;"></h2>
-<p style="color: black !important" flsestring="stelladesc"></p></div></a>
-
-<a href="https://pay.stella.hs.vc/"><div style="background: #8360c3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #2ebf91, #8360c3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #2ebf91, #8360c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    " class="desktopbox"><h2 flsestring="coralvid" style="color: white !important;"></h2>
-    <p style="color: white !important" flsestring="coralviddesc"></p></div></a>
-<a href="https://coral.video/"><div style="background: #c31432;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    Safari 7+ */
-    " class="desktopbox"><h2 flsestring="stellapay" style="color: white !important;"></h2>
-    <p style="color: white !important" flsestring="stellapaydesc"></p></div></a>
-        </div>
-    
-    
-    
-    </flsemobilehide>
-<flsemobileonly>
-    <div class="mobile">
-        <h2 style="text-align: center; font-size: 30px;" flsestring="helloimejaz"></h2>
-        <h3 flsestring="projects"></h3>
-        <a href="https://stella.hs.vc/"><div style="background: #ff7e5f; background: -webkit-linear-gradient(to right, #feb47b, #ff7e5f); background: linear-gradient(to right, #feb47b, #ff7e5f);" class="mobilebox"><h2 flsestring="stella" style="color: black !important;"></h2>
-            <p style="color: black !important" flsestring="stelladesc"></p></div></a>
-            <a href="https://coral.video/"><div style="background: #8360c3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #2ebf91, #8360c3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #2ebf91, #8360c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                " class="mobilebox"><h2 flsestring="coralvid" style="color: white !important;"></h2>
-                <p style="color: white !important" flsestring="coralviddesc"></p></div></a>
-				            <a href="https://pay.stella.hs.vc/"><div style="background: #c31432;  /* fallback for old browsers */
-                background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
-                background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                Safari 7+ */
-                " class="mobilebox"><h2 flsestring="stellapay" style="color: white !important;"></h2>
-                <p style="color: white !important" flsestring="stellapaydesc"></p></div></a>
-                    </div>
-    </div>
-</flsemobileonly>
-        <cservice url="a1_static.css" content="theme"></cservice>
+        <root></root>
+        <flseimport src="site.json" type="components"/>
+        <script src="https://cdn.jsdelivr.net/gh/stel-la/flse/flse.min.js"></script>
+        <style>
+            h1,h2,h3,h4,h5,h6,p,a,li{
+                font-family: 'Inter',sans-serif;
+            }
+        </style>
     </body>
-    <script>
-        var flsestrings = {
-            "helloimejaz":{
-                "default":"Hello, I'm Ejaz.",
-                "ja": "こんにちは、エジャズです。",
-                "es":"Hola, soy Ejaz.",
-                "fr":"Bonjour, je m'appelle Ejaz.",
-                "pt":"Olá, sou Ejaz."
-            },
-            "recentideas":{
-                "default":"Recent Ideas",
-                "ja":"最近のアイデア",
-                "es":"Ideas Recientes",
-                "fr": "Idées Récentes",
-                "pt": "Ideias Recentes"
-            },
-            "projects":{
-                "default": "Projects",
-                "ja": "プロジェクト",
-                "es": "Proyectos",
-                "fr": "Projets",
-                "pt": "Projetos"
-            },
-            "stella":{
-                "default":"Stella"
-            },
-            "stelladesc":{
-                "default":"A technology start-up focused on data management, AI and networking.",
-                "ja":"データ管理、AI、ネットワーキングに焦点を当てたテクノロジーの新興企業。",
-                "es":"Una startup tecnológica centrada en la gestión de datos, IA y redes.",
-                "fr":"Une startup technologique axée sur la gestion des données, l'IA et le réseautage.",
-                "pt":"Uma startup de tecnologia com foco em gerenciamento de dados, IA e rede."
-            },
-            "stellapay":{
-                "default": "Stella Pay",
-                "ja": "Stella 支払う",
-                "es": "Stella Pagar",
-                "fr":"Stella Payer",
-                "pt":"Stella Pagamento"
-            },
-            "stellapaydesc":{
-                "default":"Mobile and desktop payment wallet and payment processor.",
-                "ja": "モバイルおよびデスクトップの支払いウォレットと支払いプロセッサ。\n （日本語ではご利用いただけません）",
-                "es": "Procesador de pagos y billetera de pago móvil y de escritorio. (No disponible en español)",
-                "fr": "Portefeuille de paiement mobile et de bureau et processeur de paiement. (Non disponible en français)",
-                "pt": "Carteira de pagamento móvel e desktop e processador de pagamento. (Não disponível em português)"
-            },
-			"coralvid":{
-			"default": "Coral Video"
-			},
-			"coralviddesc":{
-			"default": "Original and exclusive content from creators you love.",
-			"ja": "大好きなクリエイターによるオリジナルで独占的なコンテンツ。",
-			"es": "Contenido original y exclusivo de los creadores que amas.",
-			"fr": "Contenu original et exclusif des créateurs que vous aimez.",
-			"pt": "Conteúdo original e exclusivo dos criadores que você ama. (Não disponível em português)"
-			}
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/gh/stel-la/flse/flse.min.js"></script>
 </html>
