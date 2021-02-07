@@ -13,6 +13,6 @@
     },
     {
         "tag":"copyright",
-        "value":"<p>Copyright 2021 © Ejaz Ali</p>"
+        "value":"<p>Copyright <a flsestring='curryear'></a> © Ejaz Ali</p>"
     }
 ]
