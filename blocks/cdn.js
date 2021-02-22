@@ -62,6 +62,7 @@ function checkBlock(queryw){
 		if (newquestion == " ihfaz" || newquestion == "ihfaz"){
 			var result = "Pussymagnet69"
 			placement("ihfaz_rm", "fact", result)
+			return;
 		}
 		if (newquestion == " eid" || newquestion == "eid"){
 					var result = "Eid al-Fitr 2020 begins at night on Saturday 23rd May.";
