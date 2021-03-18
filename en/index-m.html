@@ -5,7 +5,7 @@
 <link href="mob.css" rel="stylesheet"/>
 <script type="text/javascript">
 var ss = new URL(window.location).searchParams.get("overridelogo");
-if (window.innerWidth < window.innerHeight){
+if (window.innerWidth > window.innerHeight){
 if (ss != "" && ss != null){
 	window.location.replace("index-d.html?overridelogo=" + ss);
 } else{
