@@ -40,7 +40,9 @@ window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 <h1 id="slog" style="font-size: 50px;">Stella</h1>
 	<script>
 	var ss = new URL(window.location).searchParams.get("overridelogo");
+	if (ss == "" || ss == null){
 	document.getElementById("slog").innerHTML = ss;
+	}
 	</script>
 <div class="input-out"><input id="sb" tabindex=4 placeholder="Search the Internet."><script>
 var input = document.getElementById("sb");
