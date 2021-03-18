@@ -5,8 +5,13 @@
 <meta charset="UTF-8">
 <link href="desk.css" rel="stylesheet"/>
 <script type="text/javascript">
+var ss = new URL(window.location).searchParams.get("overridelogo");
 if (window.innerWidth < window.innerHeight){
+if (ss != "" && ss != null){
+	window.location.replace("index-m.html?overridelogo=" + ss);
+} else{
 window.location.replace("index-m.html");
+}
 }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +44,6 @@ window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 <center>
 <h1 id="slog" style="font-size: 50px;">Stella</h1>
 	<script>
-	var ss = new URL(window.location).searchParams.get("overridelogo");
 	if (ss != "" && ss != null){
 	document.getElementById("slog").innerHTML = ss;
 	}
