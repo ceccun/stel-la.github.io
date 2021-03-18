@@ -4,8 +4,13 @@
 <title>Stella - Things to change the world.</title>
 <link href="mob.css" rel="stylesheet"/>
 <script type="text/javascript">
-if (window.innerWidth > window.innerHeight){
+var ss = new URL(window.location).searchParams.get("overridelogo");
+if (window.innerWidth < window.innerHeight){
+if (ss != "" && ss != null){
+	window.location.replace("index-d.html?overridelogo=" + ss);
+} else{
 window.location.replace("index-d.html");
+}
 }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -29,9 +34,12 @@ window.location.replace("index-d.html");
 </div>
 <center>
 <div style="margin-top: 5vh;">
-
-<h1 style="font-size: 50px;">Stella</h1>
-
+<h1 id="slog" style="font-size: 50px;">Stella</h1>
+	<script>
+	if (ss != "" && ss != null){
+	document.getElementById("slog").innerHTML = ss;
+	}
+	</script>
 <div class="input-out"><input id="sb" placeholder="Search the Internet."><script>
 var input = document.getElementById("sb");
 input.addEventListener("keyup", function(event) {
