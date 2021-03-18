@@ -37,7 +37,11 @@ window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
 </div>
 <div style="margin-top: 15vh;">
 <center>
-<h1 style="font-size: 50px;">Stella</h1>
+<h1 id="slog" style="font-size: 50px;">Stella</h1>
+	<script>
+	var ss = new URL(window.location).searchParams.get("overridelogo");
+	document.getElementById("slog").innerHTML = ss;
+	</script>
 <div class="input-out"><input id="sb" tabindex=4 placeholder="Search the Internet."><script>
 var input = document.getElementById("sb");
 input.addEventListener("keyup", function(event) {
