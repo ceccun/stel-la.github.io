@@ -23,6 +23,11 @@ function checkBlock(queryw){
 		if (newquestion.includes("the") == true) {
 		var newquestion = newquestion.split("what is the");
 		var newquestion = newquestion[newquestion.length - 1];
+		if (newquestion == " capital of bangladesh" || newquestion == "capital of bangladesh"){
+					var result = "Sylhet";
+			placement(result, "fact", newquestion);
+			return;
+		}
 		}
 		if (newquestion.includes("a") == true) {
 		var newquestion = newquestion.split("what is a");
