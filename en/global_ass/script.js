@@ -31,7 +31,11 @@ if ((readCookie("cookiecons") == null) && (document.URL.split("?")[0].endsWith("
 
 function acceptcookienot(){
 	createCookie("cookiecons", "1", 30);
-		setTimeout(function (){ document.getElementById("cookienotfs").setAttribute("class", "b-cookienotfs"); document.getElementById("cookienot").setAttribute("class", "b-cookienot") }, 300);
-			setTimeout(function (){ document.getElementById("cookienotfs").setAttribute("style", "display: none"); document.getElementById("cookienot").setAttribute("style", "display: none;") }, 500);
-			window.location.reload();
+		setTimeout(() => {
+			document.getElementById("cookienotfs").setAttribute("class", "b-cookienotfs"); document.getElementById("cookienot").setAttribute("class", "b-cookienot") }, 300);
+			setTimeout(() => { 
+				document.getElementById("cookienotfs").setAttribute("style", "display: none"); 
+				document.getElementById("cookienot").setAttribute("style", "display: none;");
+				window.location.replace("");
+			}, 500);
 }
