@@ -1,7 +1,7 @@
 var bstorage = window.localStorage;
 
 if (bstorage.getItem("bangs") == null){
-	bstorage.setItem("bangs", ",!#twt#https%3A%2F%2Ftwitter.com%2Fsearch%3Fq%3D%25s#search,!#yt#https%3A%2F%2Fwww.youtube.com%2Fresults%3Fsearch_query%3D%25s#search,!#reddit#https%3A%2F%2Fwww.reddit.com%2Fsearch%2F%3Fq%3D%25s#search");
+	bstorage.setItem("bangs", ",!#yt#https%3A%2F%2Fwww.youtube.com%2Fresults%3Fsearch_query%3D%25s#search");
 }
 
 function createBang(parameter, name, url, type){
