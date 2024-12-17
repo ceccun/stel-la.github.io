@@ -1,205 +1,412 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<title id="title">Stella - Things to change the world.</title>
-<link href="mob.css" rel="stylesheet"/>
-<script type="text/javascript">
-var params = document.URL.split("?");
-if (window.innerWidth > window.innerHeight){
-window.location.replace("index-d.html?" + params[1]);
-}
-function createCookie(name,valued,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+valued+expires+"; path=/";
-}
+    <head>
+        <title id="title">Stella - Things to change the world.</title>
+        <link href="mob.css" rel="stylesheet" />
+        <script type="text/javascript">
+            var params = document.URL.split("?");
+            if (window.innerWidth > window.innerHeight) {
+                window.location.replace("index-d.html?" + params[1]);
+            }
+            function createCookie(name, valued, days) {
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                    var expires = "; expires=" + date.toGMTString();
+                } else var expires = "";
+                document.cookie = name + "=" + valued + expires + "; path=/";
+            }
 
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
+            function readCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(";");
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0)
+                        return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
 
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
-</script>
-<script src="../../blocks/cdn.js"></script>
-<script src="../../blocks/math.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<link rel="shortcut icon" type="image/png" href="favicon.png"/>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
-</head>
-<body>
-<!-- Adrenaline Engine 5 -->
-<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
-<div class="rainbow-head">
-<div class="rainbow-head-inner">
-<p>&nbsp </p>
-</div>
-</div>
-<div class="content">
-<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
-<div style="margin-top: -20px;">
-<A class="a" href="../index-m.html"><h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></A></div>
-<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
-<image src="../../images/hamburger.svg"></image>
-</div>
-</div>
-<div style="margin-top: -40px;">
-<div class="input-out" style="vertical-align: middle;"><input type="search" id="sb" style="width: 100% !important;" placeholder="Search the Internet."><script>
-var input = document.getElementById("sb");
-input.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-var inputa = encodeURIComponent(document.getElementById("sb").value);
-     window.location = "index-m.html?q=" + inputa;
-}
-});
-</script></input></div>
-<div class="crossbar">
-<div style="width: fit-content">
-<button onclick="text_click()" id="text-btn">
-<script type="text/javascript">
-function text_click(){
-var q = new URL(window.location).searchParams.get('q');
-window.location.replace("index-m.html?q=" + q + "#gsc.tab=0&gsc.q=" + q);
-document.getElementById("text-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("image-btn").setAttribute("class", "");
-}
-</script>Text</button><button onclick="img_click()" id="image-btn">
-<script type="text/javascript">
-function img_click(){
-var q = new URL(window.location).searchParams.get('q');
-window.location = ("index-m.html?q=" + q + "#gsc.tab=1&gsc.q=" + q);
-document.getElementById("image-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("text-btn").setAttribute("class", "");
-}
-</script>Images</button>
-</div>
-<div style="width: fit-content"><button onclick="tab_click()" id="tab-btn">
-<script type="text/javascript">
-var query = new URL(window.location).searchParams.get('q');
-var tabs = readCookie("tabs");
-document.getElementById("tab-btn").innerText = "Tab";
-if (tabs.includes(encodeURIComponent(query) + ",")){
-document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("tab-btn").innerText = "Tabbed";
-} else{
-document.getElementById("tab-btn").setAttribute("class", "crossbar");
-document.getElementById("tab-btn").innerText = "Tab";
-}
+            function eraseCookie(name) {
+                createCookie(name, "", -1);
+            }
+        </script>
+        <script src="../../blocks/cdn.js"></script>
+        <script src="../../blocks/math.js"></script>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        />
+        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- Adrenaline Engine 5 -->
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+        <div class="content">
+            <div
+                style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 40px;
+                "
+            >
+                <div style="margin-top: -20px">
+                    <a class="a" href="../index-m.html"
+                        ><h1
+                            style="
+                                display: inline-block;
+                                vertical-align: middle;
+                                margin-right: 10px;
+                            "
+                        >
+                            Stella
+                        </h1></a
+                    >
+                </div>
+                <div
+                    id="ham"
+                    onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');"
+                    class="hamburger"
+                >
+                    <image src="../../images/hamburger.svg"></image>
+                </div>
+            </div>
+            <div style="margin-top: -40px">
+                <div class="input-out" style="vertical-align: middle">
+                    <input
+                        type="search"
+                        id="sb"
+                        style="width: 100% !important"
+                        placeholder="Search the Internet."
+                    />
+                    <script>
+                        var input = document.getElementById("sb");
+                        input.addEventListener("keyup", function (event) {
+                            event.preventDefault();
+                            if (event.keyCode === 13) {
+                                var inputa = encodeURIComponent(
+                                    document.getElementById("sb").value
+                                );
+                                window.location = "index-m.html?q=" + inputa;
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="crossbar">
+                    <div style="width: fit-content">
+                        <button onclick="text_click()" id="text-btn">
+                            <script type="text/javascript">
+                                function text_click() {
+                                    var q = new URL(
+                                        window.location
+                                    ).searchParams.get("q");
+                                    window.location.replace(
+                                        "index-m.html?q=" +
+                                            q +
+                                            "#gsc.tab=0&gsc.q=" +
+                                            q
+                                    );
+                                    document
+                                        .getElementById("text-btn")
+                                        .setAttribute(
+                                            "class",
+                                            "crossbar-button-active"
+                                        );
+                                    document
+                                        .getElementById("image-btn")
+                                        .setAttribute("class", "");
+                                }
+                            </script>
+                            Text</button
+                        ><button onclick="img_click()" id="image-btn">
+                            <script type="text/javascript">
+                                function img_click() {
+                                    var q = new URL(
+                                        window.location
+                                    ).searchParams.get("q");
+                                    window.location =
+                                        "index-m.html?q=" +
+                                        q +
+                                        "#gsc.tab=1&gsc.q=" +
+                                        q;
+                                    document
+                                        .getElementById("image-btn")
+                                        .setAttribute(
+                                            "class",
+                                            "crossbar-button-active"
+                                        );
+                                    document
+                                        .getElementById("text-btn")
+                                        .setAttribute("class", "");
+                                }
+                            </script>
+                            Images
+                        </button>
+                    </div>
+                    <div style="width: fit-content">
+                        <button onclick="tab_click()" id="tab-btn">
+                            <script type="text/javascript">
+                                var query = new URL(
+                                    window.location
+                                ).searchParams.get("q");
+                                const ls = window.localStorage;
+                                var tabs = ls.getItem("tabs");
 
-function sync(){
-		if (readCookie("acid") != null){
-		var tabsync = new XMLHttpRequest();
-		tabsync.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/add");
-		tabsync.withCredentials = true;
-		tabsync.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
-		}
-	}
-	function rm(torm){
-		if (readCookie("acid") != null){
-		var tabsrm = new XMLHttpRequest();
-		tabsrm.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/rm");
-		tabsrm.withCredentials = true;
-		tabsrm.send(readCookie("acid") + ";" + readCookie("devid") + ";" + torm);
-		}
-	}
+                                if (tabs == null) {
+                                    // ls.setItem("tabs", JSON.stringify([]));
+                                    // tabs = ls.getItem("tabs");
+                                    document
+                                        .getElementById("tab-btn")
+                                        .setAttribute("class", "");
+                                    document.getElementById(
+                                        "tab-btn"
+                                    ).innerText = "Tab";
+                                } else {
+                                    tabs = JSON.parse(tabs);
 
-function tab_click(){
-if (readCookie("tabs") == null){
-createCookie("tabs", encodeURIComponent(query) + ",", 30);
-var tabs = readCookie("tabs");
-eraseCookie("tabs");
-createCookie("tabs", encodeURIComponent(query) + "," + tabs, 30);
-document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("tab-btn").innerText = "Tabbed";
-sync();
-} else{
-if (readCookie("tabs").includes(encodeURIComponent(query) + ",") == false){
-var tabs = readCookie("tabs");
-eraseCookie("tabs");
-createCookie("tabs", encodeURIComponent(query) + "," + tabs, 30);
-document.getElementById("tab-btn").setAttribute("class", "crossbar-button-active");
-document.getElementById("tab-btn").innerText = "Tabbed";
-} else{
-var tabs = readCookie("tabs");
-var tab1 = tabs.split(encodeURIComponent(query) + ",")[0];
-var tab2 = tabs.split(encodeURIComponent(query) + ",")[1];
-eraseCookie("tabs");
-createCookie("tabs", tab1 + tab2, 30);
-document.getElementById("tab-btn").setAttribute("class", "crossbar");
-document.getElementById("tab-btn").innerText = "Tab";
-rm(encodeURIComponent(query));
-}
-}
-}
-</script></button></div></div>
-<div id="resInfo-0"></div>
-<script onload="loadcall()" async src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"></script>
-<div class="gcse-searchresults-only"></div>
-</div>
-</div>
-<!-- Sidebar -->
-<div id="sidebar" class="sidebar-h">
-&nbsp
-<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
-</div>
-<script>
-window.addEventListener('click', function(e){   
-  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
-    // Clicked in box
-  } else{
-    // Clicked outside the box
-	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
-  }
-});
-</script>
-<script>
-var query = new URL(window.location).searchParams.get('q');
-document.getElementById("title").innerText = "Stella - " + query;
-document.getElementById("sb").value = query;
-var qu = 0;
-function loadcall(){
-setTimeout("tab_location()", 300);
-checkBlock(query);
-}
+                                    const found = tabs.find(
+                                        (item) => item.query === query
+                                    );
+                                    console.log(found);
 
-function placement(result, type, processed){
-	if (qu == 0){
-	var res = document.getElementById("resInfo-0");
-	if (type == "fact"){
-	res.innerHTML = res.innerHTML + "<div class=\"block-results\"><h1>" + processed + "</h1><p>" + result + "</p></div><a class=\"a\" href=\"https://forms.gle/qgNQNK7GFJ46MXz3A\"><p>Feedback</p></a>";
-	} else{
-	res.innerHTML = res.innerHTML + "<div class=\"block-results\"><p>" + processed + "</p><h1>" + result + "</h1></div><a class=\"a\" href=\"https://forms.gle/qgNQNK7GFJ46MXz3A\"><p>Feedback</p></a>";
-	}
-	qu = 1;
-	}
-}
+                                    document.getElementById(
+                                        "tab-btn"
+                                    ).innerText = "Tab";
+                                    if (found) {
+                                        document
+                                            .getElementById("tab-btn")
+                                            .setAttribute(
+                                                "class",
+                                                "crossbar-button-active"
+                                            );
+                                        document.getElementById(
+                                            "tab-btn"
+                                        ).innerText = "Tabbed";
+                                    } else {
+                                        document
+                                            .getElementById("tab-btn")
+                                            .setAttribute("class", "");
+                                        document.getElementById(
+                                            "tab-btn"
+                                        ).innerText = "Tab";
+                                    }
+                                }
 
-function tab_location(){
-var locator = window.location.toString();
-var locator = locator.split("#");
-if (locator[1].includes("gsc.tab=0") == true){
-console.log(locator[1].includes("gsc.tab=0"));
-document.getElementById("text-btn").setAttribute("class", "crossbar-button-active");
-}
-if (locator[1].includes("gsc.tab=1") == true){
-console.log(locator[1].includes("gsc.tab=1"));
-document.getElementById("image-btn").setAttribute("class", "crossbar-button-active");
-}
-}
-</script>
-<script src="../global_ass/script.js"></script>
-</body>
+                                function sync() {
+                                    if (readCookie("acid") != null) {
+                                        var tabsync = new XMLHttpRequest();
+                                        tabsync.open(
+                                            "POST",
+                                            "https://s.stella.hs.vc/api/synchronise/tabs/add"
+                                        );
+                                        tabsync.withCredentials = true;
+                                        tabsync.send(
+                                            readCookie("acid") +
+                                                ";" +
+                                                readCookie("devid") +
+                                                ";" +
+                                                readCookie("tabs")
+                                        );
+                                    } else {
+                                        console.warn(
+                                            "A force sync was requested, but no Stella ID has been initialised on this device."
+                                        );
+                                    }
+                                }
+                                function rm(torm) {
+                                    if (readCookie("acid") != null) {
+                                        var tabsrm = new XMLHttpRequest();
+                                        tabsrm.open(
+                                            "POST",
+                                            "https://s.stella.hs.vc/api/synchronise/tabs/rm"
+                                        );
+                                        tabsrm.withCredentials = true;
+                                        tabsrm.send(
+                                            readCookie("acid") +
+                                                ";" +
+                                                readCookie("devid") +
+                                                ";" +
+                                                torm
+                                        );
+                                    }
+                                }
+
+                                function tab_click() {
+                                    const ls = window.localStorage;
+                                    let tabs = ls.getItem("tabs");
+                                    if (tabs == null) {
+                                        ls.setItem(
+                                            "tabs",
+                                            JSON.stringify([
+                                                {
+                                                    type: "search",
+                                                    query: query,
+                                                },
+                                            ])
+                                        );
+
+                                        tabs = ls.getItem("tabs");
+                                        document
+                                            .getElementById("tab-btn")
+                                            .setAttribute(
+                                                "class",
+                                                "crossbar-button-active"
+                                            );
+                                        return (document.getElementById(
+                                            "tab-btn"
+                                        ).innerText = "Tabbed");
+                                    }
+
+                                    tabs = JSON.parse(tabs);
+                                    const found = tabs.find(
+                                        (item) => item.query === query
+                                    );
+
+                                    for (const item of tabs) {
+                                        if (item.query == query) {
+                                            tabs.splice(tabs.indexOf(item), 1);
+                                            ls.setItem(
+                                                "tabs",
+                                                JSON.stringify(tabs)
+                                            );
+                                            document
+                                                .getElementById("tab-btn")
+                                                .setAttribute("class", "");
+                                            document.getElementById(
+                                                "tab-btn"
+                                            ).innerText = "Tab";
+                                            return rm(
+                                                encodeURIComponent(query)
+                                            );
+                                        }
+                                    }
+
+                                    if (!found) {
+                                        tabs.push({
+                                            type: "search",
+                                            query: query,
+                                        });
+                                        ls.setItem(
+                                            "tabs",
+                                            JSON.stringify(tabs)
+                                        );
+                                        document
+                                            .getElementById("tab-btn")
+                                            .setAttribute(
+                                                "class",
+                                                "crossbar-button-active"
+                                            );
+                                        document.getElementById(
+                                            "tab-btn"
+                                        ).innerText = "Tabbed";
+                                        return sync();
+                                    }
+                                }
+                            </script>
+                        </button>
+                    </div>
+                </div>
+                <div id="resInfo-0"></div>
+                <script
+                    onload="loadcall()"
+                    async
+                    src="https://cse.google.com/cse.js?cx=012222161208944868770:76blcc7ir91"
+                ></script>
+                <div class="gcse-searchresults-only"></div>
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar-h">
+            &nbsp
+            <iframe
+                name="sidebar-in"
+                id="sidebar-in"
+                frameborder="0"
+                style="height: 100vh"
+            ></iframe>
+        </div>
+        <script>
+            window.addEventListener("click", function (e) {
+                if (
+                    document.getElementById("sidebar-in").contains(e.target) ||
+                    document.getElementById("ham").contains(e.target)
+                ) {
+                    // Clicked in box
+                } else {
+                    // Clicked outside the box
+                    document
+                        .getElementById("sidebar")
+                        .setAttribute("class", "sidebar-h");
+                }
+            });
+        </script>
+        <script>
+            var query = new URL(window.location).searchParams.get("q");
+            document.getElementById("title").innerText = "Stella - " + query;
+            document.getElementById("sb").value = query;
+            var qu = 0;
+            function loadcall() {
+                setTimeout("tab_location()", 300);
+                checkBlock(query);
+            }
+
+            function placement(result, type, processed) {
+                if (qu == 0) {
+                    var res = document.getElementById("resInfo-0");
+                    if (type == "fact") {
+                        res.innerHTML =
+                            res.innerHTML +
+                            '<div class="block-results"><h1>' +
+                            processed +
+                            "</h1><p>" +
+                            result +
+                            '</p></div><a class="a" href="https://forms.gle/qgNQNK7GFJ46MXz3A"><p>Feedback</p></a>';
+                    } else {
+                        res.innerHTML =
+                            res.innerHTML +
+                            '<div class="block-results"><p>' +
+                            processed +
+                            "</p><h1>" +
+                            result +
+                            '</h1></div><a class="a" href="https://forms.gle/qgNQNK7GFJ46MXz3A"><p>Feedback</p></a>';
+                    }
+                    qu = 1;
+                }
+            }
+
+            function tab_location() {
+                var locator = window.location.toString();
+                var locator = locator.split("#");
+                if (locator[1].includes("gsc.tab=0") == true) {
+                    console.log(locator[1].includes("gsc.tab=0"));
+                    document
+                        .getElementById("text-btn")
+                        .setAttribute("class", "crossbar-button-active");
+                }
+                if (locator[1].includes("gsc.tab=1") == true) {
+                    console.log(locator[1].includes("gsc.tab=1"));
+                    document
+                        .getElementById("image-btn")
+                        .setAttribute("class", "crossbar-button-active");
+                }
+            }
+        </script>
+        <script src="../global_ass/script.js"></script>
+    </body>
 </html>
