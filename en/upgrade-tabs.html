@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Upgrading your tabs experience...</title>
+        <link href="unified.css" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="updating">
+                <h1>Finishing updates...</h1>
+                <p>
+                    Your Tabs experience is being upgraded. This should only
+                    take a few seconds.
+                </p>
+            </div>
+            <div style="display: none" class="whatsnew">
+                <h1>Meet the new Tabs</h1>
+                <p>Your experience with Tabs has just been upgraded!</p>
+
+                <button onclick="goTo()">Continue to Stella</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        function createCookie(name, valued, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                var expires = "; expires=" + date.toGMTString();
+            } else var expires = "";
+            document.cookie = name + "=" + valued + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(";");
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0)
+                    return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            createCookie(name, "", -1);
+        }
+
+        const nextParam = new URL(window.location.href).searchParams.get(
+            "next"
+        );
+
+        const nextURL = nextParam ? decodeURIComponent(nextParam) : "/";
+
+        function goTo() {
+            window.location.replace(nextURL);
+        }
+
+        function updateTabs() {
+            const tabs = readCookie("tabs");
+
+            if (tabs == null) {
+                return window.location.replace(nextURL);
+            }
+
+            const oldTabList = tabs.split(",");
+
+            let newTabList = oldTabList.map((tab) => {
+                return { type: "search", query: decodeURIComponent(tab) };
+            });
+
+            newTabList = newTabList.filter((tab) => {
+                return tab.query !== "";
+            });
+
+            const ls = window.localStorage;
+
+            let newTabs = ls.getItem("tabs");
+
+            if (newTabs == null) {
+                newTabs = [];
+            } else {
+                newTabs = JSON.parse(newTabs);
+            }
+
+            newTabs = newTabs.concat(newTabList);
+
+            ls.setItem("tabs", JSON.stringify(newTabs));
+
+            eraseCookie("tabs");
+
+            setTimeout(() => {
+                document.getElementsByClassName("updating")[0].style.display =
+                    "none";
+                document.getElementsByClassName("whatsnew")[0].style.display =
+                    "block";
+            }, 2000);
+        }
+
+        updateTabs();
+    </script>
+</html>

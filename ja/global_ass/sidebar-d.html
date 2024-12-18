@@ -1,58 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<title>sidebar</title>
-<link href="sidebar.css" rel="stylesheet"/>
-<meta charset="utf8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/png" href="favicon.png"/>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-<div class="hidden" style="font-family: 'M1 PLUS 1p'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
-<div style="display: none;" id="id_section">
-<h1 style="margin: 30px">ID</h1>
-<div id="id_not_logged_in" style="display: none;" class="id-box">
-<a class="a" target="_TOP" href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/loginja-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="><p style="padding: 0; margin: 0;">StellaIDにログインします</p></a>
-<a class="a" target="_TOP" href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/signupja-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="><p style="padding: 0; margin: 0;">StellaIDにサインアップ</p></a>
-</div>
-<div id="id_logged_in" style="display: none;" class="id-box">
-	<a class="a-img">
-		<style>
-			.a-img{
-				background-image: url('/images/id-placeholder-thick.png'); background-size: contain;
-				background-repeat: no-repeat;
-				background-position: left;
-				width: 50px;
-				height: 50px;
-				display: inline-block;
-				vertical-align: top;
-				opacity: 0.7;
-			}
-			@media(prefers-color-scheme: dark){
-				.a-img{
-				filter: invert();
-			}
-			}
-		</style>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><h2 id="nawa" style="padding: 0; margin: 0; display: inline-block; vertical-align: top; line-height: 50px; margin-left: 10px;">Stellaからこんにちは :D</h2>
-		<p style="margin: 0; margin-top: 10px;">アカウント管理</p>
-		<a onclick="logout();" class="a"><p style="margin: 0;">ログアウト</p></a>
-	</div>
-	<div id="id_sync_not_working" style="display: none;" class="id-box">
-		<h2 style="margin: 0; padding: 0;">同期が機能していません！</h2>
-		<p style="margin: 0; padding: 0;">ごめんなさい！ 同期は現在機能していません。まもなく利用できるようになります。 アカウント情報は更新されません。</p>
-	</div>
-</div>
-<h1 style="margin: 30px">ロケール</h1>
-<div class="country"><p><b>国： </b>イギリス</p><p><b>言語： </b>日本語</p><p style="font-size: 12px;">こんにちは！</p></div>
-<h1 style="margin: 30px">サービス</h1>
-<div class="services">
-<div class="items">
-<a class="a" href="../index-d.html" target="_TOP"><p>探す</p></a>
-<a class="a" href="../tabs-d.html" target="_TOP"><p>タブ</p></a>
- <a class="a" href="https://pay.stella.hs.vc" target="_TOP"><p>ベータ版を支払う</p></a>
- <a class="a" href="../maps/maps-d.html" target="_TOP"><p>マップアルファ</p></a>
-</div>
-</div>
-</body>
+    <head>
+        <title>sidebar</title>
+        <link href="sidebar.css" rel="stylesheet" />
+        <meta charset="utf8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'M1 PLUS 1p'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div style="display: none" id="id_section">
+            <h1 style="margin: 30px">ID</h1>
+            <div id="id_not_logged_in" style="display: none" class="id-box">
+                <a
+                    class="a"
+                    target="_TOP"
+                    href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/loginja-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="
+                    ><p style="padding: 0; margin: 0">
+                        Stella IDにログインします
+                    </p></a
+                >
+                <a
+                    class="a"
+                    target="_TOP"
+                    href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/signupja-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="
+                    ><p style="padding: 0; margin: 0">
+                        Stella IDにサインアップ
+                    </p></a
+                >
+            </div>
+            <div id="id_logged_in" style="display: none" class="id-box">
+                <style>
+                    .a-img {
+                        background-image: url("/images/id-placeholder-thick.png");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: left;
+                        width: 50px;
+                        height: 50px;
+                        display: inline-block;
+                        vertical-align: top;
+                        opacity: 0.7;
+                    }
+                    @media (prefers-color-scheme: dark) {
+                        .a-img {
+                            filter: invert();
+                        }
+                    }
+                </style>
+                <a class="a-img">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <h2
+                    id="nawa"
+                    style="
+                        padding: 0;
+                        margin: 0;
+                        display: inline-block;
+                        vertical-align: top;
+                        line-height: 50px;
+                        margin-left: 10px;
+                    "
+                >
+                    Stellaからこんにちは :D
+                </h2>
+                <p style="margin: 0; margin-top: 10px">アカウント管理</p>
+                <a onclick="logout();" class="a"
+                    ><p style="margin: 0">ログアウト</p></a
+                >
+            </div>
+            <div id="id_sync_not_working" style="display: none" class="id-box">
+                <h2 style="margin: 0; padding: 0">同期が機能していません！</h2>
+                <p style="margin: 0; padding: 0">
+                    ごめんなさい！
+                    同期は現在機能していません。まもなく利用できるようになります。
+                    アカウント情報は更新されません。
+                </p>
+            </div>
+        </div>
+        <h1 style="margin: 30px">言語</h1>
+        <div class="country">
+            <p><b>国： </b>日本</p>
+            <p><b>言語： </b>日本語</p>
+            <p style="font-size: 12px">こんにちは！</p>
+        </div>
+        <h1 style="margin: 30px">Stellaサービス</h1>
+        <div class="services">
+            <div class="items">
+                <a class="a" href="/ja/index-d.html" target="_TOP"
+                    ><p>探す</p></a
+                >
+                <a class="a" href="/ja/tabs-d.html" target="_TOP"
+                    ><p>タブ</p></a
+                >
+                <a
+                    class="a"
+                    style="display: none"
+                    href="https://pay.stella.hs.vc"
+                    target="_TOP"
+                    ><p>ベータ版を支払う</p></a
+                >
+                <a class="a" href="/ja/maps/maps-d.html" target="_TOP"
+                    ><p>マップ</p></a
+                >
+            </div>
+        </div>
+    </body>
 </html>

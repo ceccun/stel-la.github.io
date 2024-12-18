@@ -1,179 +1,305 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<title id="title">Stella - Tabs List.</title>
-<meta charset="UTF-8">
-<link href="tabs-desk.css" rel="stylesheet"/>
-<script type="text/javascript">
-if (window.innerWidth < window.innerHeight){
-window.location.replace("tabs-m.html");
-}
-function createCookie(name,valued,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+valued+expires+"; path=/";
-}
+    <head>
+        <title id="title">Stella - Tabs List.</title>
+        <meta charset="UTF-8" />
+        <link href="tabs-desk.css" rel="stylesheet" />
+        <script type="text/javascript">
+            if (window.innerWidth < window.innerHeight) {
+                window.location.replace("tabs-m.html");
+            }
+            function createCookie(name, valued, days) {
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                    var expires = "; expires=" + date.toGMTString();
+                } else var expires = "";
+                document.cookie = name + "=" + valued + expires + "; path=/";
+            }
 
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
+            function readCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(";");
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0)
+                        return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
 
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/png" href="favicon.png"/>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
-</head>
-<body>
-<!-- Adrenaline Engine 5 -->
-<div class="hidden" style="font-family: 'Inter'"><p>See this message? There may be an issue with your browser, try refreshing the page or coming back later.</p></div>
-<div class="rainbow-head">
-<div class="rainbow-head-inner">
-<p>&nbsp </p>
-</div>
-</div>
-<div class="content">
-<div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
-<div style="margin-top: -20px;">
-<a href="index-d.html" class="a">
-<h1 style="display: inline-block; vertical-align: middle; margin-right: 10px;">Stella</h1></a></div>
-<div id="ham" onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');" class="hamburger">
-<image src="../images/hamburger.svg"></image>
-</div>
-</div>
-<div style="margin-top: -40px;">
-<div style="font-size: 34px; margin-top: 10vh; text-align: center;">
-<h1 style="margin: 0; padding: 0;">Tabs List</h1>
-<p id="stats" style="font-size: 20px; margin-top: 5px; padding: 0;">Gathering Information...</p>
-</div>
-<div class="content">
-<div style="display: none;" id="notab">
-<center>
-<img src="../images/empty.svg" style="height: 30vh;">
-<p>Tap "+" on searches and content to add it to your tabs.
-</center>
-</div>
-<div class="tl" id="tab-list">
-<center id="appendzone">
+            function eraseCookie(name) {
+                createCookie(name, "", -1);
+            }
+        </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- Adrenaline Engine 5 -->
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+        <div class="content">
+            <div
+                style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 40px;
+                "
+            >
+                <div style="margin-top: -20px">
+                    <a href="index-d.html" class="a">
+                        <h1
+                            style="
+                                display: inline-block;
+                                vertical-align: middle;
+                                margin-right: 10px;
+                            "
+                        >
+                            Stella
+                        </h1></a
+                    >
+                </div>
+                <div
+                    id="ham"
+                    onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('global_ass/sidebar-d.html', 'sidebar-in');"
+                    class="hamburger"
+                >
+                    <image src="../images/hamburger.svg"></image>
+                </div>
+            </div>
+            <div style="margin-top: -40px">
+                <div
+                    style="
+                        font-size: 34px;
+                        margin-top: 10vh;
+                        text-align: center;
+                    "
+                >
+                    <h1 style="margin: 0; padding: 0">Tabs List</h1>
+                    <p
+                        id="stats"
+                        style="font-size: 20px; margin-top: 5px; padding: 0"
+                    >
+                        Gathering Information...
+                    </p>
+                </div>
+                <div class="content">
+                    <div style="display: none" id="notab">
+                        <center>
+                            <img
+                                src="../images/empty.svg"
+                                style="height: 30vh"
+                            />
+                            <p>
+                                Tap "Tab" on searches and content to add it to
+                                your tabs.
+                            </p>
+                        </center>
+                    </div>
+                    <div class="tl" id="tab-list">
+                        <center id="appendzone"></center>
+                    </div>
+                </div>
+                <script>
+                    const ls = window.localStorage;
 
+                    var relver = new URL(window.location).searchParams.get(
+                        "rel"
+                    );
+                    if (relver != "verified") {
+                        if (gettabs() == true) {
+                            window.location.replace("tabs-d.html?rel=verified");
+                        }
+                    } else {
+                        window.history.replaceState(
+                            "",
+                            "Stella - Tabs List.",
+                            "tabs-d.html"
+                        );
+                    }
 
-</center>
-</div>
-</div>
-<script>
-var tabs = readCookie("tabs");
-var relver = new URL(window.location).searchParams.get("rel");
-if (relver != "verified"){
-if (gettabs() == true){
-window.location.replace("tabs-d.html?rel=verified");
-}
-} else{
-	window.history.replaceState("","Stella - Tabs List.", "tabs-d.html");
-}
-var tabs = tabs.split(",");
-tabs.forEach(tabParse);
+                    var tabs = ls.getItem("tabs");
 
-function tabParse(item, index){
-var zone = document.getElementById("appendzone");
-var container = document.createElement("div");
-container.innerHTML = "<p>" + decodeURIComponent(item) + "</p><a href='#' class='a' style='text-decoration: none;' onclick='removeTab(\"" + item + "\")'><p>✖</p></a>";
-if (item != ""){ zone.append(container); }
-document.getElementById("stats").innerText = ""
-}
+                    if (tabs == null) {
+                        document.getElementById("stats").innerText =
+                            "No tabs found.";
+                        document.getElementById("notab").style.display =
+                            "block";
+                    } else {
+                        tabs = JSON.parse(tabs);
 
-function removeTab(item){
-var tabs = readCookie("tabs");
-var tab1 = tabs.split(item + ",")[0];
-var tab2 = tabs.split(item + ",")[1];
-eraseCookie("tabs");
-createCookie("tabs", tab1 + tab2, 30);
-if (readCookie("acid") != null){
-	if (rm(item) == true){
-		window.location.replace("");
-	}
-} else{
-window.location.replace("");
-}
-}
+                        if (tabs.length == 0) {
+                            document.getElementById("stats").innerText =
+                                "No tabs found.";
+                            document.getElementById("notab").style.display =
+                                "block";
+                        }
 
-function gettabs(){
-		if (readCookie("acid") != null){
-		var tabsync = new XMLHttpRequest();
-		tabsync.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/get");
-		tabsync.withCredentials = true;
-		tabsync.onreadystatechange = function (){
-			if (this.readyState == 4){
-				console.log(this.responseText);
-				createCookie("tabs", this.responseText, 30);
-				tabs = this.responseText;
-				return true;
-			}
-		}
-		tabsync.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
-		} else{
-			return false;
-		}
-	}
-function appendtabs(){
-		if (readCookie("acid") != null){
-		var tabap = new XMLHttpRequest();
-		tabap.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/add");
-		tabsync.onreadystatechange = function (){
-			if (this.readyState == 4){
-				return true;
-			}
-		}
-		tabap.withCredentials = true;
-		tabap.send(readCookie("acid") + ";" + readCookie("devid") + ";" + readCookie("tabs"));
-		} else{
-			return false;
-		}
-	}
-	function rm(torm){
-		if (readCookie("acid") != null){
-		var tabsrm = new XMLHttpRequest();
-		tabsrm.open("POST", "https://s.stella.hs.vc/api/synchronise/tabs/rm");
-		tabsrm.onreadystatechange = function (){
-			if (this.readyState == 4){
-				window.location.reload();
-				return true;
-			}
-		}
-		tabsrm.withCredentials = true;
-		tabsrm.send(readCookie("acid") + ";" + readCookie("devid") + ";" + torm);
-		} else{
-			return false;
-		}
-	}
-</script>
-<!-- Sidebar -->
-<div id="sidebar" class="sidebar-h">
-&nbsp
-<iframe name="sidebar-in" id="sidebar-in" frameborder="0" style="height: 100vh;"></iframe>
-</div>
-<script>
-window.addEventListener('click', function(e){   
-  if (document.getElementById('sidebar-in').contains(e.target) || document.getElementById('ham').contains(e.target)){
-    // Clicked in box
-  } else{
-    // Clicked outside the box
-	document.getElementById('sidebar').setAttribute('class','sidebar-h'); 
-  }
-});
-</script>
-<script src="global_ass/script.js"></script>
-</body>
+                        tabs.forEach(tabParse);
+                    }
+
+                    function tabParse(item, index) {
+                        var zone = document.getElementById("appendzone");
+                        var container = document.createElement("div");
+                        if (item.type == "search") {
+                            var p = document.createElement("p");
+                            p.innerText = item.query;
+
+                            var rmBtn = document.createElement("a");
+                            rmBtn.innerText = "✖";
+                            rmBtn.onclick = () => {
+                                removeTab(item.query);
+                            };
+                            rmBtn.href = "#";
+                            rmBtn.style.textDecoration = "none";
+
+                            container.append(p);
+                            container.appendChild(rmBtn);
+
+                            zone.append(container);
+                            document.getElementById("stats").innerText = "";
+                        }
+                    }
+
+                    function removeTab(item) {
+                        tabs.forEach((tab, index) => {
+                            if (tab.query == item) {
+                                tabs.splice(index, 1);
+                            }
+                        });
+
+                        ls.setItem("tabs", JSON.stringify(tabs));
+
+                        if (readCookie("acid") != null) {
+                            if (rm(item) == true) {
+                                window.location.replace("");
+                            }
+                        } else {
+                            window.location.replace("");
+                        }
+                    }
+
+                    function gettabs() {
+                        if (readCookie("acid") != null) {
+                            var tabsync = new XMLHttpRequest();
+                            tabsync.open(
+                                "POST",
+                                "https://s.stella.hs.vc/api/synchronise/tabs/get"
+                            );
+                            tabsync.withCredentials = true;
+                            tabsync.onreadystatechange = function () {
+                                if (this.readyState == 4) {
+                                    console.log(this.responseText);
+                                    createCookie("tabs", this.responseText, 30);
+                                    tabs = this.responseText;
+                                    return true;
+                                }
+                            };
+                            tabsync.send(
+                                readCookie("acid") +
+                                    ";" +
+                                    readCookie("devid") +
+                                    ";" +
+                                    readCookie("tabs")
+                            );
+                        } else {
+                            return false;
+                        }
+                    }
+                    function appendtabs() {
+                        if (readCookie("acid") != null) {
+                            var tabap = new XMLHttpRequest();
+                            tabap.open(
+                                "POST",
+                                "https://s.stella.hs.vc/api/synchronise/tabs/add"
+                            );
+                            tabsync.onreadystatechange = function () {
+                                if (this.readyState == 4) {
+                                    return true;
+                                }
+                            };
+                            tabap.withCredentials = true;
+                            tabap.send(
+                                readCookie("acid") +
+                                    ";" +
+                                    readCookie("devid") +
+                                    ";" +
+                                    readCookie("tabs")
+                            );
+                        } else {
+                            return false;
+                        }
+                    }
+                    function rm(torm) {
+                        if (readCookie("acid") != null) {
+                            var tabsrm = new XMLHttpRequest();
+                            tabsrm.open(
+                                "POST",
+                                "https://s.stella.hs.vc/api/synchronise/tabs/rm"
+                            );
+                            tabsrm.onreadystatechange = function () {
+                                if (this.readyState == 4) {
+                                    window.location.reload();
+                                    return true;
+                                }
+                            };
+                            tabsrm.withCredentials = true;
+                            tabsrm.send(
+                                readCookie("acid") +
+                                    ";" +
+                                    readCookie("devid") +
+                                    ";" +
+                                    torm
+                            );
+                        } else {
+                            return false;
+                        }
+                    }
+                </script>
+                <!-- Sidebar -->
+                <div id="sidebar" class="sidebar-h">
+                    &nbsp
+                    <iframe
+                        name="sidebar-in"
+                        id="sidebar-in"
+                        frameborder="0"
+                        style="height: 100vh"
+                    ></iframe>
+                </div>
+                <script>
+                    window.addEventListener("click", function (e) {
+                        if (
+                            document
+                                .getElementById("sidebar-in")
+                                .contains(e.target) ||
+                            document.getElementById("ham").contains(e.target)
+                        ) {
+                            // Clicked in box
+                        } else {
+                            // Clicked outside the box
+                            document
+                                .getElementById("sidebar")
+                                .setAttribute("class", "sidebar-h");
+                        }
+                    });
+                </script>
+                <script src="global_ass/script.js"></script>
+            </div>
+        </div>
+    </body>
 </html>
