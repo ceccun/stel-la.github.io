@@ -22,7 +22,7 @@ function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
-const API_DOMAIN = "https://deprecated-accounts.zen-platform.ceccun.com/";
+const API_DOMAIN = "https://deprecated-accounts.zen-platform.ceccun.com";
 
 if (
     readCookie("cookiecons") == null &&
