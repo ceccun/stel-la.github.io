@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stella - Tabs List</title>
+        <link rel="stylesheet" href="/en/unified.css" />
+        <link rel="stylesheet" href="/en/tabs-unified.css" />
+
+        <!-- <link rel="stylesheet" href="/en/id/id.css" /> -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div style="text-align: right; width: 100%; margin-bottom: 40px">
+                &nbsp
+                <div
+                    id="ham"
+                    onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); 
+    window.open('global_ass/sidebar-d.html', 'sidebar-in');"
+                    class="hamburger"
+                >
+                    <image src="../images/hamburger.svg"></image>
+                </div>
+            </div>
+            <h1>Tabs Lists</h1>
+            <div id="tab_lists"></div>
+
+            <div id="no_tabs" style="display: none">
+                <p>You don&apos;t have any Tabs.</p>
+                <p>Click "Tab" anytime you see it to add things here.</p>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar-h">
+            &nbsp
+            <iframe
+                name="sidebar-in"
+                id="sidebar-in"
+                frameborder="0"
+                style="height: 100vh"
+            ></iframe>
+        </div>
+        <script>
+            window.addEventListener("click", function (e) {
+                if (
+                    document.getElementById("sidebar-in").contains(e.target) ||
+                    document.getElementById("ham").contains(e.target)
+                ) {
+                    // Clicked in box
+                } else {
+                    // Clicked outside the box
+                    document
+                        .getElementById("sidebar")
+                        .setAttribute("class", "sidebar-h");
+                }
+            });
+        </script>
+
+        <script src="/en/global_ass/script.js"></script>
+        <script>
+            const ls = window.localStorage;
+            const noTabs = document.getElementById("no_tabs");
+            const tabLists = document.getElementById("tab_lists");
+            let tabs = ls.getItem("tabs");
+            let listName = "My Tabs";
+
+            const loadTabs = () => {
+                if (!tabs) {
+                    ls.setItem("tabs", JSON.stringify([]));
+
+                    tabLists.style.display = "none";
+
+                    return (noTabs.style.display = "block");
+                }
+
+                const tabsParsed = JSON.parse(tabs);
+                if (tabsParsed.length == 0) {
+                    tabLists.style.display = "none";
+
+                    return (noTabs.style.display = "block");
+                }
+                noTabs.style.display = "none";
+
+                tabLists.innerHTML = "";
+
+                const nameP = document.createElement("p");
+                nameP.innerText = listName;
+
+                tabLists.appendChild(nameP);
+
+                const tabGrid = document.createElement("div");
+                tabGrid.classList.add("tabGrid");
+
+                // <div class="tab">
+                //         <button class="discreteButton">
+                //             <img
+                //                 src="/images/search.png"
+                //                 alt="Search icon"
+                //                 class="icon"
+                //             />
+                //             <img
+                //                 src="/images/trash-2.svg"
+                //                 alt="Remove"
+                //                 class="removeIcon"
+                //             />
+                //         </button>
+                //         <div class="tab-inner">
+                //             <h3>google</h3>
+                //             <p>Search</p>
+                //         </div>
+                //     </div>
+
+                // Loop through tabsParsed
+                for (let i = 0; i < tabsParsed.length; i++) {
+                    const { query, type } = tabsParsed[i];
+
+                    const tabContainer = document.createElement("div");
+                    tabContainer.classList.add("tab");
+
+                    const removeButton = document.createElement("button");
+                    removeButton.classList.add("discreteButton");
+
+                    const searchIcon = document.createElement("img");
+                    searchIcon.src = "/images/search.png";
+                    searchIcon.alt = "Search icon";
+                    searchIcon.classList.add("icon");
+                    const removeIcon = document.createElement("img");
+                    removeIcon.src = "/images/trash-2.svg";
+                    removeIcon.alt = "Remove";
+                    removeIcon.classList.add("removeIcon");
+
+                    removeButton.onclick = () => {
+                        removeTab(query, type);
+                    };
+
+                    removeButton.appendChild(searchIcon);
+                    removeButton.appendChild(removeIcon);
+
+                    const tabInner = document.createElement("div");
+                    tabInner.classList.add("tab-inner");
+
+                    const tabTitle = document.createElement("h3");
+                    tabTitle.innerText = query;
+
+                    const tabDesc = document.createElement("p");
+                    tabDesc.innerText =
+                        type.charAt(0).toUpperCase() + type.slice(1);
+
+                    tabInner.appendChild(tabTitle);
+                    tabInner.appendChild(tabDesc);
+
+                    tabContainer.appendChild(removeButton);
+                    tabContainer.appendChild(tabInner);
+
+                    tabGrid.appendChild(tabContainer);
+                }
+
+                tabLists.appendChild(tabGrid);
+            };
+
+            const syncCb = (oldTabs) => {
+                const newTabs = ls.getItem("tabs");
+                const acname = ls.getItem("acname");
+
+                const token = ls.getItem("token");
+                const settings = ls.getItem("local.settings");
+
+                const settingsParsed = JSON.parse(settings);
+
+                if (acname) {
+                    listName = acname + "'s Tabs";
+
+                    if (settingsParsed && !settingsParsed.sync) {
+                        listName = `${acname}'s Tabs on this device`;
+                    }
+                } else {
+                    listName = "Tabs on Stella ID";
+
+                    if (settingsParsed && !settingsParsed.sync) {
+                        listName = `Tabs not on Stella ID`;
+                    }
+                }
+
+                if (!token) {
+                    listName = "My Tabs";
+                }
+
+                if (oldTabs != newTabs) {
+                    tabs = newTabs;
+                    ls.setItem("tabs", newTabs);
+                    loadTabs();
+                }
+            };
+
+            const removeTab = (query, type) => {
+                const localTabs = ls.getItem("tabs");
+                // First remove the Tab from the local database
+                const tabsParsed = JSON.parse(localTabs);
+
+                let index = null;
+
+                for (let i = 0; i < tabsParsed.length; i++) {
+                    const entry = tabsParsed[i];
+
+                    if (entry.query != query) {
+                        continue;
+                    }
+                    if (entry.type != type) {
+                        continue;
+                    }
+
+                    index = i;
+                }
+
+                let removedTabs = ls.getItem("removedTabs");
+
+                if (!removedTabs) {
+                    removedTabs = [];
+                } else {
+                    removedTabs = JSON.parse(removedTabs);
+                }
+
+                removedTabs.push({
+                    timestamp: Date.now(),
+                    ...tabsParsed[index],
+                });
+
+                tabsParsed.splice(index, 1);
+
+                ls.setItem("tabs", JSON.stringify(tabsParsed));
+                ls.setItem("removedTabs", JSON.stringify(removedTabs));
+
+                listName = listName + " - Still syncing...";
+
+                tabs = JSON.stringify(tabsParsed);
+                loadTabs();
+
+                addSyncTask("remove", "tabs");
+                sync(() => {
+                    addSyncTask("download", "tabs");
+                    const oldTabs = JSON.stringify(tabs);
+                    sync(() => syncCb(oldTabs));
+                });
+            };
+
+            const checkForTabs = () => {
+                addSyncTask("download", "tabs");
+                const oldTabs = JSON.stringify(tabs);
+                sync(() => syncCb(oldTabs));
+            };
+
+            if (ls.getItem("token")) {
+                listName = "Tabs on this device - Still syncing...";
+            }
+            loadTabs();
+            checkForTabs();
+        </script>
+    </body>
+</html>

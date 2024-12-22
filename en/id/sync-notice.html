@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sync this device? - Stella ID</title>
+        <link rel="stylesheet" href="/en/unified.css" />
+        <link rel="stylesheet" href="/en/id/id.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                <h2>Sync with this device?</h2>
+                <p>
+                    Sync ensures you get the same Stella experience across all
+                    your devices, including this one.
+                </p>
+                <p>
+                    By agreeing to sync, you agree to this Stella&apos;s Tabs,
+                    settings and session information to be uploaded to your
+                    account.
+                </p>
+                <p>
+                    In addition to that, Tabs, settings and session information
+                    will be downloaded from Stella ID onto this device where it
+                    will live permanently.
+                </p>
+                <p>
+                    If you log out of your Stella ID, your data still remains on
+                    this device.
+                </p>
+                <button onclick="sync(true)">Sync with this device</button>
+                <button onclick="sync(false)">
+                    Don&apos;t sync this device
+                </button>
+            </div>
+        </div>
+
+        <script>
+            let cb = new URL(window.location.href).searchParams.get("cb");
+            if (cb) {
+                cb = decodeURIComponent(cb);
+            }
+
+            const ls = window.localStorage;
+
+            const sync = (toggle) => {
+                ls.setItem(
+                    "local.settings",
+                    JSON.stringify({
+                        sync: toggle,
+                    })
+                );
+
+                if (toggle) {
+                    ls.setItem("uupload", JSON.stringify(["tabs"]));
+                    ls.setItem("udownload", JSON.stringify(["tabs"]));
+                }
+
+                return window.location.replace(cb || "/en/index-d");
+            };
+        </script>
+    </body>
+</html>

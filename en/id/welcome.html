@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Welcome to Stella ID</title>
+        <link rel="stylesheet" href="/en/unified.css" />
+        <link rel="stylesheet" href="/en/id/id.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                <h2 class="title">Welcome to Stella ID</h2>
+                <img
+                    src="/images/welcome-banner.svg"
+                    alt="Icons laid out horizontally in the respective order of: a Stella ID profile photo, the sync icon, Tabs icon and Blocks AI icon."
+                />
+                <p>
+                    Your new Stella experience awaits, here are some highlights
+                    of what Stella ID brings to you.
+                </p>
+                <h3>Your Tabs, everywhere¹</h3>
+                <p>
+                    When you use Tabs, you&apos;ll see Tabs that you&apos;ve
+                    created in other places you&apos;re logged in, such as your
+                    phone or tablet.
+                </p>
+
+                <h3>Blocks Nano</h3>
+                <p>Blocks powers search insights when searching on Stella.</p>
+                <p>
+                    Stella ID gives you access to Blocks Nano, an experimental
+                    and more helpful version of Blocks which is based on our
+                    language model.
+                </p>
+
+                <h3>Priority access</h3>
+                <p>
+                    Stella ID members get access to helpful new features to test
+                    and shape the way Stella works for everyone else.²
+                </p>
+
+                <a id="continueBtn" href="/en/id/sync-notice">
+                    <button>Continue</button>
+                </a>
+
+                <p>
+                    ¹Your Tabs are synced only when you opt-in to sync services
+                    on a per-device basis.
+                </p>
+                <p>
+                    ²Features are dependent on many factors and you may not
+                    receive every feature that i in the testing pool.
+                </p>
+            </div>
+        </div>
+
+        <script>
+            let cb = new URL(window.location.href).searchParams.get("cb");
+            if (cb) {
+                cb = decodeURIComponent(cb);
+            } else {
+                cb = "/";
+            }
+
+            const ls = window.localStorage;
+
+            const name = ls.getItem("acname");
+
+            const title = document.getElementsByClassName("title")[0];
+
+            const continueBtn = document.getElementById("continueBtn");
+
+            continueBtn.href = cb
+                ? `/en/id/sync-notice?cb=${encodeURIComponent(cb)}`
+                : "/en/id/sync-notice";
+
+            if (name) {
+                title.innerText = `Welcome to Stella ID, ${name.split(" ")[0]}`;
+            }
+        </script>
+    </body>
+</html>

@@ -21,7 +21,8 @@ function readCookie(name) {
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
-console.log(readCookie("omniupdate"));
+
+const API_DOMAIN = "http://deprecated-accounts.zen-platform.ceccun.com/";
 
 if (
     readCookie("cookiecons") == null &&
@@ -75,3 +76,178 @@ function updateTabs() {
 }
 
 updateTabs();
+
+async function checkSettingsExist() {
+    const ls = window.localStorage;
+    const token = ls.getItem("token");
+
+    if (!token) {
+        return;
+    }
+
+    let localSettings = ls.getItem("local.settings");
+
+    if (!localSettings) {
+        return window.location.replace(
+            `/en/id/sync-notice?cb=${encodeURIComponent(window.location.href)}`
+        );
+    }
+
+    localSettings = JSON.parse(localSettings);
+
+    if (!localSettings["sync"]) {
+        return window.location.replace(
+            `/en/id/sync-notice?cb=${encodeURIComponent(window.location.href)}`
+        );
+    }
+
+    // const f = await fetch(`${API_DOMAIN}/user/get`, {
+    //     method: "GET",
+    //     headers: {
+    //         Authorization: token,
+    //     },
+    // });
+}
+
+async function sync(done = () => {}) {
+    // Check if the user is logged in
+    const ls = window.localStorage;
+    const token = ls.getItem("token");
+
+    if (!token) return done();
+
+    // Check if the user has settings
+
+    let localSettings = ls.getItem("local.settings");
+
+    if (!localSettings) return done();
+
+    // Check if the user is syncing
+    localSettings = JSON.parse(localSettings);
+
+    if (!localSettings.sync) return done();
+
+    // Get unfinished syncs
+    let unfinishedUpload = ls.getItem("uupload");
+    let unfinishedDownload = ls.getItem("udownload");
+    let unfinishedRemove = ls.getItem("uremove");
+
+    if (unfinishedRemove) {
+        unfinishedRemove = JSON.parse(unfinishedRemove);
+
+        for (let i = 0; i < unfinishedRemove.length; i++) {
+            const item = unfinishedRemove[i];
+
+            if (item == "tabs") {
+                let removedTabs = ls.getItem("removedTabs");
+
+                if (!removedTabs) {
+                    continue;
+                } else {
+                    removedTabs = JSON.parse(removedTabs);
+                }
+
+                const sanitisedTabs = removedTabs.filter((tab) => {
+                    return tab.query != null && tab.type != undefined;
+                });
+
+                const f = await fetch(`${API_DOMAIN}/tabs/remove`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: token,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(sanitisedTabs),
+                });
+
+                if (f.status == 200) {
+                    unfinishedRemove.splice(i, 1);
+                    ls.setItem("uremove", JSON.stringify(unfinishedRemove));
+                    ls.removeItem("removedTabs");
+                }
+            }
+        }
+    }
+
+    if (unfinishedUpload) {
+        unfinishedUpload = JSON.parse(unfinishedUpload);
+
+        for (let i = 0; i < unfinishedUpload.length; i++) {
+            const item = unfinishedUpload[i];
+
+            if (item == "tabs") {
+                let tabs = ls.getItem("tabs");
+
+                if (!tabs) {
+                    continue;
+                }
+
+                tabs = JSON.parse(tabs);
+
+                const f = await fetch(`${API_DOMAIN}/tabs/sync`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    body: JSON.stringify(tabs),
+                });
+
+                if (f.status == 200) {
+                    unfinishedUpload.splice(i, 1);
+                    ls.setItem("uupload", JSON.stringify(unfinishedUpload));
+                }
+            }
+        }
+    }
+
+    if (unfinishedDownload) {
+        unfinishedDownload = JSON.parse(unfinishedDownload);
+
+        for (let i = 0; i < unfinishedDownload.length; i++) {
+            const item = unfinishedDownload[i];
+
+            if (item == "tabs") {
+                const f = await fetch(`${API_DOMAIN}/tabs/get`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: token,
+                    },
+                });
+
+                if (f.status == 200) {
+                    const data = await f.json();
+
+                    ls.setItem("tabs", JSON.stringify(data));
+                    unfinishedDownload.splice(i, 1);
+                    ls.setItem("udownload", JSON.stringify(unfinishedDownload));
+                }
+            }
+        }
+    }
+
+    done();
+}
+
+function addSyncTask(type, task) {
+    const ls = window.localStorage;
+
+    let unfinished = ls.getItem(`u${type}`);
+
+    if (!unfinished) {
+        unfinished = [];
+    } else {
+        unfinished = JSON.parse(unfinished);
+    }
+
+    if (unfinished.includes(task)) {
+        return;
+    }
+
+    unfinished.push(task);
+
+    ls.setItem(`u${type}`, JSON.stringify(unfinished));
+}
+
+checkSettingsExist();
+sync();

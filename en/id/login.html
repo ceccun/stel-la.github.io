@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Log in to Stella ID</title>
+        <link rel="stylesheet" href="/en/unified.css" />
+        <link rel="stylesheet" href="id.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                <h2>Log in to Stella ID</h2>
+                <form action="/en/id/login" method="post" id="loginForm">
+                    <div class="form">
+                        <p for="email">Email Address</p>
+                        <input type="email" id="email" name="email" required />
+                        <p for="password">Password</p>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            minlength="8"
+                            required
+                        />
+                    </div>
+                    <p class="error" style="display: none"></p>
+                    <button type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
+    </body>
+
+    <script src="/en/global_ass/script.js"></script>
+
+    <script>
+        let cb = new URL(window.location.href).searchParams.get("cb");
+        if (cb) {
+            cb = decodeURIComponent(cb);
+        }
+
+        const form = document.getElementById("loginForm");
+
+        const ls = window.localStorage;
+
+        const error = (msg) => {
+            const error = document.getElementsByClassName("error")[0];
+            if (msg.length == 0) {
+                error.style.display = "none";
+            } else {
+                error.style.display = "block";
+                error.innerText = msg;
+            }
+        };
+
+        const submit = async () => {
+            const formData = new FormData(form);
+
+            const email = formData.get("email").toLowerCase();
+            const password = formData.get("password");
+
+            if (password.length < 8) {
+                return error("Your password must be at least 8 characters");
+            }
+
+            const send = await fetch(`${API_DOMAIN}/user/login`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
+
+            if (send.status !== 200) {
+                const response = await send.json();
+                return error(response.message);
+            }
+
+            const response = await send.json();
+            ls.removeItem("local.settings");
+            ls.setItem("token", response.token);
+            return (window.location.href = `/en/id/sync-notice?cb=${encodeURIComponent(
+                cb
+            )}`);
+        };
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            submit();
+        });
+    </script>
+</html>

@@ -21,66 +21,90 @@
         <div style="display: none" id="id_section">
             <h1 style="margin: 30px">ID</h1>
             <div id="id_not_logged_in" style="display: none" class="id-box">
-                <a
-                    class="a"
-                    target="_TOP"
-                    href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/loginen-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="
+                <a class="a" target="_TOP" href="/en/id/login"
                     ><p style="padding: 0; margin: 0">Log in to Stella ID</p></a
                 >
-                <a
-                    class="a"
-                    target="_TOP"
-                    href="https://s.stella.hs.vc/contentdelivery/accounts/c/s-d/signupen-d.html?cb=aHR0cHM6Ly9zdGVsbGEuaHMudmMvZW4vaW5kZXgtZA=="
+                <a class="a" target="_TOP" href="/en/id/signup"
                     ><p style="padding: 0; margin: 0">
                         Sign up to Stella ID
                     </p></a
                 >
             </div>
-            <div id="id_logged_in" style="display: none" class="id-box">
-                <a class="a-img">
-                    <style>
-                        .a-img {
-                            background-image: url("/images/id-placeholder-thick.png");
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: left;
-                            width: 50px;
-                            height: 50px;
-                            display: inline-block;
-                            vertical-align: top;
-                            opacity: 0.7;
-                        }
-                        @media (prefers-color-scheme: dark) {
-                            .a-img {
-                                filter: invert();
-                            }
-                        }</style
-                    >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a
-                >
-                <h2
-                    id="nawa"
-                    style="
-                        padding: 0;
-                        margin: 0;
+            <style>
+                #id_logged_in {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .id_personal_section {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .a-img {
+                    height: 50px;
+                    width: 50px;
+                }
+
+                .no-image {
+                    opacity: 0.7;
+                }
+                /* .a-img {
+                        background-image: url("/images/id-placeholder-thick.png");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: left;
+                        width: 50px;
+                        height: 50px;
                         display: inline-block;
                         vertical-align: top;
-                        line-height: 50px;
-                        margin-left: 10px;
-                    "
-                >
-                    Hello from Stella :D
-                </h2>
-                <p style="margin: 0; margin-top: 10px">Account Management</p>
-                <a onclick="logout();" class="a"
-                    ><p style="margin: 0">Log Out</p></a
-                >
+                        opacity: 0.7;
+                    }
+                    @media (prefers-color-scheme: dark) {
+                        .a-img {
+                            filter: invert();
+                        }
+                    } */
+            </style>
+            <div id="id_logged_in" style="display: none" class="id-box">
+                <div class="id_personal_section">
+                    <img
+                        class="a-img no-image"
+                        src="/images/id-placeholder-thick.png"
+                    />
+                    <h2 id="nawa" style="margin: 0"></h2>
+                </div>
+                <div>
+                    <!-- <p style="margin: 0">Manage account</p> -->
+                    <a class="a" href="/en/id/logout.html"
+                        ><p style="margin: 0">Log out</p></a
+                    >
+                </div>
             </div>
             <div id="id_sync_not_working" style="display: none" class="id-box">
-                <h2 style="margin: 0; padding: 0">Sync isn't working!</h2>
+                <h3 style="margin: 0; padding: 0">Sync isn't working!</h3>
                 <p style="margin: 0; padding: 0">
                     Sorry! Sync isn't working right now, it will be available
                     shortly. Account information will not update.
                 </p>
+            </div>
+            <div id="id_sync_off" style="display: none" class="id-box">
+                <div>
+                    <h3 style="margin: 0; padding: 0">Sync is off</h3>
+                    <p style="margin: 0; padding: 0">
+                        You can&apos;t access shared account data from other
+                        devices.
+                    </p>
+                </div>
+
+                <div>
+                    <a
+                        href="/en/id/sync-notice?cb=%2Fen%2Fglobal_ass%2Fsidebar-d.html"
+                        class="a"
+                        ><p style="margin: 0">Enable sync</p></a
+                    >
+                </div>
             </div>
         </div>
         <h1 style="margin: 30px">Locale</h1>
@@ -95,7 +119,7 @@
                 <a class="a" href="../index-d.html" target="_TOP"
                     ><p>Search</p></a
                 >
-                <a class="a" href="../tabs-d.html" target="_TOP"><p>Tabs</p></a>
+                <a class="a" href="/en/tabs.html" target="_TOP"><p>Tabs</p></a>
                 <a
                     class="a"
                     id="devdashbtn"
@@ -119,112 +143,193 @@
             </div>
         </div>
 
+        <script src="/en/global_ass/script.js"></script>
         <script>
-            function createCookie(name, valued, days) {
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-                    var expires = "; expires=" + date.toGMTString();
-                } else var expires = "";
-                document.cookie = name + "=" + valued + expires + "; path=/";
-            }
+            const main = async () => {
+                // Show ID section
+                if (!API_DOMAIN) return;
 
-            function readCookie(name) {
-                var nameEQ = name + "=";
-                var ca = document.cookie.split(";");
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == " ") c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) == 0)
-                        return c.substring(nameEQ.length, c.length);
-                }
-                return null;
-            }
+                const ls = window.localStorage;
+                const token = ls.getItem("token");
 
-            function eraseCookie(name) {
-                createCookie(name, "", -1);
-            }
+                document.getElementById("id_section").setAttribute("style", "");
 
-            if (readCookie("supidcoutry") != null) {
-                if (readCookie("acid") == null) {
-                    document
-                        .getElementById("id_section")
-                        .setAttribute("style", "");
-                    document
+                if (!token) {
+                    return document
                         .getElementById("id_not_logged_in")
                         .setAttribute("style", "");
-                } else {
-                    if (readCookie("acinfo") == null) {
-                        document
-                            .getElementById("id_section")
-                            .setAttribute("style", "");
-                        document
-                            .getElementById("id_logged_in")
-                            .setAttribute("style", "");
-                        var acinforeq = new XMLHttpRequest();
-                        acinforeq.open(
-                            "POST",
-                            "https://s.stella.hs.vc/api/synchronise/account/get"
-                        );
-                        acinforeq.onreadystatechange = function () {
-                            if (this.readyState == 4) {
-                                if (this.status == 200) {
-                                    var resp = JSON.parse(this.responseText);
-                                    createCookie(
-                                        "acinfo",
-                                        this.responseText,
-                                        10
-                                    );
-                                    document.getElementById("nawa").innerText =
-                                        resp.name;
-                                } else {
-                                    document
-                                        .getElementById("id_sync_not_working")
-                                        .setAttribute("style", "");
-                                }
-                            }
-                        };
-                        acinforeq.withCredentials = true;
-                        acinforeq.send(
-                            readCookie("acid") + ";" + readCookie("devid")
-                        );
-                    } else {
-                        var resp = JSON.parse(readCookie("acinfo"));
-                        document
-                            .getElementById("id_section")
-                            .setAttribute("style", "");
-                        document
-                            .getElementById("id_logged_in")
-                            .setAttribute("style", "");
-                        document.getElementById("nawa").innerText = resp.name;
-                    }
+                }
+
+                let localSettings = ls.getItem("local.settings");
+
+                if (!localSettings) {
+                    return window.location.replace(
+                        `/en/id/sync-notice?cb=${encodeURIComponent(
+                            window.location.href
+                        )}`
+                    );
+                }
+
+                localSettings = JSON.parse(localSettings);
+
+                if (!localSettings.sync) {
                     document
-                        .getElementById("devdashbtn")
+                        .getElementById("id_sync_off")
                         .setAttribute("style", "");
                 }
-            }
 
-            function logout() {
-                var logoutreq = new XMLHttpRequest();
-                logoutreq.open(
-                    "POST",
-                    "https://s.stella.hs.vc/api/synchronise/account/devices/rm"
-                );
-                logoutreq.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        eraseCookie("acinfo");
-                        eraseCookie("acid");
-                        window.location.reload();
-                    }
-                };
-                logoutreq.send(
-                    readCookie("acid") +
-                        ";" +
-                        readCookie("devid") +
-                        ";" +
-                        readCookie("devid")
-                );
-            }
+                let acname = ls.getItem("acname");
+
+                if (!acname) {
+                    acname = "Your Stella ID";
+                } else {
+                    document.getElementById("nawa").innerText = acname;
+                }
+
+                document
+                    .getElementById("id_logged_in")
+                    .setAttribute("style", "");
+
+                let syncProblem = false;
+
+                const acnameReq = await fetch(`${API_DOMAIN}/user/get`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                }).catch((reason) => {
+                    syncProblem = true;
+                });
+
+                if (syncProblem) {
+                    return document
+                        .getElementById("id_sync_not_working")
+                        .setAttribute("style", "");
+                }
+
+                if (acnameReq.status !== 200 || !acnameReq.ok) {
+                    return document
+                        .getElementById("id_sync_not_working")
+                        .setAttribute("style", "");
+                }
+
+                acname = (await acnameReq.json()).name;
+
+                ls.setItem("acname", acname);
+
+                document.getElementById("nawa").innerText = acname;
+            };
+
+            main();
+        </script>
+
+        <script>
+            // function createCookie(name, valued, days) {
+            //     if (days) {
+            //         var date = new Date();
+            //         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            //         var expires = "; expires=" + date.toGMTString();
+            //     } else var expires = "";
+            //     document.cookie = name + "=" + valued + expires + "; path=/";
+            // }
+
+            // function readCookie(name) {
+            //     var nameEQ = name + "=";
+            //     var ca = document.cookie.split(";");
+            //     for (var i = 0; i < ca.length; i++) {
+            //         var c = ca[i];
+            //         while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            //         if (c.indexOf(nameEQ) == 0)
+            //             return c.substring(nameEQ.length, c.length);
+            //     }
+            //     return null;
+            // }
+
+            // function eraseCookie(name) {
+            //     createCookie(name, "", -1);
+            // }
+
+            // if (readCookie("supidcoutry") != null) {
+            //     if (readCookie("acid") == null) {
+            //         document
+            //             .getElementById("id_section")
+            //             .setAttribute("style", "");
+            //         document
+            //             .getElementById("id_not_logged_in")
+            //             .setAttribute("style", "");
+            //     } else {
+            //         if (readCookie("acinfo") == null) {
+            //             document
+            //                 .getElementById("id_section")
+            //                 .setAttribute("style", "");
+            //             document
+            //                 .getElementById("id_logged_in")
+            //                 .setAttribute("style", "");
+            //             var acinforeq = new XMLHttpRequest();
+            //             acinforeq.open(
+            //                 "POST",
+            //                 "https://s.stella.hs.vc/api/synchronise/account/get"
+            //             );
+            //             acinforeq.onreadystatechange = function () {
+            //                 if (this.readyState == 4) {
+            //                     if (this.status == 200) {
+            //                         var resp = JSON.parse(this.responseText);
+            //                         createCookie(
+            //                             "acinfo",
+            //                             this.responseText,
+            //                             10
+            //                         );
+            //                         document.getElementById("nawa").innerText =
+            //                             resp.name;
+            //                     } else {
+            //                         document
+            //                             .getElementById("id_sync_not_working")
+            //                             .setAttribute("style", "");
+            //                     }
+            //                 }
+            //             };
+            //             acinforeq.withCredentials = true;
+            //             acinforeq.send(
+            //                 readCookie("acid") + ";" + readCookie("devid")
+            //             );
+            //         } else {
+            //             var resp = JSON.parse(readCookie("acinfo"));
+            //             document
+            //                 .getElementById("id_section")
+            //                 .setAttribute("style", "");
+            //             document
+            //                 .getElementById("id_logged_in")
+            //                 .setAttribute("style", "");
+            //             document.getElementById("nawa").innerText = resp.name;
+            //         }
+            //         document
+            //             .getElementById("devdashbtn")
+            //             .setAttribute("style", "");
+            //     }
+            // }
+
+            // function logout() {
+            //     var logoutreq = new XMLHttpRequest();
+            //     logoutreq.open(
+            //         "POST",
+            //         "https://s.stella.hs.vc/api/synchronise/account/devices/rm"
+            //     );
+            //     logoutreq.onreadystatechange = function () {
+            //         if (this.readyState == 4 && this.status == 200) {
+            //             eraseCookie("acinfo");
+            //             eraseCookie("acid");
+            //             window.location.reload();
+            //         }
+            //     };
+            //     logoutreq.send(
+            //         readCookie("acid") +
+            //             ";" +
+            //             readCookie("devid") +
+            //             ";" +
+            //             readCookie("devid")
+            //     );
+            // }
         </script>
     </body>
 </html>

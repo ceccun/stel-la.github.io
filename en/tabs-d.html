@@ -3,7 +3,7 @@
     <head>
         <title id="title">Stella - Tabs List.</title>
         <meta charset="UTF-8" />
-        <link href="tabs-desk.css" rel="stylesheet" />
+        <link href="tabs-unified.css" rel="stylesheet" />
         <script type="text/javascript">
             if (window.innerWidth < window.innerHeight) {
                 window.location.replace("tabs-m.html");
@@ -115,25 +115,15 @@
                         <center id="appendzone"></center>
                     </div>
                 </div>
+                <script src="global_ass/script.js"></script>
                 <script>
                     const ls = window.localStorage;
 
-                    var relver = new URL(window.location).searchParams.get(
-                        "rel"
-                    );
-                    if (relver != "verified") {
-                        if (gettabs() == true) {
-                            window.location.replace("tabs-d.html?rel=verified");
-                        }
-                    } else {
-                        window.history.replaceState(
-                            "",
-                            "Stella - Tabs List.",
-                            "tabs-d.html"
-                        );
-                    }
-
                     var tabs = ls.getItem("tabs");
+
+                    document.getElementById("stats").innerText =
+                        "Grabbing the latest Tabs...";
+                    addSyncTask("download", "tabs");
 
                     if (tabs == null) {
                         document.getElementById("stats").innerText =
@@ -152,6 +142,21 @@
 
                         tabs.forEach(tabParse);
                     }
+
+                    sync(() => {
+                        let oldTabs = tabs;
+                        let newTabs = ls.getItem("tabs");
+
+                        if (newTabs != JSON.stringify(oldTabs)) {
+                            document.getElementById("stats").innerText =
+                                "Processing new Tabs...";
+                            ls.setItem("tabs", newTabs);
+                            window.location.reload();
+                        } else {
+                            document.getElementById("stats").innerText =
+                                "Your Tabs are synced to your Stella ID";
+                        }
+                    });
 
                     function tabParse(item, index) {
                         var zone = document.getElementById("appendzone");
@@ -172,7 +177,7 @@
                             container.appendChild(rmBtn);
 
                             zone.append(container);
-                            document.getElementById("stats").innerText = "";
+                            // document.getElementById("stats").innerText = "";
                         }
                     }
 
@@ -194,33 +199,6 @@
                         }
                     }
 
-                    function gettabs() {
-                        if (readCookie("acid") != null) {
-                            var tabsync = new XMLHttpRequest();
-                            tabsync.open(
-                                "POST",
-                                "https://s.stella.hs.vc/api/synchronise/tabs/get"
-                            );
-                            tabsync.withCredentials = true;
-                            tabsync.onreadystatechange = function () {
-                                if (this.readyState == 4) {
-                                    console.log(this.responseText);
-                                    createCookie("tabs", this.responseText, 30);
-                                    tabs = this.responseText;
-                                    return true;
-                                }
-                            };
-                            tabsync.send(
-                                readCookie("acid") +
-                                    ";" +
-                                    readCookie("devid") +
-                                    ";" +
-                                    readCookie("tabs")
-                            );
-                        } else {
-                            return false;
-                        }
-                    }
                     function appendtabs() {
                         if (readCookie("acid") != null) {
                             var tabap = new XMLHttpRequest();
@@ -298,7 +276,6 @@
                         }
                     });
                 </script>
-                <script src="global_ass/script.js"></script>
             </div>
         </div>
     </body>

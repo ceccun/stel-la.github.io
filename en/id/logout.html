@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Log out</title>
+        <meta name="description" content="Log out of Stella ID" />
+        <link rel="stylesheet" href="/en/unified.css" />
+        <link rel="stylesheet" href="/en/id/id.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                <h2 id="title">Signing out...</h2>
+
+                <p>
+                    Synced data, such as Tabs, will still be available on this
+                    device even after you log out.
+                </p>
+                <p>
+                    This device won&apos;t have access to your Stella ID
+                    benefits while you&apos;re logged out.
+                </p>
+            </div>
+        </div>
+
+        <script src="/en/global_ass/script.js"></script>
+
+        <script>
+            const ls = window.localStorage;
+
+            const name = ls.getItem("acname");
+            const title = document.getElementById("title");
+
+            const token = ls.getItem("token");
+
+            const main = async () => {
+                if (!token) {
+                    return (title.innerText = "You're not signed in");
+                }
+                const revokeToken = await fetch(`${API_DOMAIN}/user/revoke`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                    }),
+                });
+
+                setTimeout(() => {
+                    window.top.location.href = "/";
+                }, 5000);
+
+                ls.removeItem("token");
+                ls.removeItem("local.settings");
+
+                if (revokeToken.status != 200) {
+                    return (title.innerText = `Something went wrong, ${
+                        name.split(" ")[0]
+                    }`);
+                }
+
+                return (title.innerText = `See you soon, ${
+                    name.split(" ")[0]
+                }`);
+            };
+
+            main();
+        </script>
+    </body>
+</html>
