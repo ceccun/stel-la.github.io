@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <title>sidebar</title>
         <link href="sidebar.css" rel="stylesheet" />
@@ -42,6 +42,29 @@
                     </p></a
                 >
             </div>
+            <div style="display: none" class="id-box" id="id_aru">
+                <p style="margin: 0; padding: 0">
+                    ログイン中のStella
+                    IDアカウントは、この地域では有効化されていません。
+                </p>
+            </div>
+            <script>
+                const idAru = () => {
+                    const ls = window.localStorage;
+
+                    const token = ls.getItem("token");
+
+                    if (!token) {
+                        return;
+                    }
+
+                    document.getElementById("id_section").style.display =
+                        "block";
+                    document.getElementById("id_aru").style.display = "block";
+                };
+
+                idAru();
+            </script>
             <div id="id_logged_in" style="display: none" class="id-box">
                 <style>
                     .a-img {
