@@ -73,7 +73,7 @@
                     ls.setItem("udownload", JSON.stringify(["tabs"]));
                 }
 
-                return window.location.replace(cb || "/en/index-d");
+                return window.location.replace(cb ? cb : "/");
             };
         </script>
     </body>

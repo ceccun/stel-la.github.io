@@ -98,9 +98,9 @@
             const response = await send.json();
             ls.removeItem("local.settings");
             ls.setItem("token", response.token);
-            return (window.location.href = `/en/id/sync-notice?cb=${encodeURIComponent(
-                cb
-            )}`);
+            return (window.location.href = `/en/id/sync-notice${
+                cb ? `?cb=${encodeURIComponent(cb)}` : ""
+            }`);
         };
 
         form.addEventListener("submit", (e) => {

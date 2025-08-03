@@ -26,7 +26,7 @@
         </div>
 
         <div class="content">
-            <div class="card">
+            <div class="card" id="signing_out">
                 <h2 id="title">Signing out...</h2>
 
                 <p>
@@ -34,8 +34,42 @@
                     device even after you log out.
                 </p>
                 <p>
-                    This device won&apos;t have access to your Stella ID
-                    benefits while you&apos;re logged out.
+                    This device won&apos;t have access to Stella ID benefits
+                    while you&apos;re logged out.
+                </p>
+            </div>
+
+            <div class="card" id="backing_up">
+                <h2 id="title">Backing up...</h2>
+
+                <p>
+                    There is data on this device that has not been backed up to
+                    Ceccun Cloud.
+                </p>
+            </div>
+
+            <div class="card" id="backup_failure">
+                <h2 id="title">Could not sync</h2>
+
+                <p>Data on this device could not be backed up to Stella ID.</p>
+                <p>
+                    If you log out, data that was not backed up will not be
+                    available on other devices.
+                </p>
+
+                <button id="sync_again_btn">Sync again</button>
+                <button id="delete_data_btn">
+                    Delete data on this device, and sync
+                </button>
+                <button id="log_out_btn">Log out as is</button>
+            </div>
+
+            <div class="card" id="reset_sync">
+                <h2 id="title">Resetting...</h2>
+
+                <p>
+                    Data will be deleted off this device and downloaded from
+                    Stella ID.
                 </p>
             </div>
         </div>
@@ -49,11 +83,17 @@
             const title = document.getElementById("title");
 
             const token = ls.getItem("token");
+            const pendingUploads = ls.getItem("uupload");
+            const pendingRemovals = ls.getItem("uremove");
 
-            const main = async () => {
-                if (!token) {
-                    return (title.innerText = "You're not signed in");
-                }
+            const setCard = (id) => {
+                const cards = document.getElementsByClassName("card");
+                for (const card of cards) card.style.display = "none";
+                document.getElementById(id).style.display = "flex";
+            };
+
+            const logout = async () => {
+                setCard("signing_out");
                 const revokeToken = await fetch(`${API_DOMAIN}/user/revoke`, {
                     method: "POST",
                     headers: {
@@ -82,6 +122,89 @@
                     name.split(" ")[0]
                 }`);
             };
+
+            const backup = async () => {
+                if (pendingRemovals != null || pendingUploads != null) {
+                    let parsedUpload = JSON.parse(pendingUploads);
+                    let parsedRemovals = JSON.parse(pendingRemovals);
+
+                    if (parsedUpload.length != 0 || parsedRemovals != 0) {
+                        setCard("backing_up");
+
+                        await new Promise((res, rej) =>
+                            setTimeout(() => {
+                                sync(() => {
+                                    const uploadCheck = ls.getItem("uupload");
+                                    const removeCheck =
+                                        ls.getItem("removecheck");
+
+                                    if (
+                                        uploadCheck == pendingUploads ||
+                                        removeCheck == pendingRemovals
+                                    ) {
+                                        setCard("backup_failure");
+                                        rej(new Error("Items still pending"));
+                                    }
+
+                                    res();
+                                });
+                            }, 2500)
+                        );
+                    }
+                }
+            };
+
+            const resetDB = async () => {
+                setCard("reset_sync");
+                const categories = syncCats;
+
+                ls.setItem("uupload", "[]");
+                ls.setItem("uremove", "[]");
+
+                for (const cat of categories) {
+                    ls.removeItem(cat);
+                }
+
+                ls.setItem("udownload", JSON.stringify(syncCats));
+
+                await new Promise((res, rej) =>
+                    setTimeout(() => {
+                        sync(() => {
+                            res();
+                        });
+                    }, 2500)
+                );
+
+                logout();
+            };
+
+            const main = async () => {
+                if (!token) {
+                    return (title.innerText = "You're not signed in");
+                }
+
+                try {
+                    await backup();
+                } catch (error) {
+                    console.error(error);
+                    return setCard("backup_failure");
+                }
+
+                console.log("Logout logic");
+                logout();
+            };
+
+            document
+                .getElementById("sync_again_btn")
+                .addEventListener("click", () => backup());
+
+            document
+                .getElementById("delete_data_btn")
+                .addEventListener("click", () => resetDB());
+
+            document
+                .getElementById("log_out_btn")
+                .addEventListener("click", () => logout());
 
             main();
         </script>
