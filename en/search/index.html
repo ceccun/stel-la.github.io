@@ -88,31 +88,44 @@
 
             <a class="tabindex" tabindex="11"><p>Focus on content</p></a>
 
-            <div class="block-results looking">
-                <div class="blocks-searching">
-                    <div class="searchBall" id="blocks-search-ball"></div>
-                    <p><i id="blocks-status">Blocks is thinking...</i></p>
+            <div class="search-layout">
+                <div class="search-main">
+                    <div id="results" class="search-results-root"></div>
                 </div>
-                <div
-                    class="rainbow-strips hidden"
-                    id="rainbow-strips"
-                ></div>
-                <div class="blocks-information hidden"></div>
-                <div class="blocks-agreement hidden">
-                    <h2>Use Blocks?</h2>
-                    <p>
-                        Blocks provides you search insights alongside your
-                        results.
-                    </p>
-                    <p>
-                        Your use of Blocks is governed by the
-                        <a href="/en/id/privacy.html">Stella Privacy Policy</a>
-                    </p>
-                    <button id="blocks-consent-btn">I agree</button>
-                </div>
+                <aside class="search-side">
+                    <div id="infoboxes" class="side-infoboxes"></div>
+                    <div class="block-results looking">
+                        <div class="blocks-searching">
+                            <div
+                                class="searchBall"
+                                id="blocks-search-ball"
+                            ></div>
+                            <p>
+                                <i id="blocks-status">Blocks is thinking...</i>
+                            </p>
+                        </div>
+                        <div
+                            class="rainbow-strips hidden"
+                            id="rainbow-strips"
+                        ></div>
+                        <div class="blocks-information hidden"></div>
+                        <div class="blocks-agreement hidden">
+                            <h2>Use Blocks?</h2>
+                            <p>
+                                Blocks provides you search insights alongside
+                                your results.
+                            </p>
+                            <p>
+                                Your use of Blocks is governed by the
+                                <a href="/en/id/privacy.html"
+                                    >Stella Privacy Policy</a
+                                >
+                            </p>
+                            <button id="blocks-consent-btn">I agree</button>
+                        </div>
+                    </div>
+                </aside>
             </div>
-
-            <div id="results" class="search-results-root"></div>
         </div>
 
         <!-- Sidebar -->
@@ -186,6 +199,7 @@
             var imageBtn = document.getElementById("image-btn");
             var tabBtn = document.getElementById("tab-btn");
             var resultsEl = document.getElementById("results");
+            var infoboxesEl = document.getElementById("infoboxes");
             var titleEl = document.getElementById("title");
 
             // === State ===
@@ -336,6 +350,23 @@
                 var answers = (data && data.answers) || [];
                 var infoboxes = (data && data.infoboxes) || [];
 
+                // Right-hand side panel: infoboxes (Blocks lives in the same
+                // column, declared in the HTML below).
+                var sideHtml = "";
+                for (var j = 0; j < infoboxes.length; j++) {
+                    var ib = infoboxes[j];
+                    sideHtml +=
+                        '<div class="search-infobox">' +
+                        (ib.infobox
+                            ? "<h3>" + escapeHTML(ib.infobox) + "</h3>"
+                            : "") +
+                        (ib.content
+                            ? "<p>" + escapeHTML(ib.content) + "</p>"
+                            : "") +
+                        "</div>";
+                }
+                infoboxesEl.innerHTML = sideHtml;
+
                 if (results.length === 0 && answers.length === 0) {
                     resultsEl.innerHTML =
                         '<p class="results-status">No results.</p>';
@@ -351,19 +382,6 @@
                         "</p></div>";
                 }
 
-                for (var j = 0; j < infoboxes.length; j++) {
-                    var ib = infoboxes[j];
-                    html +=
-                        '<div class="search-infobox">' +
-                        (ib.infobox
-                            ? "<h3>" + escapeHTML(ib.infobox) + "</h3>"
-                            : "") +
-                        (ib.content
-                            ? "<p>" + escapeHTML(ib.content) + "</p>"
-                            : "") +
-                        "</div>";
-                }
-
                 for (var k = 0; k < results.length; k++) {
                     var r = results[k];
                     html +=
@@ -375,7 +393,7 @@
                         "</a>" +
                         '<div class="search-result-url">' +
                         escapeHTML(shortHost(r.url)) +
-                        '</div>' +
+                        "</div>" +
                         '<div class="search-result-snippet">' +
                         escapeHTML(r.content || "") +
                         "</div>" +
@@ -392,6 +410,7 @@
             function renderImageResults(data) {
                 var results = (data && data.results) || [];
                 currentImageResults = results;
+                infoboxesEl.innerHTML = "";
                 if (results.length === 0) {
                     resultsEl.innerHTML =
                         '<p class="results-status">No image results.</p>';
