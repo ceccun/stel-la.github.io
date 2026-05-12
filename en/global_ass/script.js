@@ -22,42 +22,175 @@ function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
-const API_DOMAIN = "https://deprecated-accounts.zen-platform.ceccun.com";
+const API_DOMAIN = "http://localhost:3000";
 
-if (
-    readCookie("cookiecons") == null &&
-    document.URL.split("?")[0].endsWith("d.html")
-) {
-    document.body.innerHTML =
-        document.body.innerHTML +
-        '<div id="cookienotfs" class="b-cookienotfs"><div id="cookienot" class="b-cookienot"><center><image src="/images/privacy.svg" style="width: 40%;"><h2>Before you continue</h2><p>Stella utilises technologies such as cookies (e.g web beacons, flash cookies, .etc)("cookies") to refine your experience and maximise performance on their sites. These cookies are collected when necessary and do not contain information that can uniquely identify you as an individual user. If you agree, Stella and their partners can use cookies to store, cache and control your session while using their sites.<br>Due to the technical limitations, if you do not consent to the usage of cookies, you should not visit any Stella site, including this one, for the next 30 days to confirm all cookies have been removed from your device.</p><button class="agreebtn" onclick="acceptcookienot()">I agree</button></center></div></div><link href="/en/cookie-d.css" rel="stylesheet"/>';
-    setTimeout(function () {
-        document
-            .getElementById("cookienotfs")
-            .setAttribute("class", "cookienotfs");
-        document.getElementById("cookienot").setAttribute("class", "cookienot");
-    }, 300);
+// === Cookie / consent management ===
+// Consent is stored as a single JSON cookie so we can read all categories
+// in one place. Schema:
+//   { essential: true, functional: bool, version: 2, ts: number }
+// Essential is always true; the user only chooses functional. We bump
+// `version` whenever the categories change so we can re-prompt.
+const COOKIE_CONSENT_KEY = "cookieConsent";
+const COOKIE_CONSENT_VERSION = 2;
+
+function readCookieConsent() {
+    var raw = readCookie(COOKIE_CONSENT_KEY);
+    if (!raw) return null;
+    try {
+        var parsed = JSON.parse(decodeURIComponent(raw));
+        if (parsed && parsed.version === COOKIE_CONSENT_VERSION) return parsed;
+        return null;
+    } catch (e) {
+        return null;
+    }
 }
 
-function acceptcookienot() {
-    createCookie("cookiecons", "1", 30);
-    setTimeout(() => {
-        document
-            .getElementById("cookienotfs")
-            .setAttribute("class", "b-cookienotfs");
-        document
-            .getElementById("cookienot")
-            .setAttribute("class", "b-cookienot");
-    }, 300);
-    setTimeout(() => {
-        document
-            .getElementById("cookienotfs")
-            .setAttribute("style", "display: none");
-        document
-            .getElementById("cookienot")
-            .setAttribute("style", "display: none;");
-        window.location.replace("");
-    }, 500);
+function saveCookieConsent(prefs) {
+    var value = {
+        essential: true,
+        functional: !!prefs.functional,
+        version: COOKIE_CONSENT_VERSION,
+        ts: Date.now(),
+    };
+    // 365 days — under GDPR, consent should be refreshed periodically; one
+    // year is a common middle ground. Encoded as URI-safe JSON.
+    createCookie(COOKIE_CONSENT_KEY, encodeURIComponent(JSON.stringify(value)), 365);
+    return value;
+}
+
+// Exposed so callers (e.g. titlescript.js) can gate optional features:
+//   if (window.hasConsent("functional")) { ... }
+window.hasConsent = function (category) {
+    var c = readCookieConsent();
+    if (!c) return false;
+    if (category === "essential") return true;
+    return c[category] === true;
+};
+
+window.openCookieBanner = function () {
+    showCookieBanner(readCookieConsent());
+};
+
+function showCookieBanner(existing) {
+    // If the banner is already mounted, surface it (don't duplicate).
+    var existingEl = document.getElementById("cookienotfs");
+    if (existingEl) {
+        existingEl.setAttribute("class", "cookienotfs");
+        return;
+    }
+
+    // Lazily load the banner stylesheet on first prompt.
+    if (!document.getElementById("cookie-banner-css")) {
+        var link = document.createElement("link");
+        link.id = "cookie-banner-css";
+        link.rel = "stylesheet";
+        link.href = "/en/cookie-d.css";
+        document.head.appendChild(link);
+    }
+
+    var wrap = document.createElement("div");
+    wrap.id = "cookienotfs";
+    wrap.className = "b-cookienotfs";
+
+    var panel = document.createElement("div");
+    panel.id = "cookienot";
+    panel.className = "b-cookienot";
+
+    var functionalChecked =
+        existing && typeof existing.functional === "boolean"
+            ? existing.functional
+            : true;
+
+    panel.innerHTML =
+        '<div class="cookie-banner-header">' +
+        '<img src="/images/privacy.svg" alt="" />' +
+        "<h2>Cookies &amp; Privacy</h2>" +
+        "</div>" +
+        '<p class="cookie-banner-intro">' +
+        "We use cookies and your browser's local storage to make Stella work. " +
+        "Essential items (sign-in, sync, your preferences) are always on. " +
+        "Optional items — like detecting your region to show local information " +
+        "— only run if you opt in. " +
+        '<a class="a" href="/en/id/privacy.html">Privacy Policy</a>.' +
+        "</p>" +
+        '<div class="cookie-category">' +
+        "<label>" +
+        '<input type="checkbox" checked disabled />' +
+        "<span><strong>Essential</strong> — required to keep you signed in, " +
+        "sync your Tabs and remember your settings. Always on.</span>" +
+        "</label>" +
+        "</div>" +
+        '<div class="cookie-category">' +
+        "<label>" +
+        '<input type="checkbox" id="cookie-cat-functional"' +
+        (functionalChecked ? " checked" : "") +
+        " />" +
+        "<span><strong>Functional</strong> — detect your region for local " +
+        "information, and detect when you're connected to a Ceccun building " +
+        "network.</span>" +
+        "</label>" +
+        "</div>" +
+        '<div class="cookie-banner-actions">' +
+        '<button class="cookie-btn cookie-btn-secondary" id="cookie-reject-all">Reject all</button>' +
+        '<button class="cookie-btn cookie-btn-secondary" id="cookie-save-selected">Save choices</button>' +
+        '<button class="cookie-btn cookie-btn-primary" id="cookie-accept-all">Accept all</button>' +
+        "</div>";
+
+    wrap.appendChild(panel);
+    document.body.appendChild(wrap);
+
+    var hide = function () {
+        wrap.setAttribute("class", "b-cookienotfs");
+        panel.setAttribute("class", "b-cookienot");
+        setTimeout(function () {
+            if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+        }, 400);
+    };
+
+    document
+        .getElementById("cookie-accept-all")
+        .addEventListener("click", function () {
+            saveCookieConsent({ functional: true });
+            hide();
+        });
+
+    document
+        .getElementById("cookie-reject-all")
+        .addEventListener("click", function () {
+            saveCookieConsent({ functional: false });
+            hide();
+        });
+
+    document
+        .getElementById("cookie-save-selected")
+        .addEventListener("click", function () {
+            var functional = document.getElementById(
+                "cookie-cat-functional"
+            ).checked;
+            saveCookieConsent({ functional: functional });
+            hide();
+        });
+
+    // Fade + slide in on the next frame.
+    requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+            wrap.setAttribute("class", "cookienotfs");
+            panel.setAttribute("class", "cookienot");
+        });
+    });
+}
+
+// Show the banner once per browser if the user hasn't recorded a choice yet
+// (or their stored choice is from an older schema version). Available on
+// every page that loads script.js — not gated on -d.html.
+if (!readCookieConsent()) {
+    if (document.body) {
+        showCookieBanner(null);
+    } else {
+        document.addEventListener("DOMContentLoaded", function () {
+            showCookieBanner(null);
+        });
+    }
 }
 
 function updateTabs() {

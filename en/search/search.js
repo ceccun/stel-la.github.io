@@ -1,253 +1,307 @@
-// query, title and search-box value are set up by the inline script in search/index.html.
+// query, title and search-box value are set up by the inline script in
+// search/index.html. The inline script also calls window.runBlocks(query,
+// results) once SearXNG results are in, so we can feed them to the LLM.
+
 var query = new URL(window.location).searchParams.get("q");
 
-async function blockProcess() {
-    const ls = window.localStorage;
-    const localSettings = ls.getItem("local.settings");
+// Holds {query, results} when the user hasn't consented yet — replayed once
+// they accept the consent prompt.
+var pendingBlocksArgs = null;
+// Active stream handle so a new search can cancel the previous one.
+var activeBlocksStream = null;
 
-    const searchBall = document.getElementById("blocks-search-ball");
-    const blocksResultBox = document.getElementsByClassName("block-results")[0];
-    const blocksInformation =
-        document.getElementsByClassName("blocks-information")[0];
-    const stripsArea = document.getElementById("rainbow-strips");
-    const blocksConsentBtn = document.getElementById("blocks-consent-btn");
-    const blocksAgreement =
-        document.getElementsByClassName("blocks-agreement")[0];
-
-    const consentAgree = () => {
-        const ls = window.localStorage;
-
-        let localSettings = ls.getItem("local.settings");
-        if (!localSettings) {
-            localSettings = JSON.stringify({});
-        }
-        localSettings = JSON.parse(localSettings);
-        localSettings["blocks"] = true;
-        ls.setItem("local.settings", JSON.stringify(localSettings));
-        blocksAgreement.classList.add("hidden");
-        document
-            .getElementsByClassName("blocks-searching")[0]
-            .classList.remove("hidden");
-        blockProcess();
+function getBlocksDOM() {
+    return {
+        box: document.getElementsByClassName("block-results")[0],
+        searching: document.getElementsByClassName("blocks-searching")[0],
+        info: document.getElementsByClassName("blocks-information")[0],
+        agreement: document.getElementsByClassName("blocks-agreement")[0],
+        consentBtn: document.getElementById("blocks-consent-btn"),
+        strips: document.getElementById("rainbow-strips"),
+        ball: document.getElementById("blocks-search-ball"),
     };
+}
 
-    if (!localSettings) {
-        document
-            .getElementsByClassName("blocks-searching")[0]
-            .classList.add("hidden");
-        blocksAgreement.classList.remove("hidden");
-        blocksConsentBtn.addEventListener("click", consentAgree);
-        return;
+function hasBlocksConsent() {
+    var settings = window.localStorage.getItem("local.settings");
+    if (!settings) return false;
+    try {
+        return JSON.parse(settings).blocks === true;
+    } catch (_) {
+        return false;
     }
+}
 
-    const localSettingsParsed = JSON.parse(localSettings);
+function setBlocksConsent() {
+    var ls = window.localStorage;
+    var settings = ls.getItem("local.settings");
+    settings = settings ? JSON.parse(settings) : {};
+    settings.blocks = true;
+    ls.setItem("local.settings", JSON.stringify(settings));
+}
 
-    if (!localSettingsParsed["blocks"]) {
-        document
-            .getElementsByClassName("blocks-searching")[0]
-            .classList.add("hidden");
+function showConsentPrompt(dom) {
+    dom.searching.classList.add("hidden");
+    dom.info.classList.add("hidden");
+    dom.strips.classList.add("hidden");
+    dom.agreement.classList.remove("hidden");
 
-        blocksAgreement.classList.remove("hidden");
-        blocksConsentBtn.addEventListener("click", consentAgree);
-        return;
+    // The "I agree" button replays whatever query/results are queued.
+    var btn = dom.consentBtn;
+    // Replace the node to clear any prior listeners — keeps replays clean
+    // when several searches happen before consent is granted.
+    var fresh = btn.cloneNode(true);
+    btn.parentNode.replaceChild(fresh, btn);
+    fresh.addEventListener("click", function () {
+        setBlocksConsent();
+        dom.agreement.classList.add("hidden");
+        dom.searching.classList.remove("hidden");
+        if (pendingBlocksArgs) {
+            var args = pendingBlocksArgs;
+            pendingBlocksArgs = null;
+            window.runBlocks(args.query, args.results);
+        }
+    });
+}
+
+function resetBlocksUI(dom) {
+    dom.agreement.classList.add("hidden");
+    dom.info.classList.add("hidden");
+    dom.info.innerHTML = "";
+    dom.strips.classList.add("hidden");
+    dom.strips.innerHTML = "";
+    dom.ball.classList.remove("scaleOut");
+    dom.searching.classList.remove("hidden", "fadeOut", "fadeIn");
+    dom.box.classList.remove("hidden");
+    dom.box.classList.add("looking");
+    document.getElementById("blocks-status").innerText = "Blocks is thinking...";
+}
+
+// === Streaming LLM path (logged-in users) ===
+// Rainbow palette mirrors .rainbow-strip — works the same in light + dark.
+var BLOCKS_RAINBOW = [
+    "#ff0000",
+    "#ff1493",
+    "#ff8c00",
+    "#00ff00",
+    "#00bfff",
+    "#0000ff",
+    "#8a2be2",
+];
+
+function runBlocksStream(query, results, dom) {
+    if (activeBlocksStream && activeBlocksStream.cancel) {
+        activeBlocksStream.cancel();
     }
+    resetBlocksUI(dom);
 
-    const data = await challenge(query);
-    searchBall.classList.add("scaleOut");
+    var messageElem = document.createElement("p");
+    dom.info.appendChild(messageElem);
+
+    var buffer = "";
+    var revealed = false;
+    var colorIdx = 0;
+
+    activeBlocksStream = streamChallenge(
+        query,
+        results,
+        function onChunk(chunk) {
+            // Append each token as its own span so the per-chunk rainbow→
+            // text-color animation can run independently. We never touch
+            // existing spans, so already-faded text stays put.
+            var span = document.createElement("span");
+            span.className = "blocks-stream-chunk";
+            span.style.setProperty(
+                "--bs-color",
+                BLOCKS_RAINBOW[colorIdx % BLOCKS_RAINBOW.length]
+            );
+            span.textContent = chunk;
+            messageElem.appendChild(span);
+            colorIdx++;
+
+            buffer += chunk;
+
+            if (!revealed) {
+                revealed = true;
+                dom.ball.classList.add("scaleOut");
+                dom.searching.classList.add("hidden");
+                dom.info.classList.remove("hidden");
+                dom.info.classList.add("fadeIn");
+                dom.box.classList.remove("looking");
+            }
+        },
+        function onDone() {
+            activeBlocksStream = null;
+
+            if (!revealed) {
+                // Stream finished without emitting any tokens — treat like
+                // the legacy "no answer" case and hide the box.
+                dom.box.classList.add("hidden");
+                return;
+            }
+
+            var disclaimerBar = document.createElement("div");
+            disclaimerBar.classList.add("blocks-disclaimer-bar");
+
+            var disclaimer = document.createElement("p");
+            disclaimer.innerText = "Blocks Pro is experimental";
+            disclaimer.style.fontSize = "14px";
+            disclaimer.style.opacity = 0.5;
+            disclaimerBar.appendChild(disclaimer);
+
+            dom.info.appendChild(disclaimerBar);
+
+            // Mirror what the legacy path did: cache the result for
+            // tabs.html's "Blocks History on this device".
+            try {
+                var ls = window.localStorage;
+                var logs = ls.getItem("blocksLogs");
+                logs = logs ? JSON.parse(logs) : [];
+                if (logs.length >= 100) logs.shift();
+                logs.push({ title: "Answer", message: buffer });
+                ls.setItem("blocksLogs", JSON.stringify(logs));
+            } catch (_) {}
+        },
+        function onError(err) {
+            activeBlocksStream = null;
+            console.warn("Blocks stream error:", err);
+            if (!revealed) {
+                dom.box.classList.add("hidden");
+            }
+        }
+    );
+}
+
+// === Legacy Wikipedia path (logged-out users) ===
+// Largely the original blockProcess body, kept for users without a token.
+async function runBlocksLegacy(query, dom) {
+    resetBlocksUI(dom);
+
+    var data = await challenge(query);
+    dom.ball.classList.add("scaleOut");
 
     if (data == null) {
-        return setTimeout(() => {
-            blocksResultBox.classList.add("hidden");
+        return setTimeout(function () {
+            dom.box.classList.add("hidden");
         }, 800);
     }
 
-    blocksResultBox.classList.remove("looking");
+    dom.box.classList.remove("looking");
 
-    const { title, message } = data;
+    var titleElem = document.createElement("h2");
+    titleElem.innerText = data.title;
 
-    const titleElem = document.createElement("h2");
-    titleElem.innerText = title;
+    var messageElem = document.createElement("p");
+    messageElem.innerText = data.message;
 
-    const messageElem = document.createElement("p");
-    messageElem.innerText = message;
+    dom.info.appendChild(titleElem);
+    dom.info.appendChild(messageElem);
 
-    blocksInformation.appendChild(titleElem);
-    blocksInformation.appendChild(messageElem);
+    dom.info.classList.remove("hidden");
+    var informationSize = dom.info.getBoundingClientRect();
+    dom.info.classList.add("hidden");
+    var strips = Math.max(1, (informationSize.height + 16) / 24);
 
-    blocksInformation.classList.remove("hidden");
+    setTimeout(function () {
+        dom.searching.classList.add("hidden");
+        dom.strips.classList.remove("hidden");
 
-    const informationSize = blocksInformation.getBoundingClientRect();
-
-    blocksInformation.classList.add("hidden");
-    const strips = (informationSize.height + 16) / 24;
-
-    setTimeout(() => {
-        document
-            .getElementsByClassName("blocks-searching")[0]
-            .classList.add("hidden");
-
-        stripsArea.classList.remove("hidden");
-        for (let i = 0; i < strips; i++) {
-            const strip = document.createElement("div");
+        for (var i = 0; i < strips; i++) {
+            var strip = document.createElement("div");
             strip.classList.add("rainbow-strip");
             strip.style.width = "100%";
-            if (i == 0) {
-                strip.style.width = `70px`;
-            }
-
-            if (i == strips - 1) {
-                strip.style.width = `${Math.floor(Math.random() * 70)}%`;
+            if (i === 0) strip.style.width = "70px";
+            if (i === strips - 1) {
+                strip.style.width = Math.floor(Math.random() * 70) + "%";
             }
             strip.style.height = "16px";
-            // strip.style.animationDelay = `${i * 0.1}s`;
 
-            setTimeout(() => {
-                stripsArea.appendChild(strip);
-            }, i * 100);
+            (function (idx) {
+                setTimeout(function () {
+                    dom.strips.appendChild(strip);
+                }, idx * 100);
+            })(i);
         }
 
-        setTimeout(() => {
-            stripsArea.classList.add("fadeOut");
-            setTimeout(() => {
-                stripsArea.classList.remove("fadeOut");
-                stripsArea.classList.add("hidden");
+        setTimeout(function () {
+            dom.strips.classList.add("fadeOut");
+            setTimeout(function () {
+                dom.strips.classList.remove("fadeOut");
+                dom.strips.classList.add("hidden");
+                dom.info.classList.remove("hidden");
+                dom.info.classList.add("fadeIn");
 
-                blocksInformation.classList.remove("hidden");
-
-                blocksInformation.classList.add("fadeIn");
-
-                const disclaimerBar = document.createElement("div");
+                var disclaimerBar = document.createElement("div");
                 disclaimerBar.classList.add("blocks-disclaimer-bar");
 
-                const disclaimer = document.createElement("p");
-                disclaimer.innerText = "Blocks is experimental";
-                if (data.alternatives) {
-                    disclaimer.innerText =
-                        "Blocks Nano is experimental and member only";
-                }
+                var disclaimer = document.createElement("p");
+                disclaimer.innerText = data.alternatives
+                    ? "Blocks Nano is experimental and member only"
+                    : "Blocks is experimental";
                 disclaimer.style.fontSize = "14px";
                 disclaimer.style.opacity = 0.5;
-
                 disclaimerBar.appendChild(disclaimer);
 
-                if (data.alternatives) {
-                    const seeMoreLink = document.createElement("button");
-                    seeMoreLink.classList.add("discrete-button");
-                    seeMoreLink.innerText = "See an alternative";
-
-                    data.alternatives.push(message);
-
-                    let alternativeIndex = 0;
-
-                    seeMoreLink.addEventListener("click", () => {
-                        seeMoreLink.innerText = "See another alternative";
-
-                        if (alternativeIndex >= data.alternatives.length) {
-                            alternativeIndex = 0;
-                        }
-
-                        const alternative = data.alternatives[alternativeIndex];
-
-                        blocksInformation.classList.add("fadeOut");
-
-                        document.getElementById("blocks-status").innerText =
-                            "Checking alternatives...";
-
-                        setTimeout(() => {
-                            blocksInformation.classList.remove("fadeOut");
-                            blocksInformation.classList.add("hidden");
-
-                            messageElem.innerText = alternative;
-
-                            searchBall.classList.remove("scaleOut");
-
-                            document
-                                .getElementsByClassName("blocks-searching")[0]
-                                .classList.remove("hidden");
-
-                            document
-                                .getElementsByClassName("blocks-searching")[0]
-                                .classList.add("fadeIn");
-
-                            setTimeout(() => {
-                                document
-                                    .getElementsByClassName(
-                                        "blocks-searching"
-                                    )[0]
-                                    .classList.remove("fadeIn");
-
-                                setTimeout(() => {
-                                    searchBall.classList.add("scaleOut");
-
-                                    setTimeout(() => {
-                                        document
-                                            .getElementsByClassName(
-                                                "blocks-searching"
-                                            )[0]
-                                            .classList.add("fadeOut");
-
-                                        setTimeout(() => {
-                                            document
-                                                .getElementsByClassName(
-                                                    "blocks-searching"
-                                                )[0]
-                                                .classList.remove("fadeOut");
-                                            document
-                                                .getElementsByClassName(
-                                                    "blocks-searching"
-                                                )[0]
-                                                .classList.add("hidden");
-
-                                            blocksInformation.classList.remove(
-                                                "hidden"
-                                            );
-
-                                            blocksInformation.classList.add(
-                                                "fadeIn"
-                                            );
-
-                                            setTimeout(() => {
-                                                blocksInformation.classList.remove(
-                                                    "fadeIn"
-                                                );
-                                            }, 300);
-                                        }, 300);
-                                    }, 600);
-                                }, 300);
-                            }, 300);
-                        }, 300);
-
-                        alternativeIndex++;
-                    });
-
-                    disclaimerBar.appendChild(seeMoreLink);
-                }
-
-                blocksInformation.appendChild(disclaimerBar);
+                dom.info.appendChild(disclaimerBar);
             }, 300);
         }, strips * 100 + 300);
     }, 600);
 }
 
-blockProcess();
+// === Entry point — called from the search/index.html inline script after
+// SearXNG returns text results. ===
+window.runBlocks = function (query, results) {
+    var dom = getBlocksDOM();
+    if (!dom.box) return;
+
+    if (!hasBlocksConsent()) {
+        pendingBlocksArgs = { query: query, results: results };
+        showConsentPrompt(dom);
+        return;
+    }
+
+    var token = window.localStorage.getItem("token");
+    if (token) {
+        runBlocksStream(query, results, dom);
+    } else {
+        runBlocksLegacy(query, dom);
+    }
+};
+
+// Called by the inline script when an infobox arrives — aborts any in-flight
+// LLM stream and clears the pending queue so Blocks won't replay later.
+window.cancelBlocks = function () {
+    pendingBlocksArgs = null;
+    if (activeBlocksStream && activeBlocksStream.cancel) {
+        activeBlocksStream.cancel();
+        activeBlocksStream = null;
+    }
+};
+
+// On page load, if the user already consented and there are no results yet,
+// keep the "thinking" indicator visible. Otherwise, surface the consent
+// prompt right away so the user isn't staring at a frozen spinner.
+(function init() {
+    var dom = getBlocksDOM();
+    if (!dom.box) return;
+    if (!hasBlocksConsent()) {
+        showConsentPrompt(dom);
+    }
+})();
 
 function waitForElm(selector) {
-    return new Promise((resolve) => {
+    return new Promise(function (resolve) {
         if (document.querySelector(selector)) {
             return resolve(document.querySelector(selector));
         }
 
-        const observer = new MutationObserver((mutations) => {
+        var observer = new MutationObserver(function () {
             if (document.querySelector(selector)) {
                 observer.disconnect();
                 resolve(document.querySelector(selector));
             }
         });
 
-        // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
+        observer.observe(document.body, { childList: true, subtree: true });
     });
 }

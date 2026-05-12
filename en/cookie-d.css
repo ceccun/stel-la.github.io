@@ -67,6 +67,112 @@
     transition: transform 0.1s cubic-bezier(0, 0, 0.06, 0.97);
 }
 
+/* === Granular consent banner === */
+.cookie-banner-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.cookie-banner-header img {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.cookie-banner-header h2 {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.cookie-banner-intro {
+    font-family: "Inter", sans-serif;
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.cookie-category {
+    margin-bottom: 12px;
+    padding: 12px;
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+.cookie-category label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.cookie-category input[type="checkbox"] {
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+.cookie-category input[type="checkbox"]:disabled + span {
+    opacity: 0.7;
+}
+
+.cookie-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: flex-end;
+}
+.cookie-btn {
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 0;
+    outline: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s cubic-bezier(0, 0, 0.06, 0.97),
+        background-color 0.15s linear;
+}
+.cookie-btn:active {
+    transform: scale(0.97);
+}
+.cookie-btn-secondary {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: inherit;
+}
+.cookie-btn-secondary:hover {
+    background-color: rgba(0, 0, 0, 0.16);
+}
+.cookie-btn-primary {
+    background-color: #ff6366;
+    color: white;
+}
+.cookie-btn-primary:hover {
+    background-color: #ff5052;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cookie-category {
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+    .cookie-btn-secondary {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    .cookie-btn-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.18);
+    }
+}
+
+@media only screen and (max-width: 729px) {
+    .cookie-banner-actions {
+        justify-content: stretch;
+    }
+    .cookie-banner-actions .cookie-btn {
+        flex: 1 1 auto;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     .b-cookienotfs {
         background-color: rgba(0, 0, 0, 0.5);

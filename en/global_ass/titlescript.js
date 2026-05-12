@@ -22,7 +22,19 @@ function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
+// `filla()` and `checkInternalStatus()` both rely on the user's IP/network,
+// so they only run when the user has opted into the "functional" cookie
+// category via the consent banner. The check is centralised here so adding
+// new IP-derived features later only needs the same gate.
+function hasFunctionalConsent() {
+    return typeof window.hasConsent === "function"
+        ? window.hasConsent("functional")
+        : false;
+}
+
 function filla() {
+    if (!hasFunctionalConsent()) return;
+
     if (readCookie("country") == null) {
         var s = new XMLHttpRequest();
         s.open("GET", "https://ipapi.co/json");
@@ -40,7 +52,6 @@ function filla() {
         if (this.readyState == 4 && this.status == 200) {
             var resp = JSON.parse(this.responseText);
             var co = readCookie("country");
-            console.log(resp[co]);
             if (resp[co] != undefined) {
                 document.getElementById("local-area").innerHTML = resp[co];
             }
@@ -54,6 +65,8 @@ const buildingNotice = document.getElementsByClassName(
 )[0];
 
 const checkInternalStatus = async () => {
+    if (!hasFunctionalConsent()) return;
+
     const internalReq = await fetch(
         "https://prem.zen-platform.ceccun.com/site.json"
     );

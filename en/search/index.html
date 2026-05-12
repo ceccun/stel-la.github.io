@@ -336,6 +336,35 @@
                         renderImageResults(data);
                     } else {
                         renderTextResults(data);
+                        // If SearXNG already gave us an infobox, that's the
+                        // canonical answer — skip Blocks. Otherwise, hand the
+                        // same result set off to Blocks so its LLM answer is
+                        // grounded in what we actually showed.
+                        var blocksBox = document.querySelector(
+                            ".block-results"
+                        );
+                        var hasInfobox =
+                            data.infoboxes && data.infoboxes.length > 0;
+                        if (hasInfobox) {
+                            if (blocksBox) {
+                                blocksBox.classList.add("hidden");
+                            }
+                            if (
+                                typeof window.cancelBlocks === "function"
+                            ) {
+                                window.cancelBlocks();
+                            }
+                        } else {
+                            if (blocksBox) {
+                                blocksBox.classList.remove("hidden");
+                            }
+                            if (typeof window.runBlocks === "function") {
+                                window.runBlocks(
+                                    query,
+                                    data.results || []
+                                );
+                            }
+                        }
                     }
                 } catch (err) {
                     resultsEl.innerHTML =
@@ -347,7 +376,6 @@
 
             function renderTextResults(data) {
                 var results = (data && data.results) || [];
-                var answers = (data && data.answers) || [];
                 var infoboxes = (data && data.infoboxes) || [];
 
                 // Right-hand side panel: infoboxes (Blocks lives in the same
@@ -367,20 +395,13 @@
                 }
                 infoboxesEl.innerHTML = sideHtml;
 
-                if (results.length === 0 && answers.length === 0) {
+                if (results.length === 0) {
                     resultsEl.innerHTML =
                         '<p class="results-status">No results.</p>';
                     return;
                 }
 
                 var html = "";
-
-                for (var i = 0; i < answers.length; i++) {
-                    html +=
-                        '<div class="search-answer"><p>' +
-                        escapeHTML(answers[i]) +
-                        "</p></div>";
-                }
 
                 for (var k = 0; k < results.length; k++) {
                     var r = results[k];

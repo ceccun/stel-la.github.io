@@ -1060,6 +1060,35 @@ p {
     padding: 0;
 }
 
+/* Each LLM token gets appended as a <span> with a cycling rainbow start
+   color, then settles back to the regular text color. */
+.blocks-stream-chunk {
+    color: var(--bs-color, inherit);
+    animation: blocks-stream-fade-light 1.4s ease-out forwards;
+    will-change: color;
+}
+@keyframes blocks-stream-fade-light {
+    0% {
+        color: var(--bs-color, #ff0000);
+    }
+    100% {
+        color: black;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .blocks-stream-chunk {
+        animation-name: blocks-stream-fade-dark;
+    }
+}
+@keyframes blocks-stream-fade-dark {
+    0% {
+        color: var(--bs-color, #ff0000);
+    }
+    100% {
+        color: white;
+    }
+}
+
 .looking {
     border: 0;
 }
