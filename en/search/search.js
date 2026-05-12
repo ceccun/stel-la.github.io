@@ -151,14 +151,22 @@ function runBlocksStream(query, results, dom) {
 
             dom.info.appendChild(disclaimerBar);
 
-            // Mirror what the legacy path did: cache the result for
-            // tabs.html's "Blocks History on this device".
+            // Mirror what the legacy path did: cache the result for the
+            // Blocks history shown on tabs.html. Tagged with `version` so
+            // the history page can label entries correctly instead of
+            // inferring from the (legacy-only) `alternatives` field.
             try {
                 var ls = window.localStorage;
                 var logs = ls.getItem("blocksLogs");
                 logs = logs ? JSON.parse(logs) : [];
                 if (logs.length >= 100) logs.shift();
-                logs.push({ title: "Answer", message: buffer });
+                logs.push({
+                    title: "Answer",
+                    message: buffer,
+                    query: query,
+                    ts: Date.now(),
+                    version: "Pro",
+                });
                 ls.setItem("blocksLogs", JSON.stringify(logs));
             } catch (_) {}
         },

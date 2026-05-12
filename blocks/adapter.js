@@ -118,7 +118,15 @@ async function challenge(query) {
                 blocksLogs.shift();
             }
 
-            blocksLogs.push(data);
+            // Tag entries with the Blocks variant that produced them so
+            // tabs.html can label them correctly. Nano is the
+            // member-only variant which is what hands back `alternatives`.
+            blocksLogs.push({
+                ...data,
+                query,
+                ts: Date.now(),
+                version: data.alternatives ? "Nano" : "Free",
+            });
             ls.setItem("blocksLogs", JSON.stringify(blocksLogs));
 
             return data;

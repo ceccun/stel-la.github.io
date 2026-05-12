@@ -309,11 +309,48 @@
                 resultsEl.innerHTML = html;
             }
 
+            // Fire-and-forget: persist the current query on the user's
+            // Stella ID so other devices can pick up where they left off.
+            // Only runs when the user is signed in; silently ignored
+            // otherwise. API_DOMAIN is declared in global_ass/script.js
+            // which loads later in the page, so we defer the call until
+            // after that script has executed.
+            function saveLastSearch(q) {
+                var token = window.localStorage.getItem("token");
+                if (!token || !q) return;
+                var doSave = function () {
+                    if (typeof API_DOMAIN === "undefined") return;
+                    try {
+                        fetch(API_DOMAIN + "/search/last", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: token,
+                            },
+                            body: JSON.stringify({ query: q }),
+                            keepalive: true,
+                        }).catch(function () {});
+                    } catch (_) {}
+                };
+                if (typeof API_DOMAIN !== "undefined") {
+                    doSave();
+                } else if (
+                    document.readyState === "interactive" ||
+                    document.readyState === "complete"
+                ) {
+                    setTimeout(doSave, 0);
+                } else {
+                    window.addEventListener("DOMContentLoaded", doSave);
+                }
+            }
+
             async function runSearch() {
                 if (!query) {
                     resultsEl.innerHTML = "";
                     return;
                 }
+
+                saveLastSearch(query);
 
                 if (currentCategory === "images") {
                     renderImageSkeleton();

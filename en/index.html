@@ -68,6 +68,50 @@
             </div>
 
             <div class="additionalInfo">
+                <div
+                    id="last-search-pill"
+                    class="last-search-pill"
+                    style="display: none"
+                >
+                    <a
+                        id="last-search-link"
+                        class="last-search-link"
+                        href="#"
+                    >
+                        <!-- lucide:history -->
+                        <svg
+                            class="last-search-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                            />
+                            <path d="M3 3v5h5" />
+                            <path d="M12 7v5l4 2" />
+                        </svg>
+                        <span
+                            id="last-search-text"
+                            class="last-search-text"
+                        ></span>
+                    </a>
+                    <button
+                        id="last-search-dismiss"
+                        class="last-search-dismiss"
+                        aria-label="Dismiss"
+                        title="Dismiss"
+                    >
+                        ×
+                    </button>
+                </div>
                 <div style="display: none" class="ceccunbuildingnotice">
                     <img src="/images/building-2.png" class="icon" />
                     <div>
@@ -158,5 +202,50 @@
             filla();
         </script>
         <script src="global_ass/script.js"></script>
+        <script>
+            // Pick-up-where-you-left-off pill. Hits /search/last for the
+            // signed-in user, and on success shows a pill linking back to
+            // the search page with that query. Dismissing clears the
+            // server-side record too.
+            (function loadLastSearch() {
+                var token = window.localStorage.getItem("token");
+                if (!token) return;
+                if (typeof API_DOMAIN === "undefined") return;
+
+                var pill = document.getElementById("last-search-pill");
+                var link = document.getElementById("last-search-link");
+                var text = document.getElementById("last-search-text");
+                var dismiss = document.getElementById("last-search-dismiss");
+                if (!pill || !link || !text || !dismiss) return;
+
+                fetch(API_DOMAIN + "/search/last", {
+                    headers: { Authorization: token },
+                })
+                    .then(function (r) {
+                        if (!r.ok) return null;
+                        return r.json();
+                    })
+                    .then(function (data) {
+                        if (!data || !data.query) return;
+                        text.innerText = data.query;
+                        link.href =
+                            "search/index.html?q=" +
+                            encodeURIComponent(data.query);
+                        pill.style.display = "flex";
+                    })
+                    .catch(function () {});
+
+                dismiss.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    pill.style.display = "none";
+                    fetch(API_DOMAIN + "/search/last", {
+                        method: "DELETE",
+                        headers: { Authorization: token },
+                        keepalive: true,
+                    }).catch(function () {});
+                });
+            })();
+        </script>
     </body>
 </html>
