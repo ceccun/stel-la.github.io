@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title id="title">Stella - Things to change the world.</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="unified.css" rel="stylesheet" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- Adrenaline Engine 5 -->
+        <div class="hidden" style="font-family: 'Inter'">
+            <p>
+                See this message? There may be an issue with your browser, try
+                refreshing the page or coming back later.
+            </p>
+        </div>
+        <div class="rainbow-head">
+            <div class="rainbow-head-inner">
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="tabindex" tabindex="1">
+                <p>
+                    Press the index key again to scroll through the list of
+                    available actions.
+                </p>
+            </div>
+            <div class="tabindex" tabindex="2">
+                <p>
+                    A popup will show with your action, press the index key
+                    again to visit that action.
+                </p>
+            </div>
+            <a class="tabindex" tabindex="3"><p>Focus on search box.</p></a>
+            <a class="tabindex" tabindex="5"
+                ><p>Focus on "Text" button in crossbar.</p></a
+            >
+            <a class="tabindex" tabindex="7"
+                ><p>Focus on "Images" button in crossbar.</p></a
+            >
+            <a class="tabindex" tabindex="9"
+                ><p>Focus on "Tab" button in crossbar.</p></a
+            >
+
+            <div class="search-header">
+                <a href="../index.html" class="a brand">
+                    <h1>Stella</h1>
+                </a>
+                <div class="input-out search-input">
+                    <input
+                        tabindex="4"
+                        type="search"
+                        id="sb"
+                        placeholder="Search the Internet."
+                    />
+                </div>
+                <div
+                    id="ham"
+                    onclick="document.getElementById('sidebar').setAttribute('class','sidebar-s'); window.open('../global_ass/sidebar-d.html', 'sidebar-in');"
+                    class="hamburger"
+                >
+                    <image src="../../images/hamburger.svg"></image>
+                </div>
+            </div>
+
+            <div class="crossbar">
+                <div class="crossbar-tabs">
+                    <button tabindex="6" id="text-btn">Text</button
+                    ><button tabindex="8" id="image-btn">Images</button
+                    ><button tabindex="10" id="tab-btn">Tab</button>
+                </div>
+                <div class="crossbar-share">
+                    <button id="sharebtn" onclick="qropen()" class="share-btn">
+                        <image
+                            style="opacity: 1; display: block"
+                            class="r-img"
+                            src="/images/qr-code.png"
+                        ></image>
+                    </button>
+                </div>
+            </div>
+
+            <a class="tabindex" tabindex="11"><p>Focus on content</p></a>
+
+            <div class="block-results looking">
+                <div class="blocks-searching">
+                    <div class="searchBall" id="blocks-search-ball"></div>
+                    <p><i id="blocks-status">Blocks is thinking...</i></p>
+                </div>
+                <div
+                    class="rainbow-strips hidden"
+                    id="rainbow-strips"
+                ></div>
+                <div class="blocks-information hidden"></div>
+                <div class="blocks-agreement hidden">
+                    <h2>Use Blocks?</h2>
+                    <p>
+                        Blocks provides you search insights alongside your
+                        results.
+                    </p>
+                    <p>
+                        Your use of Blocks is governed by the
+                        <a href="/en/id/privacy.html">Stella Privacy Policy</a>
+                    </p>
+                    <button id="blocks-consent-btn">I agree</button>
+                </div>
+            </div>
+
+            <div id="results" class="search-results-root"></div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar-h">
+            &nbsp;
+            <iframe
+                name="sidebar-in"
+                id="sidebar-in"
+                frameborder="0"
+                style="height: 100vh"
+            ></iframe>
+        </div>
+
+        <!-- Image preview lightbox -->
+        <div id="image-preview" class="image-preview hidden" aria-hidden="true">
+            <div class="image-preview-backdrop" data-pv-close></div>
+            <div class="image-preview-content">
+                <button
+                    class="image-preview-close"
+                    data-pv-close
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+                <div class="image-preview-toolbar">
+                    <button class="image-preview-tool" data-pv-zoom-out>−</button>
+                    <button class="image-preview-tool" data-pv-zoom-reset>Reset</button>
+                    <button class="image-preview-tool" data-pv-zoom-in>+</button>
+                </div>
+                <div class="image-preview-stage" id="image-preview-stage">
+                    <img
+                        id="image-preview-img"
+                        draggable="false"
+                        alt=""
+                    />
+                </div>
+                <div class="image-preview-info">
+                    <a
+                        class="image-preview-link"
+                        id="image-preview-link"
+                        target="_TOP"
+                        rel="noopener"
+                    ></a>
+                </div>
+                <div class="image-preview-related">
+                    <p class="image-preview-related-label">Related</p>
+                    <div
+                        class="image-preview-related-list"
+                        id="image-preview-related-list"
+                    ></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR sheet -->
+        <div class="sharesheet" id="sharesheet" style="visibility: hidden">
+            <center>
+                <h2>QR Code</h2>
+                <div id="qrjs" class="qr"></div>
+                <p>Scan this code using your phone or tablet.</p>
+            </center>
+        </div>
+
+        <script>
+            // === SearXNG configuration ===
+            const SEARX_URL = "https://searxng.zen-platform.ceccun.com";
+
+            // === DOM refs ===
+            var input = document.getElementById("sb");
+            var textBtn = document.getElementById("text-btn");
+            var imageBtn = document.getElementById("image-btn");
+            var tabBtn = document.getElementById("tab-btn");
+            var resultsEl = document.getElementById("results");
+            var titleEl = document.getElementById("title");
+
+            // === State ===
+            var query =
+                new URL(window.location).searchParams.get("q") || "";
+            var currentCategory = parseCategoryFromHash();
+
+            function parseCategoryFromHash() {
+                var h = window.location.hash || "";
+                if (h.includes("tab=images") || h.includes("gsc.tab=1")) {
+                    return "images";
+                }
+                return "general";
+            }
+
+            // === Search bar submit ===
+            input.value = query;
+            titleEl.innerText = query ? "Stella - " + query : "Stella";
+
+            input.addEventListener("keyup", function (event) {
+                if (event.keyCode !== 13) return;
+                event.preventDefault();
+                window.location =
+                    "index.html?q=" + encodeURIComponent(input.value);
+            });
+
+            // === Tab switching (in-place, no reload) ===
+            function setCategory(cat) {
+                currentCategory = cat;
+                if (cat === "images") {
+                    imageBtn.classList.add("crossbar-button-active");
+                    textBtn.classList.remove("crossbar-button-active");
+                    history.replaceState(
+                        null,
+                        "",
+                        window.location.pathname +
+                            window.location.search +
+                            "#tab=images"
+                    );
+                } else {
+                    textBtn.classList.add("crossbar-button-active");
+                    imageBtn.classList.remove("crossbar-button-active");
+                    history.replaceState(
+                        null,
+                        "",
+                        window.location.pathname + window.location.search
+                    );
+                }
+                runSearch();
+            }
+
+            textBtn.addEventListener("click", function () {
+                setCategory("general");
+            });
+            imageBtn.addEventListener("click", function () {
+                setCategory("images");
+            });
+
+            // === SearXNG fetch + render ===
+            function escapeHTML(s) {
+                return String(s == null ? "" : s).replace(
+                    /[&<>"']/g,
+                    function (c) {
+                        return {
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "'": "&#39;",
+                        }[c];
+                    }
+                );
+            }
+
+            function shortHost(u) {
+                try {
+                    return new URL(u).hostname;
+                } catch (_) {
+                    return u;
+                }
+            }
+
+            function renderTextSkeleton() {
+                var html = "";
+                for (var i = 0; i < 6; i++) {
+                    html +=
+                        '<div class="search-result skeleton-result">' +
+                        '<div class="skeleton skeleton-title"></div>' +
+                        '<div class="skeleton skeleton-url"></div>' +
+                        '<div class="skeleton skeleton-snippet"></div>' +
+                        '<div class="skeleton skeleton-snippet skeleton-snippet-short"></div>' +
+                        "</div>";
+                }
+                resultsEl.innerHTML = html;
+            }
+
+            function renderImageSkeleton() {
+                var html = '<div class="image-results">';
+                for (var i = 0; i < 12; i++) {
+                    html +=
+                        '<div class="image-result skeleton-image">' +
+                        '<div class="skeleton skeleton-image-thumb"></div>' +
+                        '<div class="skeleton skeleton-image-title"></div>' +
+                        "</div>";
+                }
+                html += "</div>";
+                resultsEl.innerHTML = html;
+            }
+
+            async function runSearch() {
+                if (!query) {
+                    resultsEl.innerHTML = "";
+                    return;
+                }
+
+                if (currentCategory === "images") {
+                    renderImageSkeleton();
+                } else {
+                    renderTextSkeleton();
+                }
+
+                var url = new URL(SEARX_URL + "/search");
+                url.searchParams.set("q", query);
+                url.searchParams.set("format", "json");
+                url.searchParams.set("categories", currentCategory);
+
+                try {
+                    var res = await fetch(url.toString(), {
+                        credentials: "omit",
+                    });
+                    if (!res.ok) throw new Error("HTTP " + res.status);
+                    var data = await res.json();
+                    if (currentCategory === "images") {
+                        renderImageResults(data);
+                    } else {
+                        renderTextResults(data);
+                    }
+                } catch (err) {
+                    resultsEl.innerHTML =
+                        '<p class="results-status">Search unavailable: ' +
+                        escapeHTML(err.message) +
+                        "</p>";
+                }
+            }
+
+            function renderTextResults(data) {
+                var results = (data && data.results) || [];
+                var answers = (data && data.answers) || [];
+                var infoboxes = (data && data.infoboxes) || [];
+
+                if (results.length === 0 && answers.length === 0) {
+                    resultsEl.innerHTML =
+                        '<p class="results-status">No results.</p>';
+                    return;
+                }
+
+                var html = "";
+
+                for (var i = 0; i < answers.length; i++) {
+                    html +=
+                        '<div class="search-answer"><p>' +
+                        escapeHTML(answers[i]) +
+                        "</p></div>";
+                }
+
+                for (var j = 0; j < infoboxes.length; j++) {
+                    var ib = infoboxes[j];
+                    html +=
+                        '<div class="search-infobox">' +
+                        (ib.infobox
+                            ? "<h3>" + escapeHTML(ib.infobox) + "</h3>"
+                            : "") +
+                        (ib.content
+                            ? "<p>" + escapeHTML(ib.content) + "</p>"
+                            : "") +
+                        "</div>";
+                }
+
+                for (var k = 0; k < results.length; k++) {
+                    var r = results[k];
+                    html +=
+                        '<div class="search-result">' +
+                        '<a class="search-result-title" href="' +
+                        escapeHTML(r.url) +
+                        '" target="_TOP">' +
+                        escapeHTML(r.title || r.url) +
+                        "</a>" +
+                        '<div class="search-result-url">' +
+                        escapeHTML(shortHost(r.url)) +
+                        '</div>' +
+                        '<div class="search-result-snippet">' +
+                        escapeHTML(r.content || "") +
+                        "</div>" +
+                        "</div>";
+                }
+
+                resultsEl.innerHTML = html;
+            }
+
+            // Holds the most recent image search results so the lightbox can
+            // open by index and pull related thumbnails from the same set.
+            var currentImageResults = [];
+
+            function renderImageResults(data) {
+                var results = (data && data.results) || [];
+                currentImageResults = results;
+                if (results.length === 0) {
+                    resultsEl.innerHTML =
+                        '<p class="results-status">No image results.</p>';
+                    return;
+                }
+
+                var html = '<div class="image-results">';
+                for (var i = 0; i < results.length; i++) {
+                    var r = results[i];
+                    var thumb =
+                        r.thumbnail_src || r.thumbnail || r.img_src || r.url;
+                    html +=
+                        '<a class="image-result" data-pv-index="' +
+                        i +
+                        '" href="' +
+                        escapeHTML(r.img_src || r.url) +
+                        '" target="_TOP">' +
+                        '<img loading="lazy" src="' +
+                        escapeHTML(thumb) +
+                        '" alt="' +
+                        escapeHTML(r.title || "") +
+                        '" />' +
+                        '<div class="image-result-title">' +
+                        escapeHTML(r.title || "") +
+                        "</div>" +
+                        "</a>";
+                }
+                html += "</div>";
+                resultsEl.innerHTML = html;
+            }
+
+            // Delegate clicks on image thumbnails to the lightbox
+            resultsEl.addEventListener("click", function (e) {
+                var anchor = e.target.closest(".image-result");
+                if (!anchor) return;
+                var idx = parseInt(anchor.getAttribute("data-pv-index"), 10);
+                if (isNaN(idx)) return;
+                e.preventDefault();
+                openImagePreview(idx, anchor);
+            });
+
+            // === Image preview lightbox ===
+            var pvRoot = document.getElementById("image-preview");
+            var pvStage = document.getElementById("image-preview-stage");
+            var pvImg = document.getElementById("image-preview-img");
+            var pvLink = document.getElementById("image-preview-link");
+            var pvRelatedList = document.getElementById(
+                "image-preview-related-list"
+            );
+
+            var pvZoom = 1;
+            var pvPanX = 0;
+            var pvPanY = 0;
+            var PV_MIN_ZOOM = 0.5;
+            var PV_MAX_ZOOM = 8;
+
+            function pvApplyTransform() {
+                pvImg.style.transform =
+                    "translate(" +
+                    pvPanX +
+                    "px, " +
+                    pvPanY +
+                    "px) scale(" +
+                    pvZoom +
+                    ")";
+                pvStage.classList.toggle("pannable", pvZoom > 1);
+            }
+
+            function pvResetTransform() {
+                pvZoom = 1;
+                pvPanX = 0;
+                pvPanY = 0;
+                pvApplyTransform();
+            }
+
+            function clampZoom(z) {
+                return Math.max(PV_MIN_ZOOM, Math.min(PV_MAX_ZOOM, z));
+            }
+
+            // Zoom anchored to a pointer position (sx, sy in viewport coords)
+            function pvZoomAt(sx, sy, newZoom) {
+                newZoom = clampZoom(newZoom);
+                var rect = pvStage.getBoundingClientRect();
+                var px = sx - rect.left - rect.width / 2;
+                var py = sy - rect.top - rect.height / 2;
+                // Image-space coord currently under the pointer
+                var imgX = (px - pvPanX) / pvZoom;
+                var imgY = (py - pvPanY) / pvZoom;
+                pvPanX = px - imgX * newZoom;
+                pvPanY = py - imgY * newZoom;
+                pvZoom = newZoom;
+                pvApplyTransform();
+            }
+
+            // === Shared-element FLIP animation ===
+            // The lightbox itself is just a fade for the backdrop + stagger
+            // for related/toolbar. The "image flying from thumbnail" piece is
+            // done by spawning a clone img positioned at the source rect, and
+            // CSS-transitioning its top/left/width/height to the destination.
+            var pvFlightDuration = 360;
+            var pvActiveClone = null;
+            // Index of the currently displayed image. Used at close time to
+            // look up the matching tile in the results grid so the clone can
+            // fly back to its original spot — not the related strip thumb,
+            // which is itself animating out.
+            var pvCurrentIndex = -1;
+
+            function pvComputeDestRect(aspect) {
+                var rect = pvStage.getBoundingClientRect();
+                var maxW = rect.width * 0.9;
+                var maxH = rect.height * 0.9;
+                var w, h;
+                if (aspect > maxW / maxH) {
+                    w = maxW;
+                    h = maxW / aspect;
+                } else {
+                    h = maxH;
+                    w = maxH * aspect;
+                }
+                return {
+                    left: rect.left + (rect.width - w) / 2,
+                    top: rect.top + (rect.height - h) / 2,
+                    width: w,
+                    height: h,
+                };
+            }
+
+            function pvMakeClone(srcImg, srcRect) {
+                var clone = document.createElement("img");
+                clone.src = srcImg.currentSrc || srcImg.src;
+                clone.className = "pv-flying-clone";
+                clone.style.top = srcRect.top + "px";
+                clone.style.left = srcRect.left + "px";
+                clone.style.width = srcRect.width + "px";
+                clone.style.height = srcRect.height + "px";
+                document.body.appendChild(clone);
+                return clone;
+            }
+
+            function setPreviewImage(r) {
+                // Quick crossfade when swapping between images inside an
+                // already-open preview. No clone here — the lightbox stays
+                // in place.
+                pvImg.classList.add("is-swapping");
+                window.setTimeout(function () {
+                    pvImg.src = r.img_src || r.url;
+                    pvImg.alt = r.title || "";
+                    pvImg.classList.remove("is-swapping");
+                }, 140);
+            }
+
+            function openImagePreview(index, sourceEl) {
+                var r = currentImageResults[index];
+                if (!r) return;
+
+                pvCurrentIndex = index;
+                pvLink.href = r.url || r.img_src;
+                pvLink.innerText = r.title || r.url || "";
+                pvResetTransform();
+                renderRelatedThumbs(index);
+
+                var alreadyOpen = pvRoot.classList.contains("is-open");
+
+                if (alreadyOpen) {
+                    setPreviewImage(r);
+                    return;
+                }
+
+                // Set the real (full-res) src now so it loads while the FLIP
+                // is playing. The real <img> stays hidden until the clone has
+                // landed in place.
+                pvImg.src = r.img_src || r.url;
+                pvImg.alt = r.title || "";
+                pvImg.style.opacity = "0";
+
+                pvRoot.classList.remove("hidden");
+                document.body.style.overflow = "hidden";
+
+                if (sourceEl) {
+                    var srcImg = sourceEl.querySelector("img") || sourceEl;
+                    var srcRect = srcImg.getBoundingClientRect();
+                    var aspect = srcRect.width / srcRect.height;
+
+                    if (pvActiveClone) {
+                        pvActiveClone.remove();
+                        pvActiveClone = null;
+                    }
+                    var clone = pvMakeClone(srcImg, srcRect);
+                    pvActiveClone = clone;
+
+                    // Trigger open state on the next frame so backdrop/related
+                    // animations start at the same time as the clone flight.
+                    requestAnimationFrame(function () {
+                        pvRoot.classList.add("is-open");
+                        pvRoot.setAttribute("aria-hidden", "false");
+
+                        var dest = pvComputeDestRect(aspect);
+                        // Force the clone to commit its initial styles before
+                        // we apply the destination, so the transition fires.
+                        void clone.offsetHeight;
+                        clone.style.top = dest.top + "px";
+                        clone.style.left = dest.left + "px";
+                        clone.style.width = dest.width + "px";
+                        clone.style.height = dest.height + "px";
+                        clone.style.borderRadius = "0";
+                    });
+
+                    // After flight, fade the clone out and reveal the real
+                    // image underneath.
+                    window.setTimeout(function () {
+                        pvImg.style.opacity = "";
+                        clone.classList.add("is-fading");
+                        window.setTimeout(function () {
+                            if (clone.parentNode) clone.remove();
+                            if (pvActiveClone === clone) pvActiveClone = null;
+                        }, 200);
+                    }, pvFlightDuration);
+                } else {
+                    pvImg.style.opacity = "";
+                    requestAnimationFrame(function () {
+                        pvRoot.classList.add("is-open");
+                        pvRoot.setAttribute("aria-hidden", "false");
+                    });
+                }
+            }
+
+            function closeImagePreview() {
+                if (!pvRoot.classList.contains("is-open")) return;
+
+                // Find the grid tile that matches the currently displayed
+                // image and animate back to it. We have to temporarily un-lock
+                // body scroll to make scrollIntoView work, then re-measure.
+                var gridTile =
+                    pvCurrentIndex >= 0
+                        ? resultsEl.querySelector(
+                              '.image-result[data-pv-index="' +
+                                  pvCurrentIndex +
+                                  '"]'
+                          )
+                        : null;
+                var destEl = gridTile
+                    ? gridTile.querySelector("img") || gridTile
+                    : null;
+
+                if (destEl && pvImg.src) {
+                    // If the user navigated through related thumbs, the
+                    // matching grid tile may be far down the page. Bring it
+                    // back into view (no smooth scroll — we want it stable
+                    // before measuring) so the clone always lands somewhere
+                    // visible.
+                    document.body.style.overflow = "";
+                    var destRect = destEl.getBoundingClientRect();
+                    var inView =
+                        destRect.top < window.innerHeight &&
+                        destRect.bottom > 0 &&
+                        destRect.left < window.innerWidth &&
+                        destRect.right > 0;
+                    if (!inView) {
+                        destEl.scrollIntoView({
+                            block: "center",
+                            inline: "center",
+                        });
+                        destRect = destEl.getBoundingClientRect();
+                    }
+
+                    var imgRect = pvImg.getBoundingClientRect();
+
+                    if (pvActiveClone) {
+                        pvActiveClone.remove();
+                        pvActiveClone = null;
+                    }
+                    var clone = pvMakeClone(pvImg, imgRect);
+                    clone.style.borderRadius = "0";
+                    pvActiveClone = clone;
+
+                    // Hide the real image immediately so the user only sees
+                    // the clone flying back.
+                    pvImg.style.opacity = "0";
+
+                    requestAnimationFrame(function () {
+                        pvRoot.classList.remove("is-open");
+                        pvRoot.setAttribute("aria-hidden", "true");
+
+                        void clone.offsetHeight;
+                        clone.style.top = destRect.top + "px";
+                        clone.style.left = destRect.left + "px";
+                        clone.style.width = destRect.width + "px";
+                        clone.style.height = destRect.height + "px";
+                        clone.style.borderRadius = "8px";
+                    });
+
+                    window.setTimeout(function () {
+                        if (clone.parentNode) clone.remove();
+                        if (pvActiveClone === clone) pvActiveClone = null;
+                        pvImg.src = "";
+                        pvImg.style.opacity = "";
+                        pvRelatedList.innerHTML = "";
+                        pvResetTransform();
+                        pvCurrentIndex = -1;
+                    }, pvFlightDuration + 40);
+                } else {
+                    pvRoot.classList.remove("is-open");
+                    pvRoot.setAttribute("aria-hidden", "true");
+                    document.body.style.overflow = "";
+                    window.setTimeout(function () {
+                        if (pvRoot.classList.contains("is-open")) return;
+                        pvImg.src = "";
+                        pvRelatedList.innerHTML = "";
+                        pvResetTransform();
+                        pvCurrentIndex = -1;
+                    }, pvFlightDuration);
+                }
+            }
+
+            function renderRelatedThumbs(activeIndex) {
+                var html = "";
+                for (var i = 0; i < currentImageResults.length; i++) {
+                    var r = currentImageResults[i];
+                    var thumb =
+                        r.thumbnail_src ||
+                        r.thumbnail ||
+                        r.img_src ||
+                        r.url;
+                    html +=
+                        '<img class="related-thumb' +
+                        (i === activeIndex ? " is-active" : "") +
+                        '" data-pv-related="' +
+                        i +
+                        '" loading="lazy" src="' +
+                        escapeHTML(thumb) +
+                        '" alt="' +
+                        escapeHTML(r.title || "") +
+                        '" />';
+                }
+                pvRelatedList.innerHTML = html;
+                var activeEl = pvRelatedList.querySelector(
+                    ".related-thumb.is-active"
+                );
+                if (activeEl && activeEl.scrollIntoView) {
+                    activeEl.scrollIntoView({
+                        block: "nearest",
+                        inline: "center",
+                        behavior: "smooth",
+                    });
+                }
+            }
+
+            pvRelatedList.addEventListener("click", function (e) {
+                var t = e.target.closest("[data-pv-related]");
+                if (!t) return;
+                var idx = parseInt(t.getAttribute("data-pv-related"), 10);
+                if (isNaN(idx)) return;
+                openImagePreview(idx);
+            });
+
+            // Close handlers (backdrop, X button, Escape)
+            pvRoot.addEventListener("click", function (e) {
+                if (e.target.hasAttribute("data-pv-close")) {
+                    closeImagePreview();
+                }
+            });
+            window.addEventListener("keydown", function (e) {
+                if (pvRoot.classList.contains("hidden")) return;
+                if (e.key === "Escape") closeImagePreview();
+                if (e.key === "+" || e.key === "=") {
+                    var rect = pvStage.getBoundingClientRect();
+                    pvZoomAt(
+                        rect.left + rect.width / 2,
+                        rect.top + rect.height / 2,
+                        pvZoom * 1.2
+                    );
+                }
+                if (e.key === "-" || e.key === "_") {
+                    var rect2 = pvStage.getBoundingClientRect();
+                    pvZoomAt(
+                        rect2.left + rect2.width / 2,
+                        rect2.top + rect2.height / 2,
+                        pvZoom / 1.2
+                    );
+                }
+                if (e.key === "0") pvResetTransform();
+            });
+
+            // Toolbar buttons
+            pvRoot
+                .querySelector("[data-pv-zoom-in]")
+                .addEventListener("click", function () {
+                    var rect = pvStage.getBoundingClientRect();
+                    pvZoomAt(
+                        rect.left + rect.width / 2,
+                        rect.top + rect.height / 2,
+                        pvZoom * 1.25
+                    );
+                });
+            pvRoot
+                .querySelector("[data-pv-zoom-out]")
+                .addEventListener("click", function () {
+                    var rect = pvStage.getBoundingClientRect();
+                    pvZoomAt(
+                        rect.left + rect.width / 2,
+                        rect.top + rect.height / 2,
+                        pvZoom / 1.25
+                    );
+                });
+            pvRoot
+                .querySelector("[data-pv-zoom-reset]")
+                .addEventListener("click", pvResetTransform);
+
+            // Mouse wheel zoom (anchored to cursor)
+            pvStage.addEventListener(
+                "wheel",
+                function (e) {
+                    e.preventDefault();
+                    var factor = Math.exp(-e.deltaY * 0.0015);
+                    pvZoomAt(e.clientX, e.clientY, pvZoom * factor);
+                },
+                { passive: false }
+            );
+
+            // Double-click to toggle 1x ↔ 2.5x at cursor
+            pvStage.addEventListener("dblclick", function (e) {
+                if (pvZoom > 1.01) {
+                    pvResetTransform();
+                } else {
+                    pvZoomAt(e.clientX, e.clientY, 2.5);
+                }
+            });
+
+            // Mouse drag pan (only when zoomed in)
+            var pvDragging = false;
+            var pvDragStartX = 0;
+            var pvDragStartY = 0;
+            pvStage.addEventListener("mousedown", function (e) {
+                if (pvZoom <= 1) return;
+                pvDragging = true;
+                pvDragStartX = e.clientX - pvPanX;
+                pvDragStartY = e.clientY - pvPanY;
+                pvStage.classList.add("grabbing");
+                e.preventDefault();
+            });
+            window.addEventListener("mousemove", function (e) {
+                if (!pvDragging) return;
+                pvPanX = e.clientX - pvDragStartX;
+                pvPanY = e.clientY - pvDragStartY;
+                pvApplyTransform();
+            });
+            window.addEventListener("mouseup", function () {
+                pvDragging = false;
+                pvStage.classList.remove("grabbing");
+            });
+
+            // Touch: pinch-zoom + single-finger pan
+            var pvLastTouchDist = 0;
+            var pvLastTouchMidX = 0;
+            var pvLastTouchMidY = 0;
+            var pvLastTouchX = 0;
+            var pvLastTouchY = 0;
+
+            function touchDist(t) {
+                var dx = t[0].clientX - t[1].clientX;
+                var dy = t[0].clientY - t[1].clientY;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+
+            pvStage.addEventListener(
+                "touchstart",
+                function (e) {
+                    if (e.touches.length === 1) {
+                        pvLastTouchX = e.touches[0].clientX - pvPanX;
+                        pvLastTouchY = e.touches[0].clientY - pvPanY;
+                    } else if (e.touches.length === 2) {
+                        pvLastTouchDist = touchDist(e.touches);
+                        pvLastTouchMidX =
+                            (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                        pvLastTouchMidY =
+                            (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                    }
+                },
+                { passive: true }
+            );
+
+            pvStage.addEventListener(
+                "touchmove",
+                function (e) {
+                    if (e.touches.length === 1 && pvZoom > 1) {
+                        e.preventDefault();
+                        pvPanX = e.touches[0].clientX - pvLastTouchX;
+                        pvPanY = e.touches[0].clientY - pvLastTouchY;
+                        pvApplyTransform();
+                    } else if (e.touches.length === 2) {
+                        e.preventDefault();
+                        var dist = touchDist(e.touches);
+                        if (pvLastTouchDist > 0) {
+                            var midX =
+                                (e.touches[0].clientX +
+                                    e.touches[1].clientX) /
+                                2;
+                            var midY =
+                                (e.touches[0].clientY +
+                                    e.touches[1].clientY) /
+                                2;
+                            pvZoomAt(
+                                midX,
+                                midY,
+                                pvZoom * (dist / pvLastTouchDist)
+                            );
+                            pvLastTouchMidX = midX;
+                            pvLastTouchMidY = midY;
+                        }
+                        pvLastTouchDist = dist;
+                    }
+                },
+                { passive: false }
+            );
+
+            // Set initial active tab + kick off the first search
+            if (currentCategory === "images") {
+                imageBtn.classList.add("crossbar-button-active");
+            } else {
+                textBtn.classList.add("crossbar-button-active");
+            }
+            runSearch();
+
+            // === Crossbar: Tab (add to / remove from local Tabs) ===
+            const ls = window.localStorage;
+            var tabs = ls.getItem("tabs");
+
+            (function initTabState() {
+                if (tabs == null) {
+                    tabBtn.classList.remove("crossbar-button-active");
+                    tabBtn.innerText = "Tab";
+                    return;
+                }
+                var parsed = JSON.parse(tabs);
+                var found = parsed.find(function (item) {
+                    return item.query === query;
+                });
+                if (found) {
+                    tabBtn.classList.add("crossbar-button-active");
+                    tabBtn.innerText = "Tabbed";
+                } else {
+                    tabBtn.classList.remove("crossbar-button-active");
+                    tabBtn.innerText = "Tab";
+                }
+            })();
+
+            function tab_click() {
+                let tabs = ls.getItem("tabs");
+                if (tabs == null) {
+                    ls.setItem(
+                        "tabs",
+                        JSON.stringify([{ type: "search", query: query }])
+                    );
+                    tabBtn.classList.add("crossbar-button-active");
+                    tabBtn.innerText = "Tabbed";
+                    addSyncTask("upload", "tabs");
+                    return sync(function () {});
+                }
+
+                tabs = JSON.parse(tabs);
+                for (const item of tabs) {
+                    if (item.query == query) {
+                        tabs.splice(tabs.indexOf(item), 1);
+                        ls.setItem("tabs", JSON.stringify(tabs));
+                        tabBtn.classList.remove("crossbar-button-active");
+                        tabBtn.innerText = "Tab";
+                        return;
+                    }
+                }
+
+                tabs.push({ type: "search", query: query });
+                ls.setItem("tabs", JSON.stringify(tabs));
+                tabBtn.classList.add("crossbar-button-active");
+                tabBtn.innerText = "Tabbed";
+                addSyncTask("upload", "tabs");
+                return sync(function () {
+                    tabBtn.innerText = "Tabbed";
+                });
+            }
+
+            tabBtn.addEventListener("click", tab_click);
+
+            // QR share
+            function qropen() {
+                var button = document.getElementById("sharebtn");
+                if (button.classList.contains("crossbar-button-active")) {
+                    sharesheet("close");
+                } else {
+                    sharesheet("open");
+                }
+            }
+
+            function sharesheet(state) {
+                var button = document.getElementById("sharebtn");
+                var sheet = document.getElementById("sharesheet");
+                document.getElementById("qrjs").innerHTML = "";
+                new QRCode(document.getElementById("qrjs"), {
+                    text: window.location.href,
+                    width: 200,
+                    height: 200,
+                    colorDark: "#000000",
+                    colorLight: "#FFFFFF00",
+                    correctLevel: QRCode.CorrectLevel.H,
+                });
+                if (state === "open") {
+                    sheet.style.visibility = "";
+                    sheet.classList.add("sharesheet-open");
+                    button.classList.add("crossbar-button-active");
+                }
+                if (state === "close") {
+                    sheet.style.visibility = "hidden";
+                    sheet.classList.remove("sharesheet-open");
+                    button.classList.remove("crossbar-button-active");
+                }
+            }
+
+            document.body.addEventListener("mouseup", function (e) {
+                if (e.target.getAttribute("id") !== "sharesheet") {
+                    sharesheet("close");
+                }
+            });
+
+            // Sidebar close-on-outside-click
+            window.addEventListener("click", function (e) {
+                if (
+                    document.getElementById("sidebar-in").contains(e.target) ||
+                    document.getElementById("ham").contains(e.target)
+                ) {
+                    // Clicked in box
+                } else {
+                    document
+                        .getElementById("sidebar")
+                        .setAttribute("class", "sidebar-h");
+                }
+            });
+        </script>
+
+        <script src="../global_ass/script.js"></script>
+        <script src="/blocks/adapter.js"></script>
+        <script src="search.js"></script>
+        <script src="qrcode.js"></script>
+    </body>
+</html>

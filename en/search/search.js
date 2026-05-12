@@ -1,7 +1,5 @@
+// query, title and search-box value are set up by the inline script in search/index.html.
 var query = new URL(window.location).searchParams.get("q");
-document.getElementById("title").innerText = "Stella - " + query;
-document.getElementById("sb").value = query;
-var qu = 0;
 
 async function blockProcess() {
     const ls = window.localStorage;
@@ -233,12 +231,6 @@ async function blockProcess() {
 
 blockProcess();
 
-// checkBlock(query);
-function loadcall() {
-    setTimeout("tab_location()", 300);
-    // document.getElementById("resgog").setAttribute("style", "");
-}
-
 function waitForElm(selector) {
     return new Promise((resolve) => {
         if (document.querySelector(selector)) {
@@ -258,21 +250,4 @@ function waitForElm(selector) {
             subtree: true,
         });
     });
-}
-
-function tab_location() {
-    var locator = window.location.toString();
-    var locator = locator.split("#");
-    if (locator[1].includes("gsc.tab=0") == true) {
-        console.log(locator[1].includes("gsc.tab=0"));
-        document
-            .getElementById("text-btn")
-            .setAttribute("class", "crossbar-button-active");
-    }
-    if (locator[1].includes("gsc.tab=1") == true) {
-        console.log(locator[1].includes("gsc.tab=1"));
-        document
-            .getElementById("image-btn")
-            .setAttribute("class", "crossbar-button-active");
-    }
 }
