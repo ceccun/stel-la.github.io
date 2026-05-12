@@ -22,7 +22,7 @@ function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
-const API_DOMAIN = "http://deprecated-accounts.zen-platform.ceccun.com";
+const API_DOMAIN = "https://deprecated-accounts.zen-platform.ceccun.com";
 
 // === Cookie / consent management ===
 // Consent is stored as a single JSON cookie so we can read all categories
